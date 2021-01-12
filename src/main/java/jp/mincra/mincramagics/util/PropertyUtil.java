@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class PropertyUtil {
 
-    public static void loadProperty() {
+    public static void getProperty() {
         Properties properties = new Properties();
 
         //プロパティファイルのパスを指定する
@@ -24,9 +24,8 @@ public class PropertyUtil {
         }
 
         // Mapに格納
-        MincraMagics.PropertyMap = new HashMap<>();
         for (Map.Entry<Object, Object> e : properties.entrySet()) {
-            MincraMagics.PropertyMap.put(e.getKey().toString(), e.getValue().toString());
+            MincraMagics.getPropertyMap().put(e.getKey().toString(), e.getValue().toString());
         }
     }
 
