@@ -1,5 +1,6 @@
 package jp.mincra.mincramagics;
 
+import jp.mincra.mincramagics.listeners.MincraListener;
 import jp.mincra.mincramagics.util.PropertyUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,6 +15,7 @@ public final class MincraMagics extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         //プロパティ
         try {
             PropertyUtil.setProperty();
@@ -22,7 +24,11 @@ public final class MincraMagics extends JavaPlugin {
         }
         PropertyUtil.getProperty();
 
+        //PlayerManager
         getPlayerManager();
+
+        //listenerの登録
+        getServer().getPluginManager().registerEvents(new MincraListener(), this);
     }
 
     @Override
