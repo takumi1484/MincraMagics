@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 
 public final class MincraMagics extends JavaPlugin {
 
+    private static PlayerManager pManager;
+
     public static Map<String, String> PropertyMap;
 
     @Override
@@ -22,10 +24,18 @@ public final class MincraMagics extends JavaPlugin {
         }
         PropertyUtil.loadProperty();
 
+        getPlayerManager();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    //PlayerManagerをインスタンス化
+    public static PlayerManager getPlayerManager() {
+        if (pManager == null)
+            pManager = new PlayerManager();
+        return pManager;
     }
 }
