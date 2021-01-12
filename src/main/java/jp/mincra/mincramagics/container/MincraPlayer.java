@@ -4,17 +4,19 @@ import java.util.UUID;
 
 public class MincraPlayer {
 
-    private String userName = "Unknown";
+    private String playerName = "Unknown";
     private UUID playerUUID;
 
     private int playerMP;
+    //1tick毎に減算
+    private int playerCooltime = 0;
 
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String playerName) {
+        this.playerName = playerName;
     }
     public String getUserName(){
-        return userName;
+        return playerName;
     }
 
     public void setPlayerUUID(UUID playerUUID){
@@ -29,5 +31,12 @@ public class MincraPlayer {
     }
     public int getPlayerMP(){
         return playerMP;
+    }
+
+    public void setPlayerCooltime(int playerCooltime) {
+        this.playerCooltime = playerCooltime;
+    }
+    public int getPlayerCooltime() {
+        return playerCooltime;
     }
 }
