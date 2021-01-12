@@ -10,7 +10,7 @@ import java.util.Map;
 
 public final class MincraMagics extends JavaPlugin {
 
-    private static PlayerManager pManager;
+    private static PlayerManager playerManager;
     private static Map<String, String> PropertyMap;
 
     @Override
@@ -37,9 +37,9 @@ public final class MincraMagics extends JavaPlugin {
 
     //pManagerを取得
     public static PlayerManager getPlayerManager() {
-        if (pManager == null)
-            pManager = new PlayerManager();
-        return pManager;
+        if (playerManager == null)
+            playerManager = new PlayerManager();
+        return playerManager;
     }
     //PropertyMapを取得
     public static Map<String, String> getPropertyMap() {
