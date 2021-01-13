@@ -1,12 +1,9 @@
-package jp.mincra.mincramagics.util;
-
-import jp.mincra.mincramagics.MincraMagics;
+package jp.mincra.mincramagics.managers;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class PropertyManager {
 
@@ -37,18 +34,13 @@ public class PropertyManager {
         File properties = new File("./plugins/MincraMagics/mincra.properties");
 
         //ディレクトリ作成
-        if (dir.exists()){
-            if (properties.exists() == false){
-                    FileWriter fileWriter = new FileWriter(properties);
-                    fileWriter.write("MySQL_url=");
-                    fileWriter.close();
-                    properties.createNewFile();
-            }
-        } else {
+        if (dir.exists() == false) {
             dir.mkdir();
+        }
 
+        if (properties.exists() == false){
             FileWriter fileWriter = new FileWriter(properties);
-            fileWriter.write("MySQL_url=");
+            fileWriter.write("MySQL_url=jdbc:mysql://localhost/mincra\nMySQL_user=root\nMySQL_password=suken314");
             fileWriter.close();
             properties.createNewFile();
         }
