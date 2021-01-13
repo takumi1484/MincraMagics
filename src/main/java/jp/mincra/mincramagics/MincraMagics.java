@@ -1,50 +1,65 @@
 package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.listeners.MincraListener;
-import jp.mincra.mincramagics.util.PropertyUtil;
+import jp.mincra.mincramagics.managers.PlayerManager;
+import jp.mincra.mincramagics.managers.PropertyManager;
+import jp.mincra.mincramagics.managers.SQLManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public final class MincraMagics extends JavaPlugin {
 
     private static PlayerManager playerManager;
-    private static Map<String, String> PropertyMap;
+    private static PropertyManager propertyManager;
+    private static SQLManager sqlManager;
 
     @Override
     public void onEnable() {
 
-        //プロパティ
+        //PropertyManager
+        getPropertyManager();
         try {
-            PropertyUtil.setProperty();
+            propertyManager.setProperty();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        PropertyUtil.getProperty();
+        propertyManager.loadProperty();
 
         //PlayerManager
         getPlayerManager();
 
-        //listenerの登録
+        //SQLManager
+        getSQLManager();
+        sqlManager.getConnection();
+
+        //listener
         getServer().getPluginManager().registerEvents(new MincraListener(), this);
     }
 
     @Override
     public void onDisable() {
+
+        //SQL切断
+        sqlManager.closeConnection();
     }
 
-    //pManagerを取得
+    //playerManager取得
     public static PlayerManager getPlayerManager() {
         if (playerManager == null)
             playerManager = new PlayerManager();
         return playerManager;
     }
-    //PropertyMapを取得
-    public static Map<String, String> getPropertyMap() {
-        if (PropertyMap == null)
-            PropertyMap = new HashMap<>();
-        return PropertyMap;
+    //propertyManagerを取得
+    public static PropertyManager getPropertyManager() {
+        if (propertyManager == null)
+            propertyManager = new PropertyManager();
+        return propertyManager;
+    }
+    //sqlManagerを取得
+    public static SQLManager getSQLManager() {
+        if (sqlManager == null)
+            sqlManager = new SQLManager();
+        return sqlManager;
     }
 }
