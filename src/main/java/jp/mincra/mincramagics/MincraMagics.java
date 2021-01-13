@@ -29,6 +29,7 @@ public final class MincraMagics extends JavaPlugin {
         //SQLManager
         getSQLManager();
         sqlManager.getConnection();
+        sqlManager.createRequiredTables();
 
         //listener
         getServer().getPluginManager().registerEvents(new MincraListener(), this);

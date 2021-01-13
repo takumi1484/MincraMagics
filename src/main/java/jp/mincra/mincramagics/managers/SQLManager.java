@@ -31,8 +31,6 @@ public class SQLManager {
             System.out.println("[MincraMagics] MySQLに接続中です...");
             conn = DriverManager.getConnection(url);
             stmt = conn.createStatement();
-
-            createRequiredTables();
         } catch (SQLException e) {
             // 例外処理
             System.out.println("[MincraMagics] MySQLの接続に失敗しました。");
