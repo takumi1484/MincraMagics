@@ -1,5 +1,7 @@
 package jp.mincra.mincramagics.listeners;
 
+import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.container.MincraPlayer;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -10,12 +12,16 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.util.Vector;
 
+import java.util.UUID;
+
 public class MincraListener implements Listener {
 
     @EventHandler
     public void onPlayerLogin(PlayerLoginEvent event) {
         System.out.println("login");
-        event.getPlayer().sendMessage("Hi~");
+        UUID uuid = event.getPlayer().getUniqueId();
+        MincraPlayer mincraPlayer = MincraMagics.getSQLManager().getMincraPlayer(uuid);
+        System.out.println("[MincraMagics] name:"+mincraPlayer.getPlayerName()+" mp:"+mincraPlayer.getPlayerMP());
     }
 
     /**

@@ -7,15 +7,15 @@ public class MincraPlayer {
     private String playerName = "Unknown";
     private UUID playerUUID;
 
-    private int playerMP;
+    private int playerMP = 0;
     //1tick毎に減算
     private int playerCooltime = 0;
 
 
-    public void setUserName(String playerName) {
+    public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
-    public String getUserName(){
+    public String getPlayerName(){
         return playerName;
     }
 
@@ -39,4 +39,5 @@ public class MincraPlayer {
     public int getPlayerCooltime() {
         return playerCooltime;
     }
+
 }

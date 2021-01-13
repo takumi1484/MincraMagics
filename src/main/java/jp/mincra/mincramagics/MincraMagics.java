@@ -6,11 +6,6 @@ import jp.mincra.mincramagics.managers.PropertyManager;
 import jp.mincra.mincramagics.managers.SQLManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 public final class MincraMagics extends JavaPlugin {
 
     private static PlayerManager playerManager;
