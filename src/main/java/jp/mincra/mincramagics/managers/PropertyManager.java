@@ -6,10 +6,13 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class PropertyUtil {
+public class PropertyManager {
 
-    public static void getProperty() {
+    private static Map<String, String> PropertyMap = new HashMap<>();
+
+    public void loadProperty() {
         Properties properties = new Properties();
 
         //プロパティファイルのパスを指定する
@@ -25,21 +28,21 @@ public class PropertyUtil {
 
         // Mapに格納
         for (Map.Entry<Object, Object> e : properties.entrySet()) {
-            MincraMagics.getPropertyMap().put(e.getKey().toString(), e.getValue().toString());
+            PropertyMap.put(e.getKey().toString(), e.getValue().toString());
         }
     }
 
-    public static void setProperty() throws IOException {
+    public void setProperty() throws IOException {
         File dir = new File("./plugins/MincraMagics");
         File properties = new File("./plugins/MincraMagics/mincra.properties");
 
         //ディレクトリ作成
         if (dir.exists()){
             if (properties.exists() == false){
-                FileWriter fileWriter = new FileWriter(properties);
-                fileWriter.write("MySQL_url=");
-                fileWriter.close();
-                properties.createNewFile();
+                    FileWriter fileWriter = new FileWriter(properties);
+                    fileWriter.write("MySQL_url=");
+                    fileWriter.close();
+                    properties.createNewFile();
             }
         } else {
             dir.mkdir();
@@ -49,5 +52,9 @@ public class PropertyUtil {
             fileWriter.close();
             properties.createNewFile();
         }
+    }
+
+    public Map<String ,String> getPropertyMap(){
+        return PropertyMap;
     }
 }
