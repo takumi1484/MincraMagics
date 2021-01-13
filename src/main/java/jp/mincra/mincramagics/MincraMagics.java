@@ -22,16 +22,10 @@ public final class MincraMagics extends JavaPlugin {
 
         //PropertyManager
         getPropertyManager();
-        try {
-            propertyManager.setProperty();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        propertyManager.setProperty();
         propertyManager.loadProperty();
-
         //PlayerManager
         getPlayerManager();
-
         //SQLManager
         getSQLManager();
         sqlManager.getConnection();

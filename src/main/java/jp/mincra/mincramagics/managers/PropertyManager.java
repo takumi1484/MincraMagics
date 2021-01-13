@@ -29,7 +29,7 @@ public class PropertyManager {
         }
     }
 
-    public void setProperty() throws IOException {
+    public void setProperty() {
         File dir = new File("./plugins/MincraMagics");
         File properties = new File("./plugins/MincraMagics/mincra.properties");
 
@@ -39,10 +39,15 @@ public class PropertyManager {
         }
 
         if (properties.exists() == false){
-            FileWriter fileWriter = new FileWriter(properties);
-            fileWriter.write("MySQL_url=jdbc:mysql://localhost/mincra\nMySQL_user=root\nMySQL_password=suken314");
-            fileWriter.close();
-            properties.createNewFile();
+            FileWriter fileWriter = null;
+            try {
+                fileWriter = new FileWriter(properties);
+                fileWriter.write("MySQL_url=jdbc:mysql://localhost/mincra\nMySQL_user=root\nMySQL_password=suken314");
+                fileWriter.close();
+                properties.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
