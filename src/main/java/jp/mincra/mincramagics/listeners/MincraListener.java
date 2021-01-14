@@ -6,9 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
-
-import java.util.UUID;
 
 public class MincraListener implements Listener {
 
@@ -36,24 +33,6 @@ public class MincraListener implements Listener {
             MincraMagics.getSQLManager().insertMincraPlayer(player.getUniqueId(),mincraPlayer);
             //プレイヤーをHashMapに追加
             MincraMagics.getPlayerManager().putMincraPlayer(mincraPlayer);
-        };
-    }
-
-    /**
-    @EventHandler
-    public void onPlayerToggleFlight(PlayerToggleFlightEvent event) {
-        System.out.println("toggleflight");
-
-        Player player = event.getPlayer();
-        if (player.getGameMode() != GameMode.CREATIVE) {
-            event.setCancelled(true);
-            Block b = player.getWorld().getBlockAt(player.getLocation().subtract(0, 2, 0));
-            if (!b.getType().equals(Material.AIR)) {
-                Vector v = player.getLocation().getDirection().multiply(1).setY(1);
-                player.setVelocity(v);
-            }
         }
     }
-    */
-
 }

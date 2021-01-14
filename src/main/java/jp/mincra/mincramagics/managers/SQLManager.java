@@ -82,11 +82,7 @@ public class SQLManager {
             e.printStackTrace();
         }
 
-        if (i == 0){
-            return false;
-        } else {
-            return true;
-        }
+        return i != 0;
     }
 
 
