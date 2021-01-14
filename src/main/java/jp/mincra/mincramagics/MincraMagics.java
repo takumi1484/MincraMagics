@@ -1,5 +1,6 @@
 package jp.mincra.mincramagics;
 
+import jp.mincra.mincramagics.commands.MincraCommands;
 import jp.mincra.mincramagics.listeners.MincraListener;
 import jp.mincra.mincramagics.managers.PlayerManager;
 import jp.mincra.mincramagics.managers.PropertyManager;
@@ -28,6 +29,9 @@ public final class MincraMagics extends JavaPlugin {
 
         //listener
         getServer().getPluginManager().registerEvents(new MincraListener(), this);
+
+        //command
+        getCommand("mcr").setExecutor(new MincraCommands(this));
     }
 
     @Override

@@ -3,3 +3,8 @@ version: 1.0-SNAPSHOT
 main: jp.mincra.mincramagics.MincraMagics
 api-version: 1.13
 authors: [Harineko]
+
+commands:
+  mcr:
+    description: MincraMagicsのコマンド。
+    usage: /<command>
