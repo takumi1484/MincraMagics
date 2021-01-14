@@ -7,7 +7,7 @@ public class MincraPlayer {
     private String playerName = "Unknown";
     private UUID playerUUID;
 
-    private int playerMP = 0;
+    private int playerMP = 100;
     //1tick毎に減算
     private int playerCooltime = 0;
 

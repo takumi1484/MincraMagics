@@ -60,7 +60,7 @@ public class SQLManager {
                 "mp INT, " +
                 "cooltime INT" +
                 ")";
-        System.out.println("[MincraMagics] テーブルを作成中です... "+sql);
+        System.out.println("[MincraMagics] テーブルの作成を試行します...");
         //execute the SQL stetement
         try {
             stmt.execute(sql);
@@ -69,6 +69,26 @@ public class SQLManager {
             e.printStackTrace();
         }
     }
+
+    public boolean existsRecord(String sql){
+        //レコードの存在チェック
+        int i = 0;
+        try {
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs.next()) {
+                i = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (i == 0){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     //MincraPlayer型についての操作
     public void updateMincraPlayer(UUID uuid, MincraPlayer mincraPlayer){
@@ -87,11 +107,34 @@ public class SQLManager {
         }
     }
 
+    public void insertMincraPlayer(UUID uuid, MincraPlayer mincraPlayer){
+        String sql = " SELECT EXISTS(SELECT * FROM player WHERE uuid = '" + uuid + "')";
+
+        //insert
+        if (existsRecord(sql)){
+            sql = "INSERT INTO player (name, uuid, mp, cooltime) VALUES ('" +
+                    mincraPlayer.getPlayerName() + "', '" +
+                    mincraPlayer.getPlayerUUID() + "', " +
+                    mincraPlayer.getPlayerMP() + ", " +
+                    mincraPlayer.getPlayerCooltime() + ")";
+            try {
+                stmt.executeUpdate(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("[MincraMagics] " +
+                    mincraPlayer.getPlayerName() + "のレコードは既にplayerテーブルに存在しています。" +
+                    "\n UUID: " + mincraPlayer.getPlayerUUID());
+        }
+    }
+
     public MincraPlayer getMincraPlayer(UUID uuid) {
         MincraPlayer mincraPlayer = new MincraPlayer();
 
         String sql = "SELECT name, uuid, mp, cooltime FROM player " +
                 "WHERE uuid = '"+ uuid +"'";
+
         try {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
