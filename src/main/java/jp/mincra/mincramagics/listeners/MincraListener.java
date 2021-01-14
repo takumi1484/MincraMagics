@@ -6,6 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.UUID;
 
 public class MincraListener implements Listener {
 
@@ -17,7 +20,7 @@ public class MincraListener implements Listener {
             //1度ログイン済み
 
             //SQLから情報を取得
-            MincraPlayer mincraPlayer = MincraMagics.getSQLManager().getMincraPlayer(event.getPlayer().getUniqueId());
+            MincraPlayer mincraPlayer = MincraMagics.getSQLManager().getMincraPlayer(player.getUniqueId());
             //プレイヤーをHashMapに追加
             MincraMagics.getPlayerManager().putMincraPlayer(mincraPlayer);
 
@@ -29,10 +32,22 @@ public class MincraListener implements Listener {
             MincraPlayer mincraPlayer = new MincraPlayer();
             mincraPlayer.setPlayerUUID(player.getUniqueId());
             mincraPlayer.setPlayerName(player.getName());
-            //SQLに追加 (いらない処理)
+            //SQLに追加
             MincraMagics.getSQLManager().insertMincraPlayer(player.getUniqueId(),mincraPlayer);
             //プレイヤーをHashMapに追加
             MincraMagics.getPlayerManager().putMincraPlayer(mincraPlayer);
         }
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+
+        //Mapから取得
+        MincraPlayer mincraPlayer = MincraMagics.getPlayerManager().getMincraPlayer(uuid);
+        MincraMagics.getPlayerManager().removeMincraPlayer(uuid); //Mapから削除
+        //SQLに保存
+        MincraMagics.getSQLManager().updateMincraPlayer(mincraPlayer);
     }
 }

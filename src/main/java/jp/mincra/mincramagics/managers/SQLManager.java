@@ -70,35 +70,22 @@ public class SQLManager {
         }
     }
 
-    public boolean existsRecord(String sql){
-        //レコードの存在チェック
-        int i = 0;
-        try {
-            ResultSet rs = stmt.executeQuery(sql);
-            if(rs.next()) {
-                i = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return i != 0;
-    }
-
 
     //MincraPlayer型についての操作
-    public void updateMincraPlayer(UUID uuid, MincraPlayer mincraPlayer){
+    public void updateMincraPlayer(MincraPlayer mincraPlayer){
         String sql = "UPDATE player set " +
-                "name = '"+ mincraPlayer.getPlayerName() + "'" +
-                "mp = "+ mincraPlayer.getPlayerMP() +
-                "cooltime = "+ mincraPlayer.getPlayerCooltime() +
+                "name = '"+ mincraPlayer.getPlayerName() + "', " +
+                "mp = "+ mincraPlayer.getPlayerMP() + ", " +
+                "cooltime = "+ mincraPlayer.getPlayerCooltime() + " " +
                 "WHERE uuid = '" + mincraPlayer.getPlayerUUID() + "'";
 
         try {
-            stmt.executeQuery(sql);
+            stmt.executeUpdate(sql);
+            System.out.println("[MincraMagics] SQLのアップデートに成功しました。 name=" +
+                    mincraPlayer.getPlayerName());
         } catch (SQLException e) {
-            System.out.println("[MincraMagics] SQLのアップデートに失敗しました。 " +
-                    "name=" + mincraPlayer.getPlayerName());
+            System.out.println("[MincraMagics] SQLのアップデートに失敗しました。 name=" +
+                    mincraPlayer.getPlayerName());
             e.printStackTrace();
         }
     }
@@ -115,21 +102,22 @@ public class SQLManager {
                     mincraPlayer.getPlayerCooltime() + ")";
             try {
                 stmt.executeUpdate(sql);
+                System.out.println("[MincraMagics] レコードの追加に成功しました。 name=" +
+                        mincraPlayer.getPlayerName());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("[MincraMagics] " +
-                    mincraPlayer.getPlayerName() + "のレコードは既にplayerテーブルに存在しています。" +
-                    "\n UUID: " + mincraPlayer.getPlayerUUID());
+            System.out.println("[MincraMagics] レコードが既にplayerテーブルに存在しています。 name=" +
+                    mincraPlayer.getPlayerName() + " UUID: " + mincraPlayer.getPlayerUUID());
         }
     }
 
     public MincraPlayer getMincraPlayer(UUID uuid) {
         MincraPlayer mincraPlayer = new MincraPlayer();
+        mincraPlayer.setPlayerUUID(uuid);
 
-        String sql = "SELECT name, uuid, mp, cooltime FROM player " +
-                "WHERE uuid = '"+ uuid +"'";
+        String sql = "SELECT name, uuid, mp, cooltime FROM player WHERE uuid = '"+ uuid +"'";
 
         try {
             ResultSet rs = stmt.executeQuery(sql);
@@ -146,5 +134,21 @@ public class SQLManager {
 
             return null;
         }
+    }
+
+
+    //Util
+    public boolean existsRecord(String sql){
+        //レコードの存在チェック
+        int i = 0;
+        try {
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs.next()) {
+                i = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i != 0;
     }
 }

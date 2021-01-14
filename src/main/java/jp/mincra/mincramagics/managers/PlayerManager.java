@@ -9,6 +9,9 @@ public class PlayerManager {
 
     private ConcurrentHashMap<UUID, MincraPlayer> MincraPlayerUUIDMap = new ConcurrentHashMap<>();
 
+    public MincraPlayer getMincraPlayer(UUID uuid) {
+        return MincraPlayerUUIDMap.get(uuid);
+    }
     public void putMincraPlayer(MincraPlayer mincraPlayer) {
         MincraPlayerUUIDMap.put(mincraPlayer.getPlayerUUID(),mincraPlayer);
     }
