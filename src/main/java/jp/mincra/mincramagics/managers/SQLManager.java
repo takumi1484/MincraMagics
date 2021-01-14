@@ -13,10 +13,6 @@ public class SQLManager {
     private Connection conn;
     private Statement stmt;
 
-    public Statement getStatement(){
-        return stmt;
-    }
-
 
     public void getConnection(){
         try {
