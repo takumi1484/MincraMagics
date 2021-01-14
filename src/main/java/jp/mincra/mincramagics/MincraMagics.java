@@ -37,7 +37,8 @@ public final class MincraMagics extends JavaPlugin {
     @Override
     public void onDisable() {
 
-        //SQL切断
+        //SQL全て保存&切断
+        sqlManager.saveMincraPlayer();
         sqlManager.closeConnection();
     }
 

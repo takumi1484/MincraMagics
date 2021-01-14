@@ -132,6 +132,15 @@ public class SQLManager {
         }
     }
 
+    public void saveMincraPlayer(){
+        System.out.println("[MincraMagics] 全プレイヤーのデータをSQLに保存します...");
+        Map<UUID, MincraPlayer> map = MincraMagics.getPlayerManager().getMincraPlayerMap();
+
+        for(Map.Entry<UUID, MincraPlayer> entry : map.entrySet()) {
+            updateMincraPlayer(entry.getValue());
+        }
+    }
+
 
     //Util
     public boolean existsRecord(String sql){
