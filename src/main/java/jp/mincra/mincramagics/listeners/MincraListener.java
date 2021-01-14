@@ -45,7 +45,7 @@ public class MincraListener implements Listener {
         UUID uuid = player.getUniqueId();
 
         //Mapから取得
-        MincraPlayer mincraPlayer = MincraMagics.getPlayerManager().getMincraPlayer(uuid);
+        MincraPlayer mincraPlayer = MincraMagics.getPlayerManager().getMincraPlayerMap().get(uuid);
         MincraMagics.getPlayerManager().removeMincraPlayer(uuid); //Mapから削除
         //SQLに保存
         MincraMagics.getSQLManager().updateMincraPlayer(mincraPlayer);

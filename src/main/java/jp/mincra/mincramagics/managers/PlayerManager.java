@@ -7,37 +7,37 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerManager {
 
-    private ConcurrentHashMap<UUID, MincraPlayer> MincraPlayerUUIDMap = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<UUID, MincraPlayer> MincraPlayerMap = new ConcurrentHashMap<>();
 
-    public MincraPlayer getMincraPlayer(UUID uuid) {
-        return MincraPlayerUUIDMap.get(uuid);
+    public ConcurrentHashMap<UUID, MincraPlayer> getMincraPlayerMap() {
+        return MincraPlayerMap;
     }
     public void putMincraPlayer(MincraPlayer mincraPlayer) {
-        MincraPlayerUUIDMap.put(mincraPlayer.getPlayerUUID(),mincraPlayer);
+        MincraPlayerMap.put(mincraPlayer.getPlayerUUID(),mincraPlayer);
     }
     public void removeMincraPlayer(UUID uuid) {
-        MincraPlayerUUIDMap.remove(uuid);
+        MincraPlayerMap.remove(uuid);
     }
 
     //MP
     public int getPlayerMP(UUID uuid) {
-        return MincraPlayerUUIDMap.get(uuid).getPlayerMP();
+        return MincraPlayerMap.get(uuid).getPlayerMP();
     }
     public void addPlayerMP(UUID uuid, int mp) {
-        MincraPlayer mincraPlayer = MincraPlayerUUIDMap.get(uuid);
+        MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
         mp = mp + mincraPlayer.getPlayerMP();
         mincraPlayer.setPlayerMP(mp);
-        MincraPlayerUUIDMap.put(uuid,mincraPlayer);
+        MincraPlayerMap.put(uuid,mincraPlayer);
     }
 
     //Cooltime
     public int getPlayerCooltime(UUID uuid) {
-        return MincraPlayerUUIDMap.get(uuid).getPlayerCooltime();
+        return MincraPlayerMap.get(uuid).getPlayerCooltime();
     }
     public void addPlayerCooltime(UUID uuid, int cooltime) {
-        MincraPlayer mincraPlayer = MincraPlayerUUIDMap.get(uuid);
+        MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
         cooltime = cooltime + mincraPlayer.getPlayerCooltime();
         mincraPlayer.setPlayerMP(cooltime);
-        MincraPlayerUUIDMap.put(uuid,mincraPlayer);
+        MincraPlayerMap.put(uuid,mincraPlayer);
     }
 }
