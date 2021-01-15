@@ -19,7 +19,7 @@ public class MincraCommands implements CommandExecutor {
         Player caster;
         if (sender instanceof Player) {
             caster = (Player) sender;
-            MincraMagics.getPlayerManager().addPlayerMP(caster.getUniqueId(), 10);
+            MincraMagics.getPlayerManager().addPlayerMP_value(caster.getUniqueId(), 10);
         }
         return false;
     }

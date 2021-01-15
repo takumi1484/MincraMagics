@@ -8,6 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 public class MincraListener implements Listener {
@@ -51,8 +53,21 @@ public class MincraListener implements Listener {
 
         //Mapから取得
         MincraPlayer mincraPlayer = MincraMagics.getPlayerManager().getMincraPlayerMap().get(uuid);
-        MincraMagics.getPlayerManager().removeMincraPlayer(uuid); //Mapから削除
         //SQLに保存
         MincraMagics.getSQLManager().updateMincraPlayer(mincraPlayer);
+
+        //オンラインプレイヤーリストを正しく設定するために遅延する
+        Timer timer = new Timer(false);
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                //オンラインプレイヤーリストを設定
+                MincraMagics.getPlayerManager().setOnlinePlayerList();
+                //Mapから削除
+                MincraMagics.getPlayerManager().removeMincraPlayer(uuid);
+                timer.cancel();
+            }
+        };
+        timer.schedule(task, 50);
     }
 }

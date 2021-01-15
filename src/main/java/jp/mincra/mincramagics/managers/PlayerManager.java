@@ -23,24 +23,47 @@ public class PlayerManager {
     }
 
     //MP
-    public float getPlayerMP(UUID uuid) {
+    public float getPlayerMP_value(UUID uuid) {
         return MincraPlayerMap.get(uuid).getPlayerMP_value();
     }
-    public void addPlayerMP(UUID uuid, float mp) {
+    public void addPlayerMP_value(UUID uuid, float mp_value) {
         MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
-        mp = mp + mincraPlayer.getPlayerMP_value();
-        mincraPlayer.setPlayerMP_value(mp);
+        mp_value = mp_value + mincraPlayer.getPlayerMP_value();
+        mincraPlayer.setPlayerMP_value(mp_value);
+        MincraPlayerMap.put(uuid,mincraPlayer);
+    }
+    public void setPlayerMP_value(UUID uuid, float mp_value) {
+        MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
+        mincraPlayer.setPlayerCooltime_max(mp_value);
+        MincraPlayerMap.put(uuid,mincraPlayer);
+    }
+
+    public float getPlayerMP_max(UUID uuid) {
+        return MincraPlayerMap.get(uuid).getPlayerMP_max();
+    }
+    public void setPlayerMP_max(UUID uuid, float mp_max) {
+        MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
+        mincraPlayer.setPlayerCooltime_max(mp_max);
         MincraPlayerMap.put(uuid,mincraPlayer);
     }
 
     //Cooltime
-    public float getPlayerCooltime(UUID uuid) {
+    public float getPlayerCooltime_value(UUID uuid) {
         return MincraPlayerMap.get(uuid).getPlayerCooltime_value();
     }
-    public void addPlayerCooltime(UUID uuid, float cooltime) {
+    public void addPlayerCooltime_value(UUID uuid, float cooltime_value) {
         MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
-        cooltime = cooltime + mincraPlayer.getPlayerCooltime_value();
-        mincraPlayer.setPlayerMP_value(cooltime);
+        cooltime_value = cooltime_value + mincraPlayer.getPlayerCooltime_value();
+        mincraPlayer.setPlayerMP_value(cooltime_value);
+        MincraPlayerMap.put(uuid,mincraPlayer);
+    }
+
+    public float getPlayerCooltime_max(UUID uuid) {
+        return MincraPlayerMap.get(uuid).getPlayerCooltime_max();
+    }
+    public void setPlayerCooltime_max(UUID uuid, float cooltime_max) {
+        MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
+        mincraPlayer.setPlayerCooltime_max(cooltime_max);
         MincraPlayerMap.put(uuid,mincraPlayer);
     }
 
