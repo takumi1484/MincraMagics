@@ -71,8 +71,8 @@ public class SQLManager {
     public void updateMincraPlayer(MincraPlayer mincraPlayer){
         String sql = "UPDATE player set " +
                 "name = '"+ mincraPlayer.getPlayerName() + "', " +
-                "mp = "+ mincraPlayer.getPlayerMP() + ", " +
-                "cooltime = "+ mincraPlayer.getPlayerCooltime() + " " +
+                "mp = "+ mincraPlayer.getPlayerMP_value() + ", " +
+                "cooltime = "+ mincraPlayer.getPlayerCooltime_value() + " " +
                 "WHERE uuid = '" + mincraPlayer.getPlayerUUID() + "'";
 
         try {
@@ -94,8 +94,8 @@ public class SQLManager {
             sql = "INSERT INTO player (name, uuid, mp, cooltime) VALUES ('" +
                     mincraPlayer.getPlayerName() + "', '" +
                     mincraPlayer.getPlayerUUID() + "', " +
-                    mincraPlayer.getPlayerMP() + ", " +
-                    mincraPlayer.getPlayerCooltime() + ")";
+                    mincraPlayer.getPlayerMP_value() + ", " +
+                    mincraPlayer.getPlayerCooltime_value() + ")";
             try {
                 stmt.executeUpdate(sql);
                 System.out.println("[MincraMagics] レコードの追加に成功しました。 name=" +
@@ -119,8 +119,8 @@ public class SQLManager {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 mincraPlayer.setPlayerName(rs.getString("name"));
-                mincraPlayer.setPlayerMP(rs.getInt("mp"));
-                mincraPlayer.setPlayerCooltime(rs.getInt("cooltime"));
+                mincraPlayer.setPlayerMP_value(rs.getInt("mp"));
+                mincraPlayer.setPlayerCooltime_value(rs.getInt("cooltime"));
             }
 
             return mincraPlayer;

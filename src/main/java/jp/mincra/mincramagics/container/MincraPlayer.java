@@ -7,9 +7,11 @@ public class MincraPlayer {
     private String playerName = "Unknown";
     private UUID playerUUID;
 
-    private float playerMP = 100;
-    //1tick毎に減算
-    private float playerCooltime = 0;
+    private float playerMP_value = 20;
+    private float playerMP_max = 20;
+
+    private float playerCooltime_value = 0;
+    private float playerCooltime_max = 0;
 
 
     public void setPlayerName(String playerName) {
@@ -26,18 +28,28 @@ public class MincraPlayer {
         return playerUUID;
     }
 
-    public void setPlayerMP(float playerMP){
-        this.playerMP = playerMP;
+    public void setPlayerMP_value(float playerMP_value){
+        this.playerMP_value = playerMP_value;
     }
-    public float getPlayerMP(){
-        return playerMP;
+    public float getPlayerMP_value(){
+        return playerMP_value;
     }
 
-    public void setPlayerCooltime(float playerCooltime) {
-        this.playerCooltime = playerCooltime;
+    public void setPlayerMP_max(float playerMP_max) {
+        this.playerMP_max = playerMP_max;
     }
-    public float getPlayerCooltime() {
-        return playerCooltime;
+    public float getPlayerMP_max() {return playerMP_max;}
+
+    public void setPlayerCooltime_value(float playerCooltime_value) {
+        this.playerCooltime_value = playerCooltime_value;
     }
+    public float getPlayerCooltime_value() {
+        return playerCooltime_value;
+    }
+
+    public void setPlayerCooltime_max(float playerCooltime_max) {
+        this.playerCooltime_max = playerCooltime_max;
+    }
+    public float getPlayerCooltime_max() {return playerCooltime_max;}
 
 }
