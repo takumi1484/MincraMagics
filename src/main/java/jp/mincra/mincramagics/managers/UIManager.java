@@ -11,7 +11,7 @@ public class UIManager {
 
     public void sendMPActionbar(){
 
-        String actionbar = "";
+        String actionbar;
         UUID uuid;
         PlayerManager playerManager = MincraMagics.getPlayerManager();
 
