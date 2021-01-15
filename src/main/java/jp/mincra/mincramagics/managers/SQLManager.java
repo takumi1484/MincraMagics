@@ -53,8 +53,9 @@ public class SQLManager {
                 "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
                 "name varchar(20), " +
                 "uuid VARBINARY(36) NOT NULL UNIQUE," +
-                "mp FLOAT, " +
-                "cooltime FLOAT" +
+                "mp_value FLOAT, " +
+                "cooltime_value FLOAT" +
+                "cooltime_max FLOAT" +
                 ")";
         System.out.println("[MincraMagics] テーブルの作成を試行します...");
         //execute the SQL stetement
@@ -70,10 +71,11 @@ public class SQLManager {
     //MincraPlayer型についての操作
     public void updateMincraPlayer(MincraPlayer mincraPlayer){
         String sql = "UPDATE player set " +
-                "name = '"+ mincraPlayer.getPlayerName() + "', " +
-                "mp = "+ mincraPlayer.getPlayerMP_value() + ", " +
-                "cooltime = "+ mincraPlayer.getPlayerCooltime_value() + " " +
-                "WHERE uuid = '" + mincraPlayer.getPlayerUUID() + "'";
+                "name = '" + mincraPlayer.getPlayerName() + "', " +
+                "mp_value = " + mincraPlayer.getPlayerMP_value() + ", " +
+                "cooltime_value = " + mincraPlayer.getPlayerCooltime_value() + ", " +
+                "cooltime_max = " + mincraPlayer.getPlayerCooltime_max() +
+                " WHERE uuid = '" + mincraPlayer.getPlayerUUID() + "'";
 
         try {
             stmt.executeUpdate(sql);
@@ -91,11 +93,12 @@ public class SQLManager {
 
         //insert
         if (existsRecord(sql)){
-            sql = "INSERT INTO player (name, uuid, mp, cooltime) VALUES ('" +
+            sql = "INSERT INTO player (name, uuid, mp_value, cooltime_value, cooltime_max) VALUES ('" +
                     mincraPlayer.getPlayerName() + "', '" +
                     mincraPlayer.getPlayerUUID() + "', " +
                     mincraPlayer.getPlayerMP_value() + ", " +
-                    mincraPlayer.getPlayerCooltime_value() + ")";
+                    mincraPlayer.getPlayerCooltime_value() + ", " +
+                    mincraPlayer.getPlayerCooltime_max() + ")";
             try {
                 stmt.executeUpdate(sql);
                 System.out.println("[MincraMagics] レコードの追加に成功しました。 name=" +
@@ -113,14 +116,15 @@ public class SQLManager {
         MincraPlayer mincraPlayer = new MincraPlayer();
         mincraPlayer.setPlayerUUID(uuid);
 
-        String sql = "SELECT name, uuid, mp, cooltime FROM player WHERE uuid = '"+ uuid +"'";
+        String sql = "SELECT name, uuid, mp_value, cooltime_value, cooltime_max FROM player WHERE uuid = '"+ uuid +"'";
 
         try {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 mincraPlayer.setPlayerName(rs.getString("name"));
-                mincraPlayer.setPlayerMP_value(rs.getInt("mp"));
-                mincraPlayer.setPlayerCooltime_value(rs.getInt("cooltime"));
+                mincraPlayer.setPlayerMP_value(rs.getFloat("mp_value"));
+                mincraPlayer.setPlayerCooltime_value(rs.getFloat("cooltime_value"));
+                mincraPlayer.setPlayerCooltime_max(rs.getFloat("cooltime_max"));
             }
 
             return mincraPlayer;
