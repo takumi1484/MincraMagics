@@ -37,7 +37,11 @@ public class MincraListener implements Listener {
             MincraMagics.getSQLManager().insertMincraPlayer(player.getUniqueId(),mincraPlayer);
             //プレイヤーをHashMapに追加
             MincraMagics.getPlayerManager().putMincraPlayer(mincraPlayer);
+
         }
+
+        //オンラインプレイヤーリストを設定
+        MincraMagics.getPlayerManager().setOnlinePlayerList();
     }
 
     @EventHandler

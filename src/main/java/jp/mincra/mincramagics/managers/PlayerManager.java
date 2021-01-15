@@ -1,6 +1,8 @@
 package jp.mincra.mincramagics.managers;
 
 import jp.mincra.mincramagics.container.MincraPlayer;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -8,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class PlayerManager {
 
     private ConcurrentHashMap<UUID, MincraPlayer> MincraPlayerMap = new ConcurrentHashMap<>();
+    private Player[] onlinePlayerList;
 
     public ConcurrentHashMap<UUID, MincraPlayer> getMincraPlayerMap() {
         return MincraPlayerMap;
@@ -39,5 +42,14 @@ public class PlayerManager {
         cooltime = cooltime + mincraPlayer.getPlayerCooltime_value();
         mincraPlayer.setPlayerMP_value(cooltime);
         MincraPlayerMap.put(uuid,mincraPlayer);
+    }
+
+
+    //オンラインプレイヤー
+    public Player[] getOnlinePlayerList(){
+        return onlinePlayerList;
+    }
+    public void setOnlinePlayerList(){
+        onlinePlayerList = Bukkit.getOnlinePlayers().toArray(new Player[0]);
     }
 }

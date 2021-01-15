@@ -42,7 +42,9 @@ public class PropertyManager {
             FileWriter fileWriter = null;
             try {
                 fileWriter = new FileWriter(properties);
-                fileWriter.write("MySQL_url=jdbc:mysql://localhost/mincra\nMySQL_user=root\nMySQL_password=suken314");
+                fileWriter.write("MySQL_url=jdbc:mysql://localhost/mincra\n" +
+                        "MySQL_user=root\n" +
+                        "MySQL_password=suken314");
                 fileWriter.close();
                 properties.createNewFile();
             } catch (IOException e) {
