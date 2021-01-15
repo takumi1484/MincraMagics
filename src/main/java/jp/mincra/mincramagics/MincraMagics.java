@@ -9,6 +9,9 @@ import jp.mincra.mincramagics.managers.UIManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public final class MincraMagics extends JavaPlugin {
 
     private static PlayerManager playerManager;
@@ -50,12 +53,14 @@ public final class MincraMagics extends JavaPlugin {
     }
 
     public void onTick() {
-        new BukkitRunnable() {
+        Timer timer = new Timer(); // 今回追加する処理
+        TimerTask task = new TimerTask() {
             public void run() {
+                // 定期的に実行したい処理
                 uiManager.sendMPActionbar();
-                onTick();
             }
-        }.runTaskLater(this, 1);
+        };
+        timer.scheduleAtFixedRate(task,0,50);
     }
 
 
