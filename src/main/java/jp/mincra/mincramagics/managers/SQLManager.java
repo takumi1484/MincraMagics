@@ -54,7 +54,7 @@ public class SQLManager {
                 "name varchar(20), " +
                 "uuid VARBINARY(36) NOT NULL UNIQUE," +
                 "mp_value FLOAT, " +
-                "cooltime_value FLOAT" +
+                "cooltime_value FLOAT, " +
                 "cooltime_max FLOAT" +
                 ")";
         System.out.println("[MincraMagics] テーブルの作成を試行します...");
@@ -89,7 +89,7 @@ public class SQLManager {
     }
 
     public void insertMincraPlayer(UUID uuid, MincraPlayer mincraPlayer){
-        String sql = " SELECT EXISTS(SELECT * FROM player WHERE uuid = '" + uuid + "')";
+        String sql = "SELECT EXISTS(SELECT * FROM player WHERE uuid = '" + uuid + "')";
 
         //insert
         if (existsRecord(sql)){
@@ -158,6 +158,7 @@ public class SQLManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return i != 0;
+
+        return i == 0;
     }
 }
