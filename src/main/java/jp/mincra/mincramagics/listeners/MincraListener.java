@@ -21,6 +21,7 @@ public class MincraListener implements Listener {
 
             //SQLから情報を取得
             MincraPlayer mincraPlayer = MincraMagics.getSQLManager().getMincraPlayer(player.getUniqueId());
+            mincraPlayer.setPlayerName(player.getName());
             //プレイヤーをHashMapに追加
             MincraMagics.getPlayerManager().putMincraPlayer(mincraPlayer);
 

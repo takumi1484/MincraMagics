@@ -53,8 +53,8 @@ public class SQLManager {
                 "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
                 "name varchar(20), " +
                 "uuid VARBINARY(36) NOT NULL UNIQUE," +
-                "mp INT, " +
-                "cooltime INT" +
+                "mp FLOAT, " +
+                "cooltime FLOAT" +
                 ")";
         System.out.println("[MincraMagics] テーブルの作成を試行します...");
         //execute the SQL stetement

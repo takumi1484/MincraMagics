@@ -20,10 +20,10 @@ public class PlayerManager {
     }
 
     //MP
-    public int getPlayerMP(UUID uuid) {
+    public float getPlayerMP(UUID uuid) {
         return MincraPlayerMap.get(uuid).getPlayerMP();
     }
-    public void addPlayerMP(UUID uuid, int mp) {
+    public void addPlayerMP(UUID uuid, float mp) {
         MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
         mp = mp + mincraPlayer.getPlayerMP();
         mincraPlayer.setPlayerMP(mp);
@@ -31,10 +31,10 @@ public class PlayerManager {
     }
 
     //Cooltime
-    public int getPlayerCooltime(UUID uuid) {
+    public float getPlayerCooltime(UUID uuid) {
         return MincraPlayerMap.get(uuid).getPlayerCooltime();
     }
-    public void addPlayerCooltime(UUID uuid, int cooltime) {
+    public void addPlayerCooltime(UUID uuid, float cooltime) {
         MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
         cooltime = cooltime + mincraPlayer.getPlayerCooltime();
         mincraPlayer.setPlayerMP(cooltime);
