@@ -11,10 +11,12 @@ import java.util.UUID;
 public class SQLManager {
 
     private Connection conn;
-    private Statement stmt;
+    private String url = MincraMagics.getPropertyManager().getProperty("MySQL_url")+"?user=" +
+            MincraMagics.getPropertyManager().getProperty("MySQL_user")+"&password=" +
+            MincraMagics.getPropertyManager().getProperty("MySQL_password");
 
 
-    public void getConnection(){
+    public Connection getConnection(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -22,90 +24,108 @@ public class SQLManager {
         }
 
         try {
-//            PropertyManager propertyManager = MincraMagics.getPropertyManager();
-            String url = MincraMagics.getPropertyManager().getProperty("MySQL_url")+"?user=" +
-                    MincraMagics.getPropertyManager().getProperty("MySQL_user")+"&password=" +
-                    MincraMagics.getPropertyManager().getProperty("MySQL_password");
-            System.out.println("[MincraMagics] MySQLに接続中です...");
             conn = DriverManager.getConnection(url);
-            stmt = conn.createStatement();
+            return conn;
         } catch (SQLException e) {
-            // 例外処理
-            System.out.println("[MincraMagics] MySQLの接続に失敗しました。");
+            System.out.println("[MincraMagics] MySQLの接続に失敗しました。 URL: " + url);
             e.printStackTrace();
+            return null;
         }
     }
 
-    public void closeConnection(){
-        try {
-            System.out.println("[MincraMagics] MySQLから切断します...");
-            conn.close();
-        } catch (SQLException e){
-            System.out.println("[MincraMagics] MySQLの切断に失敗しました。");
-            e.printStackTrace();
-        }
-    }
-
-    //必要なテーブルを作成
-    public void createRequiredTables() {
-        String sql = "CREATE TABLE IF NOT EXISTS player (" +
-                //AUTO_INCREMENT 値が指定されなくても自動で入力される。
-                "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
-                "name varchar(20), " +
-                "uuid VARBINARY(36) NOT NULL UNIQUE," +
-                "mp_value FLOAT, " +
-                "cooltime_value FLOAT, " +
-                "cooltime_max FLOAT" +
-                ")";
-        System.out.println("[MincraMagics] テーブルの作成を試行します...");
-        //execute the SQL stetement
-        try {
-            stmt.execute(sql);
+    public boolean isExistTable(String tableName) {
+        boolean tExists = false;
+        try (ResultSet rs = getConnection().getMetaData().getTables(null, null, tableName, null)) {
+            while (rs.next()) {
+                String tName = rs.getString("TABLE_NAME");
+                if (tName != null && tName.equals(tableName)) {
+                    tExists = true;
+                    break;
+                }
+            }
         } catch (SQLException e) {
-            System.out.println("[MincraMagics] テーブルの作成に失敗しました。");
+            e.printStackTrace();
+        }
+        return tExists;
+    }
+
+    public boolean isExistsRecord(String sql){
+        //レコードの存在チェック
+        int i = 0;
+        try {
+            Statement stmt = getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs.next()) {
+                i = rs.getInt(1);
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return i == 0;
+    }
+    
+    public void createTable(String query, String tableName) {
+        try {
+            if (isExistTable(tableName)){
+                Statement stmt = getConnection().createStatement();
+                stmt.execute(query);
+                stmt.close();
+                System.out.println("[MincraMagics] テーブルの作成に成功しました。 テーブル名: " + tableName);
+            } else {
+                System.out.println("[MincraMagics] テーブルは既に存在します。 テーブル名: " + tableName);
+            }
+        } catch (SQLException e) {
+            System.out.println("[MincraMagics] テーブルの作成に失敗しました。 \nテーブル名: " + tableName + "\nクエリ文: " + query);
             e.printStackTrace();
         }
     }
 
+    public void updateRecord(String query){
+        try {
+            Statement stmt = getConnection().createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertRecord(String query) {
+            try {
+                Statement stmt = getConnection().createStatement();
+                stmt.executeUpdate(query);
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    }
 
     //MincraPlayer型についての操作
     public void updateMincraPlayer(MincraPlayer mincraPlayer){
-        String sql = "UPDATE player set " +
+        String query = "UPDATE player set " +
                 "name = '" + mincraPlayer.getPlayerName() + "', " +
                 "mp_value = " + mincraPlayer.getPlayerMP_value() + ", " +
                 "cooltime_value = " + mincraPlayer.getPlayerCooltime_value() + ", " +
                 "cooltime_max = " + mincraPlayer.getPlayerCooltime_max() +
                 " WHERE uuid = '" + mincraPlayer.getPlayerUUID() + "'";
-
-        try {
-            stmt.executeUpdate(sql);
-            System.out.println("[MincraMagics] SQLのアップデートに成功しました。 name=" +
-                    mincraPlayer.getPlayerName());
-        } catch (SQLException e) {
-            System.out.println("[MincraMagics] SQLのアップデートに失敗しました。 name=" +
-                    mincraPlayer.getPlayerName());
-            e.printStackTrace();
-        }
+        updateRecord(query);
     }
 
     public void insertMincraPlayer(UUID uuid, MincraPlayer mincraPlayer){
-        String sql = "SELECT EXISTS(SELECT * FROM player WHERE uuid = '" + uuid + "')";
+        String query = "SELECT EXISTS(SELECT * FROM player WHERE uuid = '" + uuid + "')";
 
         //insert
-        if (existsRecord(sql)){
-            sql = "INSERT INTO player (name, uuid, mp_value, cooltime_value, cooltime_max) VALUES ('" +
+        if (isExistsRecord(query)){
+            query = "INSERT INTO player (name, uuid, mp_value, cooltime_value, cooltime_max) VALUES ('" +
                     mincraPlayer.getPlayerName() + "', '" +
                     mincraPlayer.getPlayerUUID() + "', " +
                     mincraPlayer.getPlayerMP_value() + ", " +
                     mincraPlayer.getPlayerCooltime_value() + ", " +
                     mincraPlayer.getPlayerCooltime_max() + ")";
-            try {
-                stmt.executeUpdate(sql);
-                System.out.println("[MincraMagics] レコードの追加に成功しました。 name=" +
-                        mincraPlayer.getPlayerName());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            insertRecord(query);
         } else {
             System.out.println("[MincraMagics] レコードが既にplayerテーブルに存在しています。 name=" +
                     mincraPlayer.getPlayerName() + " UUID: " + mincraPlayer.getPlayerUUID());
@@ -119,6 +139,7 @@ public class SQLManager {
         String sql = "SELECT name, uuid, mp_value, cooltime_value, cooltime_max FROM player WHERE uuid = '"+ uuid +"'";
 
         try {
+            Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 mincraPlayer.setPlayerName(rs.getString("name"));
@@ -126,7 +147,8 @@ public class SQLManager {
                 mincraPlayer.setPlayerCooltime_value(rs.getFloat("cooltime_value"));
                 mincraPlayer.setPlayerCooltime_max(rs.getFloat("cooltime_max"));
             }
-
+            stmt.close();
+            rs.close();
             return mincraPlayer;
         }catch (SQLException e){
             System.out.println("[MincraMagics] データを取得に失敗しました。");
@@ -138,27 +160,9 @@ public class SQLManager {
 
     public void saveMincraPlayer(){
         System.out.println("[MincraMagics] 全プレイヤーのデータをSQLに保存します...");
-        Map<UUID, MincraPlayer> map = MincraMagics.getPlayerManager().getMincraPlayerMap();
 
-        for(Map.Entry<UUID, MincraPlayer> entry : map.entrySet()) {
+        for(Map.Entry<UUID, MincraPlayer> entry : MincraMagics.getPlayerManager().getMincraPlayerMap().entrySet()) {
             updateMincraPlayer(entry.getValue());
         }
-    }
-
-
-    //Util
-    public boolean existsRecord(String sql){
-        //レコードの存在チェック
-        int i = 0;
-        try {
-            ResultSet rs = stmt.executeQuery(sql);
-            if(rs.next()) {
-                i = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return i == 0;
     }
 }

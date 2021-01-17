@@ -30,8 +30,18 @@ public final class MincraMagics extends JavaPlugin {
         playerManager.setOnlinePlayerList();
         //SQLManager
         getSQLManager();
-        sqlManager.getConnection();
-        sqlManager.createRequiredTables();
+//        sqlManager.getConnection();
+        String sql = "CREATE TABLE IF NOT EXISTS player (" +
+                //AUTO_INCREMENT 値が指定されなくても自動で入力される。
+                "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                "name varchar(20), " +
+                "uuid VARBINARY(36) NOT NULL UNIQUE," +
+                "mp_value FLOAT, " +
+                "cooltime_value FLOAT, " +
+                "cooltime_max FLOAT" +
+                ")";
+        String tableName = "player";
+        sqlManager.createTable(sql, tableName);
         //UIManager
         getUIManager();
 
@@ -46,9 +56,8 @@ public final class MincraMagics extends JavaPlugin {
     @Override
     public void onDisable() {
 
-        //SQL全て保存&切断
+        //SQL全て保存
         sqlManager.saveMincraPlayer();
-        sqlManager.closeConnection();
     }
 
     public void onTick() {
