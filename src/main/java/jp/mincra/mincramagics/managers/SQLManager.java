@@ -49,7 +49,7 @@ public class SQLManager {
         return tExists;
     }
 
-    public boolean isExistsRecord(String sql){
+    public boolean isExistRecord(String sql){
         //レコードの存在チェック
         int i = 0;
         try {
@@ -69,14 +69,14 @@ public class SQLManager {
     
     public void createTable(String query, String tableName) {
         try {
-            if (isExistTable(tableName)){
+//            if (isExistTable(tableName)){
                 Statement stmt = getConnection().createStatement();
                 stmt.execute(query);
                 stmt.close();
                 System.out.println("[MincraMagics] テーブルの作成に成功しました。 テーブル名: " + tableName);
-            } else {
-                System.out.println("[MincraMagics] テーブルは既に存在します。 テーブル名: " + tableName);
-            }
+//            } else {
+//                System.out.println("[MincraMagics] テーブルは既に存在します。 テーブル名: " + tableName);
+//            }
         } catch (SQLException e) {
             System.out.println("[MincraMagics] テーブルの作成に失敗しました。 \nテーブル名: " + tableName + "\nクエリ文: " + query);
             e.printStackTrace();
@@ -118,7 +118,7 @@ public class SQLManager {
         String query = "SELECT EXISTS(SELECT * FROM player WHERE uuid = '" + uuid + "')";
 
         //insert
-        if (isExistsRecord(query)){
+        if (isExistRecord(query)){
             query = "INSERT INTO player (name, uuid, mp_value, cooltime_value, cooltime_max) VALUES ('" +
                     mincraPlayer.getPlayerName() + "', '" +
                     mincraPlayer.getPlayerUUID() + "', " +
