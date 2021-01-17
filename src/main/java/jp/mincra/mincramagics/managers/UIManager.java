@@ -9,17 +9,29 @@ import java.util.UUID;
 
 public class UIManager {
 
-    public void sendMPActionbar(){
-
+    public void onTick(){
         String actionbar;
+        String subtitle;
         UUID uuid;
-//        PlayerManager playerManager = MincraMagics.getPlayerManager();
+        PlayerManager playerManager = MincraMagics.getPlayerManager();
 
-        for (Player player : MincraMagics.getPlayerManager().getOnlinePlayerList()) {
+        for (Player player : playerManager.getOnlinePlayerList()) {
             uuid = player.getUniqueId();
-            actionbar = MincraMagics.getPlayerManager().getPlayerMP_value(uuid) + "/" +
-                    MincraMagics.getPlayerManager().getPlayerMP_max(uuid);
+
+            //MP
+            String mp_value = String.format("%.1f",playerManager.getPlayerMP_value(uuid));
+            String mp_max = String.format("%.1f",playerManager.getPlayerMP_max(uuid));
+            actionbar = mp_value + "/" + mp_max;
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(actionbar));
+
+            //クールタイム減少
+            if (playerManager.getPlayerCooltime_value(uuid) > 0f) {
+                String cooltime_value = String.format("%.1f",playerManager.getPlayerCooltime_value(uuid));
+                String cooltime_max = String.format("%.1f",playerManager.getPlayerCooltime_max(uuid));
+                subtitle = cooltime_value + "/" + cooltime_max;
+                player.sendTitle("", subtitle,0,10,10);
+                playerManager.addPlayerCooltime_value(uuid,-0.05f);
+            }
         }
     }
 }

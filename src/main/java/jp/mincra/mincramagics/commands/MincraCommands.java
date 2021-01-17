@@ -1,6 +1,7 @@
 package jp.mincra.mincramagics.commands;
 
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.managers.PlayerManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,7 +20,10 @@ public class MincraCommands implements CommandExecutor {
         Player caster;
         if (sender instanceof Player) {
             caster = (Player) sender;
-            MincraMagics.getPlayerManager().addPlayerMP_value(caster.getUniqueId(), 10);
+            PlayerManager playerManager = MincraMagics.getPlayerManager();
+            playerManager.addPlayerMP_value(caster.getUniqueId(), 20);
+            playerManager.setPlayerCooltime(caster.getUniqueId(), 10);
+
         }
         return false;
     }

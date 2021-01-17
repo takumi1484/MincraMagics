@@ -63,7 +63,7 @@ public final class MincraMagics extends JavaPlugin {
         TimerTask task = new TimerTask() {
             public void run() {
                 // 定期的に実行したい処理
-                uiManager.sendMPActionbar();
+                uiManager.onTick();
             }
         };
         timer.scheduleAtFixedRate(task,0,50);
