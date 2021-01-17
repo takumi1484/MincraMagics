@@ -31,7 +31,7 @@ public final class MincraMagics extends JavaPlugin {
         //SQLManager
         getSQLManager();
 //        sqlManager.getConnection();
-        String sql = "CREATE TABLE IF NOT EXISTS player (" +
+        sqlManager.createTable("CREATE TABLE IF NOT EXISTS player (" +
                 //AUTO_INCREMENT 値が指定されなくても自動で入力される。
                 "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
                 "name varchar(20), " +
@@ -39,9 +39,7 @@ public final class MincraMagics extends JavaPlugin {
                 "mp_value FLOAT, " +
                 "cooltime_value FLOAT, " +
                 "cooltime_max FLOAT" +
-                ")";
-        String tableName = "player";
-        sqlManager.createTable(sql, tableName);
+                ")", "player");
         //UIManager
         getUIManager();
 
