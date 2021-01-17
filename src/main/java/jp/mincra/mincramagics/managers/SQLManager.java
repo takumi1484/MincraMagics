@@ -22,10 +22,10 @@ public class SQLManager {
         }
 
         try {
-            Map<String, String> propertyMap = MincraMagics.getPropertyManager().getPropertyMap();
-            String url = propertyMap.get("MySQL_url")+"?user=" +
-                    propertyMap.get("MySQL_user")+"&password=" +
-                    propertyMap.get("MySQL_password");
+//            PropertyManager propertyManager = MincraMagics.getPropertyManager();
+            String url = MincraMagics.getPropertyManager().getProperty("MySQL_url")+"?user=" +
+                    MincraMagics.getPropertyManager().getProperty("MySQL_user")+"&password=" +
+                    MincraMagics.getPropertyManager().getProperty("MySQL_password");
             System.out.println("[MincraMagics] MySQLに接続中です...");
             conn = DriverManager.getConnection(url);
             stmt = conn.createStatement();

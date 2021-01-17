@@ -53,7 +53,11 @@ public class PropertyManager {
         }
     }
 
-    public Map<String ,String> getPropertyMap(){
-        return PropertyMap;
+//    public Map<String ,String> getPropertyMap(){
+//        return PropertyMap;
+//    }
+
+    public String getProperty(String key) {
+        return PropertyMap.get(key);
     }
 }

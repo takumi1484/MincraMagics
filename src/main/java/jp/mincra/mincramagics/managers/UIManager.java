@@ -13,12 +13,12 @@ public class UIManager {
 
         String actionbar;
         UUID uuid;
-        PlayerManager playerManager = MincraMagics.getPlayerManager();
+//        PlayerManager playerManager = MincraMagics.getPlayerManager();
 
-        for (Player player : playerManager.getOnlinePlayerList()) {
+        for (Player player : MincraMagics.getPlayerManager().getOnlinePlayerList()) {
             uuid = player.getUniqueId();
-            actionbar = playerManager.getPlayerMP_value(uuid) + "/" +
-                    playerManager.getPlayerMP_max(uuid);
+            actionbar = MincraMagics.getPlayerManager().getPlayerMP_value(uuid) + "/" +
+                    MincraMagics.getPlayerManager().getPlayerMP_max(uuid);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(actionbar));
         }
     }

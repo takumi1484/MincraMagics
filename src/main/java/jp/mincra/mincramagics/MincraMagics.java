@@ -7,7 +7,6 @@ import jp.mincra.mincramagics.managers.PropertyManager;
 import jp.mincra.mincramagics.managers.SQLManager;
 import jp.mincra.mincramagics.managers.UIManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Timer;
 import java.util.TimerTask;

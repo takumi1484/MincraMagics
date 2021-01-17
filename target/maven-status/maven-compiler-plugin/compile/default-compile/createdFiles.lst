@@ -3,6 +3,7 @@ jp\mincra\mincramagics\listeners\MincraListener.class
 jp\mincra\mincramagics\managers\SQLManager.class
 jp\mincra\mincramagics\managers\UIManager.class
 jp\mincra\mincramagics\MincraMagics$1.class
+jp\mincra\mincramagics\listeners\MincraListener$1.class
 jp\mincra\mincramagics\commands\MincraCommands.class
 jp\mincra\mincramagics\MincraMagics.class
 jp\mincra\mincramagics\managers\PlayerManager.class
