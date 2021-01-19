@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class PropertyManager {
 
-    private static Map<String, String> PropertyMap = new HashMap<>();
+    private Map<String, String> PropertyMap = new HashMap<>();
 
     public void loadProperty() {
         Properties properties = new Properties();
