@@ -2,12 +2,12 @@ package jp.mincra.mincramagics.listener;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraPlayer;
-import jp.mincra.mincramagics.entity.player.PlayerManager;
+import jp.mincra.mincramagics.util.MincraChatUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Timer;
@@ -49,9 +49,9 @@ public class MincraListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
+    public void onPlayerQuit(PlayerQuitEvent e) {
+        Player p = e.getPlayer();
+        UUID uuid = p.getUniqueId();
 
         //Mapから取得
         MincraPlayer mincraPlayer = MincraMagics.getPlayerManager().getMincraPlayerMap().get(uuid);
@@ -71,5 +71,11 @@ public class MincraListener implements Listener {
             }
         };
         timer.schedule(task, 50);
+    }
+
+    @EventHandler
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
+        String translated = MincraChatUtil.translateHexColorCodes(e.getMessage());
+        e.setMessage(translated);
     }
 }

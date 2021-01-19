@@ -62,6 +62,12 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.org/repository/maven-public/</url>
+            <layout>default</layout>
+        </repository>
+
     </repositories>
 
     <dependencies>
@@ -97,5 +103,11 @@
             <artifactId>jsoup</artifactId>
             <version>1.10.2</version>
         </dependency>
+        <dependency>
+            <groupId>de.tr7zw</groupId>
+            <artifactId>item-nbt-api</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
     </dependencies>
 </project>

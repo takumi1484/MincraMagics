@@ -3,6 +3,7 @@ version: ${project.version}
 main: jp.mincra.mincramagics.MincraMagics
 api-version: 1.13
 authors: [Harineko]
+depend: [NBTAPI]
 
 commands:
   mcr:
