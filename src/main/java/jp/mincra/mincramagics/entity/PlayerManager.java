@@ -1,4 +1,4 @@
-package jp.mincra.mincramagics.managers;
+package jp.mincra.mincramagics.entity;
 
 import jp.mincra.mincramagics.container.MincraPlayer;
 import org.bukkit.Bukkit;

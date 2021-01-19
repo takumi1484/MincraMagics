@@ -1,7 +1,7 @@
-package jp.mincra.mincramagics.commands;
+package jp.mincra.mincramagics.command;
 
 import jp.mincra.mincramagics.MincraMagics;
-import jp.mincra.mincramagics.managers.PlayerManager;
+import jp.mincra.mincramagics.entity.PlayerManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

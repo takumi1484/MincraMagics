@@ -1,4 +1,4 @@
-package jp.mincra.mincramagics.managers;
+package jp.mincra.mincramagics.dao;
 
 
 import jp.mincra.mincramagics.MincraMagics;

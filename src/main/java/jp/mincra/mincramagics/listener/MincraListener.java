@@ -1,4 +1,4 @@
-package jp.mincra.mincramagics.listeners;
+package jp.mincra.mincramagics.listener;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraPlayer;

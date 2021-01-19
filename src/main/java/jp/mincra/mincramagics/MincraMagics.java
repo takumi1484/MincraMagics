@@ -1,11 +1,11 @@
 package jp.mincra.mincramagics;
 
-import jp.mincra.mincramagics.commands.MincraCommands;
-import jp.mincra.mincramagics.listeners.MincraListener;
-import jp.mincra.mincramagics.managers.PlayerManager;
-import jp.mincra.mincramagics.managers.PropertyManager;
-import jp.mincra.mincramagics.managers.SQLManager;
-import jp.mincra.mincramagics.managers.UIManager;
+import jp.mincra.mincramagics.command.MincraCommands;
+import jp.mincra.mincramagics.listener.MincraListener;
+import jp.mincra.mincramagics.entity.PlayerManager;
+import jp.mincra.mincramagics.property.PropertyManager;
+import jp.mincra.mincramagics.dao.SQLManager;
+import jp.mincra.mincramagics.ui.UIManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Timer;

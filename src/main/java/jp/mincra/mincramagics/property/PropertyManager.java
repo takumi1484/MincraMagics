@@ -1,4 +1,4 @@
-package jp.mincra.mincramagics.managers;
+package jp.mincra.mincramagics.property;
 
 import java.io.*;
 import java.util.HashMap;
