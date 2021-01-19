@@ -1,8 +1,10 @@
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\dao\SQLManager.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\command\MincraCommands.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\container\MincraPlayer.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\managers\PlayerManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\MincraMagics.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\managers\SQLManager.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\managers\UIManager.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\commands\MincraCommands.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listeners\MincraListener.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\managers\PropertyManager.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\entity\player\PlayerManager.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\property\PropertyManager.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\MincraListener.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\MincraChatUtil.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\data\MagicPoint.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\ui\UIManager.java
