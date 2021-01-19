@@ -3,6 +3,7 @@ package jp.mincra.mincramagics.dao;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraPlayer;
+import jp.mincra.mincramagics.util.MincraChatUtil;
 
 import java.sql.*;
 import java.util.Map;
@@ -27,7 +28,8 @@ public class SQLManager {
             conn = DriverManager.getConnection(url);
             return conn;
         } catch (SQLException e) {
-            System.out.println("[MincraMagics] MySQLの接続に失敗しました。 URL: " + url);
+            MincraChatUtil.sendConsoleMessage("MySQLの接続に失敗しました。 URL: " + url);
+            MincraChatUtil.sendConsoleMessage("MySQLの接続に失敗しました。 URL: " + url);
             e.printStackTrace();
             return null;
         }
@@ -73,12 +75,12 @@ public class SQLManager {
                 Statement stmt = getConnection().createStatement();
                 stmt.execute(query);
                 stmt.close();
-                System.out.println("[MincraMagics] テーブルの作成に成功しました。 テーブル名: " + tableName);
+                MincraChatUtil.sendConsoleMessage("テーブルの作成に成功しました。 テーブル名: " + tableName);
 //            } else {
-//                System.out.println("[MincraMagics] テーブルは既に存在します。 テーブル名: " + tableName);
+//                MincraChatUtil.sendConsoleMessage("テーブルは既に存在します。 テーブル名: " + tableName);
 //            }
         } catch (SQLException e) {
-            System.out.println("[MincraMagics] テーブルの作成に失敗しました。 \nテーブル名: " + tableName + "\nクエリ文: " + query);
+            MincraChatUtil.sendConsoleMessage("テーブルの作成に失敗しました。 \nテーブル名: " + tableName + "\nクエリ文: " + query);
             e.printStackTrace();
         }
     }
@@ -127,7 +129,7 @@ public class SQLManager {
                     mincraPlayer.getPlayerCooltime_max() + ")";
             insertRecord(query);
         } else {
-            System.out.println("[MincraMagics] レコードが既にplayerテーブルに存在しています。 name=" +
+            MincraChatUtil.sendConsoleMessage("レコードが既にplayerテーブルに存在しています。 name=" +
                     mincraPlayer.getPlayerName() + " UUID: " + mincraPlayer.getPlayerUUID());
         }
     }
@@ -151,7 +153,7 @@ public class SQLManager {
             rs.close();
             return mincraPlayer;
         }catch (SQLException e){
-            System.out.println("[MincraMagics] データを取得に失敗しました。");
+            MincraChatUtil.sendConsoleMessage("データを取得に失敗しました。");
             e.printStackTrace();
 
             return null;
@@ -159,7 +161,7 @@ public class SQLManager {
     }
 
     public void saveMincraPlayer(){
-        System.out.println("[MincraMagics] 全プレイヤーのデータをSQLに保存します...");
+        MincraChatUtil.sendConsoleMessage("全プレイヤーのデータをSQLに保存します...");
 
         for(Map.Entry<UUID, MincraPlayer> entry : MincraMagics.getPlayerManager().getMincraPlayerMap().entrySet()) {
             updateMincraPlayer(entry.getValue());

@@ -2,10 +2,11 @@ package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.command.MincraCommands;
 import jp.mincra.mincramagics.listener.MincraListener;
-import jp.mincra.mincramagics.entity.PlayerManager;
+import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.property.PropertyManager;
 import jp.mincra.mincramagics.dao.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
+import jp.mincra.mincramagics.util.MincraChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Timer;
@@ -14,12 +15,42 @@ import java.util.TimerTask;
 public final class MincraMagics extends JavaPlugin {
 
     private static PlayerManager playerManager;
+    public static PlayerManager getPlayerManager() {
+        if (playerManager == null)
+            playerManager = new PlayerManager();
+        return playerManager;
+    }
+
     private static PropertyManager propertyManager;
+    public static PropertyManager getPropertyManager() {
+        if (propertyManager == null)
+            propertyManager = new PropertyManager();
+        return propertyManager;
+    }
+
     private static SQLManager sqlManager;
+    public static SQLManager getSQLManager() {
+        if (sqlManager == null)
+            sqlManager = new SQLManager();
+        return sqlManager;
+    }
+
     private static UIManager uiManager;
+    public static UIManager getUIManager(){
+        if (uiManager == null)
+            uiManager = new UIManager();
+        return uiManager;
+    }
+
+
+    protected static MincraMagics instance;
+    public static MincraMagics getInstance(){
+        return instance;
+    }
 
     @Override
     public void onEnable() {
+        instance = this;
 
         //PropertyManager
         getPropertyManager();
@@ -56,6 +87,10 @@ public final class MincraMagics extends JavaPlugin {
 
         //SQL全て保存
         sqlManager.saveMincraPlayer();
+
+        instance = null;
+        MincraChatUtil.sendConsoleMessage("プラグインが正常に終了しました。");
+        setEnabled(false);
     }
 
     public void onTick() {
@@ -68,27 +103,4 @@ public final class MincraMagics extends JavaPlugin {
         };
         timer.scheduleAtFixedRate(task,0,50);
     }
-
-
-    public static PlayerManager getPlayerManager() {
-        if (playerManager == null)
-            playerManager = new PlayerManager();
-        return playerManager;
-    }
-    public static PropertyManager getPropertyManager() {
-        if (propertyManager == null)
-            propertyManager = new PropertyManager();
-        return propertyManager;
-    }
-    public static SQLManager getSQLManager() {
-        if (sqlManager == null)
-            sqlManager = new SQLManager();
-        return sqlManager;
-    }
-    public static UIManager getUIManager(){
-        if (uiManager == null)
-            uiManager = new UIManager();
-        return uiManager;
-    }
-
 }

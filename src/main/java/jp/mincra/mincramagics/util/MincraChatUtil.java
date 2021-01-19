@@ -11,6 +11,10 @@ public class MincraChatUtil {
     private final static Pattern HEX_PATTERN = Pattern.compile("&(#[A-Fa-f0-9]{6})");
     private final static char COLOR_CHAR = ChatColor.COLOR_CHAR;
 
+    /**
+     * カラーコードを翻訳する。&修飾子はそのまま使える。
+     * @param message usage: &#FF0000&fテキスト
+     */
     public static String translateHexColorCodes(String message) {
         //Sourced from this post by imDaniX: https://github.com/SpigotMC/BungeeCord/pull/2883#issuecomment-653955600
         Matcher matcher = HEX_PATTERN.matcher(message);
@@ -27,8 +31,8 @@ public class MincraChatUtil {
     }
 
     /**
-     * カラーコードを翻訳する。&修飾子はそのまま使える。
-     * @param msg usage: &#FF0000&fテキスト
+     * @param msg 本文
+     * @return [MincraMagics] 付きのメッセージ
      */
     public static String makeDebugMessage(String msg) {
         String prefix = "&#3ebef5&f[&#3de8fe&fMincraMagics&#3ebef5&f] &r";
@@ -39,6 +43,10 @@ public class MincraChatUtil {
         return translateHexColorCodes(buf.toString());
     }
 
+    /**
+     * コンソールにログ出力
+     * @param msg 本文
+     */
     public static void sendConsoleMessage(String msg) {
         Bukkit.getServer().getConsoleSender().sendMessage(translateHexColorCodes(makeDebugMessage(msg)));
     }
