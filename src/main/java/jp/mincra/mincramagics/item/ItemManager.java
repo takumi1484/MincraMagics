@@ -6,8 +6,11 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import de.tr7zw.changeme.nbtapi.NBTList;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.MincraChatUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -36,6 +39,8 @@ public class ItemManager {
 //                    JSONArray itemAttributeModifiersArray;
 //                    JSONObject itemEachAttribute;
         JSONObject itemMincraMagicsObject = null;
+        JSONObject itemRecipeObject = null;
+        JSONArray itemRecipeShapeArray;
 
         NBTItem nbtItem;
         NBTCompound nbtDisplay;
@@ -57,15 +62,15 @@ public class ItemManager {
                     if (material != null) {
                         item = new ItemStack(Objects.requireNonNull(material));
                     } else {
-                        MincraChatUtil.sendConsoleMessage("エラー: /item/items.jsonの" + i + "番目のアイテムIDが無効です。 id: " + itemObject.getString("id"));
+                        MincraChatUtil.sendConsoleMessage("エラー: /data/items.jsonの" + i + "番目のアイテムIDが無効です。 id: " + itemObject.getString("id"));
                         continue;
                     }
                 } else {
-                    MincraChatUtil.sendConsoleMessage("エラー: /item/items.jsonの" + i + "番目のアイテムIDがString型である必要があります。 id: " + itemObject.get("id"));
+                    MincraChatUtil.sendConsoleMessage("エラー: /data/items.jsonの" + i + "番目のアイテムIDがString型である必要があります。 id: " + itemObject.get("id"));
                     continue;
                 }
             } else {
-                MincraChatUtil.sendConsoleMessage("エラー: /item/items.jsonの"+i+"番目のアイテムIDが未指定です。");
+                MincraChatUtil.sendConsoleMessage("エラー: /data/items.jsonの"+i+"番目のアイテムIDが未指定です。");
                 continue;
             }
             //---------------------------------------↑
@@ -76,11 +81,11 @@ public class ItemManager {
                     mcr_id = itemObject.getString("mcr_id");
 
                 } else {
-                    MincraChatUtil.sendConsoleMessage("エラー: /item/items.jsonの" + i + "番目のMCR_IDがString型である必要があります。 id: " + itemObject.get("mcr_id"));
+                    MincraChatUtil.sendConsoleMessage("エラー: /data/items.jsonの" + i + "番目のMCR_IDがString型である必要があります。 id: " + itemObject.get("mcr_id"));
                     continue;
                 }
             } else {
-                MincraChatUtil.sendConsoleMessage("エラー: /item/items.jsonの"+i+"番目のMCR_IDが未指定です。");
+                MincraChatUtil.sendConsoleMessage("エラー: /data/items.jsonの"+i+"番目のMCR_IDが未指定です。");
                 continue;
             }
             //---------------------------------------↑
@@ -106,7 +111,7 @@ public class ItemManager {
                 nbtDisplay.setString("Name", itemDisplayObject.getString("Name"));
             }
             //Lore
-            if (itemDisplayObject.has("Lore") && itemDisplayObject.get("Lore") instanceof String) {
+            if (itemDisplayObject.has("Lore") && itemDisplayObject.get("Lore") instanceof JSONArray) {
                 nbtLore = nbtDisplay.getStringList("Lore");
                 for (int j = 0, loreLen = itemDisplayObject.getJSONArray("Lore").length(); j < loreLen; j++) {
                     nbtLore.add(itemDisplayObject.getJSONArray("Lore").get(j));
@@ -180,6 +185,58 @@ public class ItemManager {
             item = nbtItem.getItem();
 
             itemStackMap.put(mcr_id, item);
+
+            //レシピ登録
+            if (itemObject.has("craftable") && itemObject.getBoolean("craftable")) {
+                if (itemObject.has("recipe"))
+                    itemRecipeObject = itemObject.getJSONObject("recipe");
+                    if (itemRecipeObject.has("shape")
+                        && itemRecipeObject.get("shape") instanceof JSONArray
+                        && ((JSONArray) itemRecipeObject.get("shape")).length() == 3) {
+                    itemRecipeShapeArray = (JSONArray) itemRecipeObject.get("shape");
+
+                    NamespacedKey key = new NamespacedKey(MincraMagics.getInstance(), mcr_id);
+                    ShapedRecipe recipe = new ShapedRecipe(key, item);
+
+                    recipe.shape(itemRecipeShapeArray.get(0).toString(),
+                            itemRecipeShapeArray.get(1).toString(),
+                            itemRecipeShapeArray.get(2).toString());
+
+                        if (itemRecipeObject.getJSONObject("ingredient").has("a")) {
+                            recipe.setIngredient('a', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("a").toUpperCase())));
+                        }
+                        if (itemRecipeObject.getJSONObject("ingredient").has("b")) {
+                            recipe.setIngredient('b', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("b").toUpperCase())));
+                        }
+                        if (itemRecipeObject.getJSONObject("ingredient").has("c")) {
+                            recipe.setIngredient('c', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("c").toUpperCase())));
+                        }
+                        if (itemRecipeObject.getJSONObject("ingredient").has("d")) {
+                            recipe.setIngredient('d', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("d").toUpperCase())));
+                        }
+                        if (itemRecipeObject.getJSONObject("ingredient").has("e")) {
+                            recipe.setIngredient('e', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("e").toUpperCase())));
+                        }
+                        if (itemRecipeObject.getJSONObject("ingredient").has("f")) {
+                            recipe.setIngredient('f', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("f").toUpperCase())));
+                        }
+                        if (itemRecipeObject.getJSONObject("ingredient").has("g")) {
+                            recipe.setIngredient('g', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("g").toUpperCase())));
+                        }
+                        if (itemRecipeObject.getJSONObject("ingredient").has("h")) {
+                            recipe.setIngredient('h', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("h").toUpperCase())));
+                        }
+                        if (itemRecipeObject.getJSONObject("ingredient").has("i")) {
+                            recipe.setIngredient('i', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("i").toUpperCase())));
+                        }
+
+                        Bukkit.addRecipe(recipe);
+
+                } else {
+                    MincraChatUtil.sendConsoleMessage("エラー: /data/items.jsonのレシピが不適切です。 mcr_id: " + mcr_id);
+
+                }
+            }
         }
     }
 

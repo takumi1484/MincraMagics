@@ -40,7 +40,7 @@ public class MincraCommands implements CommandExecutor {
             return false;
         }
 
-        switch (args[0]){
+        switch (args[0]) {
             case "reload":
                 MincraMagics.reload();
                 sender.sendMessage(MincraChatUtil.debug("リロード中..."));
@@ -68,6 +68,20 @@ public class MincraCommands implements CommandExecutor {
 
                     return true;
 
+                }
+            case "item":
+
+                switch (args[1]) {
+                    case "get":
+                        if (caster instanceof Player) {
+                            ((Player) caster).getInventory().addItem(MincraMagics.getItemManager().getItem(args[2]));
+                            return true;
+
+                        } else {
+                            caster.sendMessage(MincraChatUtil.debug("/mcr item getはプレイヤーのみ実行可能です。"));
+                            return false;
+
+                        }
                 }
         }
         return false;
