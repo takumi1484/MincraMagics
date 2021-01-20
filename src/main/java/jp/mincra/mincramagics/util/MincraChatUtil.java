@@ -48,6 +48,12 @@ public class MincraChatUtil {
      * @param msg 本文
      */
     public static void sendConsoleMessage(String msg) {
-        Bukkit.getServer().getConsoleSender().sendMessage(translateHexColorCodes(debug(msg)));
+        String prefix = "[MincraMagics] ";
+        StringBuilder buf = new StringBuilder();
+        buf.append(prefix);
+        buf.append(msg);
+
+//        Bukkit.getServer().getConsoleSender().sendMessage(translateHexColorCodes(debug(msg)));
+        Bukkit.getServer().getConsoleSender().sendMessage((buf.toString()));
     }
 }

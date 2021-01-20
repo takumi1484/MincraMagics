@@ -70,7 +70,6 @@ public final class MincraMagics extends JavaPlugin {
 
         //PropertyManager
         getPropertyManager();
-        propertyManager.setProperty();
         propertyManager.loadProperty();
         //PlayerManager
         getPlayerManager();
@@ -127,7 +126,9 @@ public final class MincraMagics extends JavaPlugin {
     }
 
     public static void reload() {
+        MincraChatUtil.sendConsoleMessage("プラグインをリロードします...");
         propertyManager.loadProperty();
         jsonManager.loadItemNode();
+        itemManager.registerItem();
     }
 }

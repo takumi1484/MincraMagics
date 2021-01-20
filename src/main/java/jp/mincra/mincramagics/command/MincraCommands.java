@@ -43,7 +43,7 @@ public class MincraCommands implements CommandExecutor {
         switch (args[0]) {
             case "reload":
                 MincraMagics.reload();
-                sender.sendMessage(MincraChatUtil.debug("リロード中..."));
+                sender.sendMessage(MincraChatUtil.debug("プラグインをリロードします..."));
                 return true;
 
             case "test":
@@ -69,12 +69,19 @@ public class MincraCommands implements CommandExecutor {
                     return true;
 
                 }
+
             case "item":
 
                 switch (args[1]) {
                     case "get":
                         if (caster instanceof Player) {
-                            ((Player) caster).getInventory().addItem(MincraMagics.getItemManager().getItem(args[2]));
+                            if (MincraMagics.getItemManager().getItem(args[2]) != null) {
+
+                                caster.sendMessage(MincraChatUtil.debug(args[2]+"を付与しました。"));
+                                ((Player) caster).getInventory().addItem(MincraMagics.getItemManager().getItem(args[2]));
+                            } else {
+                                caster.sendMessage(MincraChatUtil.debug(args[2]+"は未登録のアイテムです。"));
+                            }
                             return true;
 
                         } else {
