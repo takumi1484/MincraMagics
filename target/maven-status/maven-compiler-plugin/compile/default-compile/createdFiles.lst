@@ -11,3 +11,4 @@ jp\mincra\mincramagics\property\JsonManager.class
 jp\mincra\mincramagics\util\MincraChatUtil.class
 jp\mincra\mincramagics\MincraMagics$1.class
 jp\mincra\mincramagics\listener\MincraListener$1.class
+jp\mincra\mincramagics\item\ItemManager.class
