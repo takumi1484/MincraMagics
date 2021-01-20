@@ -1,6 +1,7 @@
 package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.command.MincraCommands;
+import jp.mincra.mincramagics.item.ItemManager;
 import jp.mincra.mincramagics.listener.MincraListener;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.property.JsonManager;
@@ -50,6 +51,13 @@ public final class MincraMagics extends JavaPlugin {
         return jsonManager;
     }
 
+    private static ItemManager itemManager;
+    public static ItemManager getItemManager() {
+        if (itemManager == null)
+            itemManager = new ItemManager();
+        return itemManager;
+    }
+
 
     protected static MincraMagics instance;
     public static MincraMagics getInstance(){
@@ -84,6 +92,9 @@ public final class MincraMagics extends JavaPlugin {
         //JsonManager
         getJsonManager();
         jsonManager.loadItemNode();
+        //ItemManager
+        getItemManager();
+        itemManager.registerItem();
 
         //listener
         onTick();
