@@ -34,7 +34,7 @@ public class MincraChatUtil {
      * @param msg 本文
      * @return [MincraMagics] 付きのメッセージ
      */
-    public static String makeDebugMessage(String msg) {
+    public static String debug(String msg) {
         String prefix = "&#3ebef5&f[&#3de8fe&fMincraMagics&#3ebef5&f] &r";
         StringBuilder buf = new StringBuilder();
         buf.append(prefix);
@@ -48,6 +48,6 @@ public class MincraChatUtil {
      * @param msg 本文
      */
     public static void sendConsoleMessage(String msg) {
-        Bukkit.getServer().getConsoleSender().sendMessage(translateHexColorCodes(makeDebugMessage(msg)));
+        Bukkit.getServer().getConsoleSender().sendMessage(translateHexColorCodes(debug(msg)));
     }
 }

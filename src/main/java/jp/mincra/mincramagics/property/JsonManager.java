@@ -7,9 +7,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class JsonManager {
-    private static JsonNode itemNode;
+    private JsonNode itemNode;
 
-    public static void readItemNode() {
+    public void loadItemNode() {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
@@ -20,7 +20,7 @@ public class JsonManager {
         }
     }
 
-    public static JsonNode getItemNode() {
+    public JsonNode getItemNode() {
         return itemNode;
     }
 }

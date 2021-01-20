@@ -43,6 +43,13 @@ public final class MincraMagics extends JavaPlugin {
         return uiManager;
     }
 
+    private static JsonManager jsonManager;
+    public static JsonManager getJsonManager() {
+        if (jsonManager == null)
+            jsonManager = new JsonManager();
+        return jsonManager;
+    }
+
 
     protected static MincraMagics instance;
     public static MincraMagics getInstance(){
@@ -75,7 +82,8 @@ public final class MincraMagics extends JavaPlugin {
         //UIManager
         getUIManager();
         //JsonManager
-        JsonManager.readItemNode();
+        getJsonManager();
+        jsonManager.loadItemNode();
 
         //listener
         onTick();
@@ -105,5 +113,10 @@ public final class MincraMagics extends JavaPlugin {
             }
         };
         timer.scheduleAtFixedRate(task,0,50);
+    }
+
+    public static void reload() {
+        propertyManager.loadProperty();
+        jsonManager.loadItemNode();
     }
 }
