@@ -35,11 +35,11 @@ public class PropertyManager {
         File properties = new File("./plugins/MincraMagics/mincra.properties");
 
         //ディレクトリ作成
-        if (mainDir.exists() == false) {
+        if (!mainDir.exists()) {
             mainDir.mkdir();
         }
 
-        if (properties.exists() == false){
+        if (!properties.exists()){
             try {
                 FileWriter fileWriter;
                 fileWriter = new FileWriter(properties);
@@ -57,11 +57,11 @@ public class PropertyManager {
         File jsonItemsDir = new File("./plugins/MincraMagics/data");
         File jsonItemFile = new File("./plugins/MincraMagics/data/items.json");
 
-        if (jsonItemsDir.exists() == false) {
+        if (!jsonItemsDir.exists()) {
             jsonItemsDir.mkdir();
         }
 
-        if (jsonItemFile.exists() == false) {
+        if (!jsonItemFile.exists()) {
             try {
                 FileWriter fileWriter;
                 fileWriter = new FileWriter(jsonItemFile);

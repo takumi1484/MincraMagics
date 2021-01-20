@@ -7,6 +7,7 @@ jp\mincra\mincramagics\container\MagicPoint.class
 jp\mincra\mincramagics\MincraMagics.class
 jp\mincra\mincramagics\dao\SQLManager.class
 jp\mincra\mincramagics\property\PropertyManager.class
+jp\mincra\mincramagics\property\JsonManager.class
 jp\mincra\mincramagics\util\MincraChatUtil.class
 jp\mincra\mincramagics\MincraMagics$1.class
 jp\mincra\mincramagics\listener\MincraListener$1.class
