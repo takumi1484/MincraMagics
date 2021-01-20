@@ -3,6 +3,7 @@ package jp.mincra.mincramagics;
 import jp.mincra.mincramagics.command.MincraCommands;
 import jp.mincra.mincramagics.listener.MincraListener;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
+import jp.mincra.mincramagics.property.JsonManager;
 import jp.mincra.mincramagics.property.PropertyManager;
 import jp.mincra.mincramagics.dao.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
@@ -73,6 +74,8 @@ public final class MincraMagics extends JavaPlugin {
                 ")", "player");
         //UIManager
         getUIManager();
+        //JsonManager
+        JsonManager.readItemNode();
 
         //listener
         onTick();

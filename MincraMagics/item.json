@@ -1,0 +1,25 @@
+[
+  {
+    "id": "apple",
+    "mcr_id": "example",
+    "nbt": {
+      "display":{
+        "Name": "{\"text\":\"Example Item\",\"color\":\"white\",\"bold\":true,\"italic\":false}",
+        "Lore":[
+          "{\"text\":\"This is a example item.\",\"color\":\"gray\",\"italic\":false}"]},
+      "CustomModelData":114514,
+      "MincraMagics":{
+        "id":"example"}
+    },
+    "recipe": {
+      "shape": [
+        " a ",
+        "aba",
+        " a "],
+      "ingredient": {
+        "a": "red_dye",
+        "b": "apple"
+      }
+    }
+  }
+]
