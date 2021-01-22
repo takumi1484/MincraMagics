@@ -1,6 +1,12 @@
 # MincraMagics
-MincraServer2の独自プラグイン。[MincraMagicRod](https://github.com/celtas/MincraMagicRodの後継。
-)
+
+MincraServer2の独自プラグイン。[MincraMagicRod](https://github.com/celtas/MincraMagicRod)の後継。
+
+
+# Depend
+
+[NBT-API](https://github.com/tr7zw/Item-NBT-API)
+
 
 # Commands
 
