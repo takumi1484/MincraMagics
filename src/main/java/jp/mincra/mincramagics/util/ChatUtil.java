@@ -6,7 +6,7 @@ import org.bukkit.ChatColor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MincraChatUtil {
+public class ChatUtil {
 
     private final static Pattern HEX_PATTERN = Pattern.compile("&(#[A-Fa-f0-9]{6})");
     private final static char COLOR_CHAR = ChatColor.COLOR_CHAR;

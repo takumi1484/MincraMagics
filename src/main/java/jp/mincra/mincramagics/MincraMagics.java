@@ -4,11 +4,11 @@ import jp.mincra.mincramagics.command.MincraCommands;
 import jp.mincra.mincramagics.item.ItemManager;
 import jp.mincra.mincramagics.listener.MincraListener;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
-import jp.mincra.mincramagics.property.JsonManager;
+import jp.mincra.mincramagics.property.JSONManager;
 import jp.mincra.mincramagics.property.PropertyManager;
 import jp.mincra.mincramagics.dao.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
-import jp.mincra.mincramagics.util.MincraChatUtil;
+import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Timer;
@@ -44,10 +44,10 @@ public final class MincraMagics extends JavaPlugin {
         return uiManager;
     }
 
-    private static JsonManager jsonManager;
-    public static JsonManager getJsonManager() {
+    private static JSONManager jsonManager;
+    public static JSONManager getJsonManager() {
         if (jsonManager == null)
-            jsonManager = new JsonManager();
+            jsonManager = new JSONManager();
         return jsonManager;
     }
 
@@ -110,7 +110,7 @@ public final class MincraMagics extends JavaPlugin {
         sqlManager.saveMincraPlayer();
 
         instance = null;
-        MincraChatUtil.sendConsoleMessage("プラグインが正常に終了しました。");
+        ChatUtil.sendConsoleMessage("プラグインが正常に終了しました。");
         setEnabled(false);
     }
 
@@ -126,7 +126,7 @@ public final class MincraMagics extends JavaPlugin {
     }
 
     public static void reload() {
-        MincraChatUtil.sendConsoleMessage("プラグインをリロードします...");
+        ChatUtil.sendConsoleMessage("プラグインをリロードします...");
         propertyManager.loadProperty();
         jsonManager.loadItemNode();
         itemManager.registerItem();
