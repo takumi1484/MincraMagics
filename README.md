@@ -1,6 +1,6 @@
 # MincraMagics
-MincraServer2の独自プラグイン。MincraMagicRodの後継。
-[MincraMagicRod](https://github.com/celtas/MincraMagicRod)
+MincraServer2の独自プラグイン。[MincraMagicRod](https://github.com/celtas/MincraMagicRodの後継。
+)
 
 # Commands
 
