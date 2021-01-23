@@ -45,7 +45,7 @@ public final class MincraMagics extends JavaPlugin {
     }
 
     private static JSONManager jsonManager;
-    public static JSONManager getJsonManager() {
+    public static JSONManager getJSONManager() {
         if (jsonManager == null)
             jsonManager = new JSONManager();
         return jsonManager;
@@ -89,11 +89,13 @@ public final class MincraMagics extends JavaPlugin {
         //UIManager
         getUIManager();
         //JsonManager
-        getJsonManager();
+        getJSONManager();
         jsonManager.loadItemNode();
+//        jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items");
         //ItemManager
         getItemManager();
-        itemManager.registerItem();
+        itemManager.loadItem();
+//        itemManager.registerItem();
 
         //listener
         onTick();

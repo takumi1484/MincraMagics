@@ -1,25 +1,14 @@
 package jp.mincra.mincramagics.command;
 
-import de.tr7zw.changeme.nbtapi.NBTCompound;
-import de.tr7zw.changeme.nbtapi.NBTCompoundList;
-import de.tr7zw.changeme.nbtapi.NBTItem;
-import de.tr7zw.changeme.nbtapi.NBTList;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
-import jp.mincra.mincramagics.util.MincraChatUtil;
-import org.bukkit.Material;
+import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.Objects;
 
 public class MincraCommands implements CommandExecutor {
 
@@ -36,14 +25,14 @@ public class MincraCommands implements CommandExecutor {
 
         if (args.length < 1){
             //argsが空っぽの時の処理
-            caster.sendMessage(MincraChatUtil.debug("引数が空です。"));
+            caster.sendMessage(ChatUtil.debug("引数が空です。"));
             return false;
         }
 
         switch (args[0]) {
             case "reload":
                 MincraMagics.reload();
-                sender.sendMessage(MincraChatUtil.debug("プラグインをリロードします..."));
+                sender.sendMessage(ChatUtil.debug("プラグインをリロードします..."));
                 return true;
 
             case "test":
@@ -77,15 +66,15 @@ public class MincraCommands implements CommandExecutor {
                         if (caster instanceof Player) {
                             if (MincraMagics.getItemManager().getItem(args[2]) != null) {
 
-                                caster.sendMessage(MincraChatUtil.debug(args[2]+"を付与しました。"));
+                                caster.sendMessage(ChatUtil.debug(args[2]+"を付与しました。"));
                                 ((Player) caster).getInventory().addItem(MincraMagics.getItemManager().getItem(args[2]));
                             } else {
-                                caster.sendMessage(MincraChatUtil.debug(args[2]+"は未登録のアイテムです。"));
+                                caster.sendMessage(ChatUtil.debug(args[2]+"は未登録のアイテムです。"));
                             }
                             return true;
 
                         } else {
-                            caster.sendMessage(MincraChatUtil.debug("/mcr item getはプレイヤーのみ実行可能です。"));
+                            caster.sendMessage(ChatUtil.debug("/mcr item getはプレイヤーのみ実行可能です。"));
                             return false;
 
                         }
