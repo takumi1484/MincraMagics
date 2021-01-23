@@ -2,7 +2,7 @@ package jp.mincra.mincramagics.listener;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraPlayer;
-import jp.mincra.mincramagics.util.MincraChatUtil;
+import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,7 +31,7 @@ public class MincraListener implements Listener {
 
         } else {
             //初回ログイン
-            MincraChatUtil.sendConsoleMessage(""+player.getName()+"が初めてログインしました！");
+            ChatUtil.sendConsoleMessage(""+player.getName()+"が初めてログインしました！");
 
             //新規のインスタンス
             MincraPlayer mincraPlayer = new MincraPlayer();
@@ -75,7 +75,7 @@ public class MincraListener implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
-        String translated = MincraChatUtil.translateHexColorCodes(e.getMessage());
+        String translated = ChatUtil.translateHexColorCodes(e.getMessage());
         e.setMessage(translated);
     }
 }

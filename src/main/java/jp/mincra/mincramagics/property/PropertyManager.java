@@ -10,6 +10,8 @@ public class PropertyManager {
     private Map<String, String> PropertyMap = new HashMap<>();
 
     public void loadProperty() {
+        setProperty();
+
         Properties properties = new Properties();
 
         //プロパティファイルのパスを指定する
