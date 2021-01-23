@@ -45,7 +45,7 @@ public class JSONManager {
 
                     tempJSONArray = getJSONArray(file.getPath());
 
-//                    MincraMagics.getItemManager().loadItem(tempJSONArray,path);
+                    MincraMagics.getItemManager().registerItem(tempJSONArray,path);
 
 //                    for (int i=0, len=tempJSONArray.length(); i<len; i++) {
 //                        mergedJSONArray.put(tempJSONArray.get(i));

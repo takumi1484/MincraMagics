@@ -6,6 +6,7 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import de.tr7zw.changeme.nbtapi.NBTList;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.ChatUtil;
+import jp.mincra.mincramagics.util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -21,150 +22,13 @@ public class ItemManager {
 
     private Map<String, ItemStack> itemStackMap = new HashMap<>();
 
-    public void loadItem() {
-//        JSONArray itemArray = MincraMagics.getJSONManager().getAllJSONArray("./plugins/MincraMagics/data/items/");
-
-        String path = "";
-        JSONArray itemArray = new JSONArray(MincraMagics.getJSONManager().getItemNode().toString());
-
-        if (!itemArray.isEmpty()) {
-            ChatUtil.sendConsoleMessage("アイテムの登録を開始します...");
-
-            itemStackMap = new HashMap<>();;
-
-
-            ItemMeta recipeIngredientMeta;
-            List<String> recipeIngredientLoreList;
-
-            JSONObject itemObject;
-            //            JSONObject itemDisplayObject;
-//            JSONArray itemEnchantmentsArray;
-//            JSONObject itemEachEnchant;
-//                    JSONArray itemAttributeModifiersArray;
-//                    JSONObject itemEachAttribute;
-//            JSONObject itemMincraMagicsObject = null;
-//            JSONObject itemRecipeObject = null;
-//            JSONArray itemRecipeShapeArray;
-
-            NBTItem nbtItem;
-            NBTCompound nbtDisplay;
-            NBTList nbtLore;
-            NBTCompoundList nbtEnchantments;
-            NBTCompound nbtEachEnchant;
-            NBTCompound nbtMincraMagics;
-
-            int item_amount = 0;
-            int recipe_amount = 0;
-
-            for (int i = 0, len = itemArray.length(); i < len; i++) {
-
-                if (itemArray.get(i) instanceof JSONObject) { //配列内の値がJSONObjectかどうか
-
-                    //初期化する変数
-                    ItemStack item;
-                    Material material = null;
-                    String mcr_id;
-
-                    itemObject = itemArray.getJSONObject(i);
-
-                    //id-------------------------------------↓
-                    if (itemObject.has("id")) {
-                        if (itemObject.get("id") instanceof String) {
-                            material = Material.getMaterial(itemObject.getString("id").toUpperCase());
-                            if (material != null) {
-                                item = new ItemStack(Objects.requireNonNull(material));
-                            } else {
-                                ChatUtil.sendConsoleMessage("エラー: " + path + "の" + i + "番目のアイテムIDが無効です。 id: " + itemObject.getString("id"));
-                                continue;
-                            }
-                        } else {
-                            ChatUtil.sendConsoleMessage("エラー: " + path + "の" + i + "番目のアイテムIDがString型である必要があります。 id: " + itemObject.get("id"));
-                            continue;
-                        }
-                    } else {
-                        ChatUtil.sendConsoleMessage("エラー: " + path + "の" + i + "番目のアイテムIDが未指定です。");
-                        continue;
-                    }
-                    //---------------------------------------↑
-
-                    //mcr_id---------------------------------↓
-                    if (itemObject.has("mcr_id")) {
-                        if (itemObject.get("mcr_id") instanceof String) {
-                            mcr_id = itemObject.getString("mcr_id");
-
-                        } else {
-                            ChatUtil.sendConsoleMessage("エラー: " + path + "の" + i + "番目のMCR_IDがString型である必要があります。 id: " + itemObject.get("mcr_id"));
-                            continue;
-                        }
-                    } else {
-                        ChatUtil.sendConsoleMessage("エラー: " + path + "の"+i+"番目のMCR_IDが未指定です。");
-                        continue;
-                    }
-                    //---------------------------------------↑
-
-                    //nbt------------------------------------↓
-                    nbtItem = new NBTItem(item);
-
-                    if (itemObject.has("nbt") && itemObject.get("nbt") instanceof JSONObject) {
-
-                        loadNBT(nbtItem, itemObject.getJSONObject("nbt"));
-                    }
-                    //---------------------------------------↑
-
-
-                } else { //配列の値がJSONObject以外なら飛ばす
-                    continue;
-                }
-            }
-        } else {
-            ChatUtil.sendConsoleMessage("アイテムファイルが存在しません。");
-        }
-    }
-
-    //NBTをロードする
-    public void loadNBT(NBTItem nbtItem, JSONObject itemNBTObject) {
-
-        Iterator<String> keys = itemNBTObject.keys(); //キー探索
-
-        while (keys.hasNext()) {
-            ChatUtil.sendConsoleMessage("key: "+ keys.next() + itemNBTObject.get(keys.next()));
-            if(itemNBTObject.get(keys.next()) instanceof JSONObject) {
-                loadNBT(nbtItem, itemNBTObject.getJSONObject(keys.next()));
-
-            } else if (itemNBTObject.get(keys.next()) instanceof JSONArray) {
-                for (int i = 0, len = itemNBTObject.getJSONArray(keys.next()).length(); i<len; i++) {
-                    if (itemNBTObject.getJSONArray(keys.next()).get(i) instanceof JSONObject) {
-                        loadNBT(nbtItem, itemNBTObject.getJSONArray(keys.next()).getJSONObject(i));
-                    } else {
-                        loadNBTValue(nbtItem, keys.next(), itemNBTObject.getJSONArray(keys.next()).get(i));
-                    }
-                }
-            } else {
-                loadNBTValue(nbtItem, keys.next(), itemNBTObject.get(keys.next()));
-            }
-
-        }
-    }
-
-    //NBTのうちint, boolean, stringをセットする
-    public void loadNBTValue(NBTItem nbtItem, String key, Object object) {
-        ChatUtil.sendConsoleMessage("loadNBTValue: "+key + object);
-        if (object instanceof Integer) {
-            nbtItem.setInteger(key, (Integer) object);
-        } else if (object instanceof String) {
-            nbtItem.setString(key, (String) object);
-        } else if (object instanceof Boolean) {
-            nbtItem.setBoolean(key, (Boolean) object);
-        }
-    }
-
-    public void registerItem() {
+    public void registerItem(JSONArray itemArray, String path) {
 
         itemStackMap = new HashMap<>();;
 
         ChatUtil.sendConsoleMessage("アイテムの登録を開始します...");
 
-        JSONArray itemArray = new JSONArray(MincraMagics.getJSONManager().getItemNode().toString());
+//        JSONArray itemArray = new JSONArray(MincraMagics.getJSONManager().getItemNode().toString());
 
         ItemStack item;
         Material material = null;
@@ -206,15 +70,15 @@ public class ItemManager {
                     if (material != null) {
                         item = new ItemStack(Objects.requireNonNull(material));
                     } else {
-                        ChatUtil.sendConsoleMessage("エラー: /data/items.jsonの" + i + "番目のアイテムIDが無効です。 id: " + itemObject.getString("id"));
+                        ChatUtil.sendConsoleMessage("エラー: "+path+"の" + i + "番目のアイテムIDが無効です。 id: " + itemObject.getString("id"));
                         continue;
                     }
                 } else {
-                    ChatUtil.sendConsoleMessage("エラー: /data/items.jsonの" + i + "番目のアイテムIDがString型である必要があります。 id: " + itemObject.get("id"));
+                    ChatUtil.sendConsoleMessage("エラー: "+path+"の" + i + "番目のアイテムIDがString型である必要があります。 id: " + itemObject.get("id"));
                     continue;
                 }
             } else {
-                ChatUtil.sendConsoleMessage("エラー: /data/items.jsonの" + i + "番目のアイテムIDが未指定です。");
+                ChatUtil.sendConsoleMessage("エラー: "+path+"の" + i + "番目のアイテムIDが未指定です。");
                 continue;
             }
             //---------------------------------------↑
@@ -225,11 +89,11 @@ public class ItemManager {
                     mcr_id = itemObject.getString("mcr_id");
 
                 } else {
-                    ChatUtil.sendConsoleMessage("エラー: /data/items.jsonの" + i + "番目のMCR_IDがString型である必要があります。 id: " + itemObject.get("mcr_id"));
+                    ChatUtil.sendConsoleMessage("エラー: "+path+"の" + i + "番目のMCR_IDがString型である必要があります。 id: " + itemObject.get("mcr_id"));
                     continue;
                 }
             } else {
-                ChatUtil.sendConsoleMessage("エラー: /data/items.jsonの" + i + "番目のMCR_IDが未指定です。");
+                ChatUtil.sendConsoleMessage("エラー: "+path+"の" + i + "番目のMCR_IDが未指定です。");
                 continue;
             }
             //---------------------------------------↑
@@ -338,9 +202,6 @@ public class ItemManager {
             itemStackMap.put(mcr_id, item);
         }
 
-        ItemStack ingredient;
-        ShapedRecipe shapedRecipe;
-        NamespacedKey namespacedKey;
         for(int i=0, len=itemArray.length(); i<len; i++) {
             itemObject = itemArray.getJSONObject(i);
             mcr_id = itemObject.getString("mcr_id");
@@ -364,44 +225,26 @@ public class ItemManager {
                             itemRecipeShapeArray.get(1).toString(),
                             itemRecipeShapeArray.get(2).toString());
 
-                        if (itemRecipeObject.getJSONObject("ingredient").has("a")) {
-                            recipe.setIngredient('a', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("a").toUpperCase())));
-//                            material = material.getMaterial(itemObject.getString("id").toUpperCase())
-//                            ingredient = new ItemStack(material);
-//                            recipeIngredientMeta = getItem(itemRecipeObject.getJSONObject("ingredient").getJSONObject("a").getString("mcr_id")).getItemMeta();
-//                            ingredient.setItemMeta(recipeIngredientMeta);
-//                            recipe.setIngredient('a', ingredient);
+                    StringBuffer shapeBuffer = new StringBuffer(itemRecipeShapeArray.get(0).toString());
+                    shapeBuffer.append(itemRecipeShapeArray.get(1).toString());
+                    shapeBuffer.append(itemRecipeShapeArray.get(2).toString());
+                    String shape = shapeBuffer.toString();
+
+                    List<Character> charList = StringUtil.getContainsCharacter(shape);
+
+                    for (int j=0, charListSize=charList.size(); j<charListSize; j++) {
+                        if (itemRecipeObject.getJSONObject("ingredient").has(charList.get(j).toString())
+                                && itemRecipeObject.getJSONObject("ingredient").get(charList.get(j).toString()) instanceof String) {
+                            recipe.setIngredient(charList.get(j),
+                                    Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString(charList.get(j).toString()).toUpperCase())));
                         }
-                        if (itemRecipeObject.getJSONObject("ingredient").has("b")) {
-                            recipe.setIngredient('b', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("b").toUpperCase())));
-                        }
-                        if (itemRecipeObject.getJSONObject("ingredient").has("c")) {
-                            recipe.setIngredient('c', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("c").toUpperCase())));
-                        }
-                        if (itemRecipeObject.getJSONObject("ingredient").has("d")) {
-                            recipe.setIngredient('d', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("d").toUpperCase())));
-                        }
-                        if (itemRecipeObject.getJSONObject("ingredient").has("e")) {
-                            recipe.setIngredient('e', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("e").toUpperCase())));
-                        }
-                        if (itemRecipeObject.getJSONObject("ingredient").has("f")) {
-                            recipe.setIngredient('f', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("f").toUpperCase())));
-                        }
-                        if (itemRecipeObject.getJSONObject("ingredient").has("g")) {
-                            recipe.setIngredient('g', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("g").toUpperCase())));
-                        }
-                        if (itemRecipeObject.getJSONObject("ingredient").has("h")) {
-                            recipe.setIngredient('h', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("h").toUpperCase())));
-                        }
-                        if (itemRecipeObject.getJSONObject("ingredient").has("i")) {
-                            recipe.setIngredient('i', Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString("i").toUpperCase())));
-                        }
+                    }
 
                         Bukkit.addRecipe(recipe);
                         recipe_amount = recipe_amount + 1;
 
                 } else {
-                    ChatUtil.sendConsoleMessage("エラー: /data/items.jsonのレシピが不適切です。 mcr_id: " + mcr_id);
+                    ChatUtil.sendConsoleMessage("エラー: "+path+"のレシピが不適切です。 mcr_id: " + mcr_id);
 
                 }
             }

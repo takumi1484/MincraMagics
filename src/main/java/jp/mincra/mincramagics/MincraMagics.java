@@ -91,10 +91,10 @@ public final class MincraMagics extends JavaPlugin {
         //JsonManager
         getJSONManager();
         jsonManager.loadItemNode();
-//        jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items");
+        jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items");
         //ItemManager
         getItemManager();
-        itemManager.loadItem();
+//        itemManager.registerItem();
 //        itemManager.registerItem();
 
         //listener
@@ -131,6 +131,6 @@ public final class MincraMagics extends JavaPlugin {
         ChatUtil.sendConsoleMessage("プラグインをリロードします...");
         propertyManager.loadProperty();
         jsonManager.loadItemNode();
-        itemManager.registerItem();
+//        itemManager.registerItem();
     }
 }
