@@ -2,7 +2,9 @@ package jp.mincra.mincramagics.property;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonArray;
+import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.util.ChatUtil;
+import org.json.JSONArray;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +48,7 @@ public class JSONManager {
                     tempJSONArray = getJSONArray(file.getPath());
 
                     MincraMagics.getItemManager().registerItem(tempJSONArray,path);
+                    MincraMagics.getItemManager().registerRecipe(tempJSONArray,path);
 
 //                    for (int i=0, len=tempJSONArray.length(); i<len; i++) {
 //                        mergedJSONArray.put(tempJSONArray.get(i));

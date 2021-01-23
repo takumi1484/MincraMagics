@@ -21,10 +21,11 @@ import java.util.*;
 public class ItemManager {
 
     private Map<String, ItemStack> itemStackMap = new HashMap<>();
+    private Map<String, ShapedRecipe> shapedRecipeMap = new HashMap<>();
 
     public void registerItem(JSONArray itemArray, String path) {
 
-        itemStackMap = new HashMap<>();;
+        itemStackMap = new HashMap<>();
 
         ChatUtil.sendConsoleMessage("アイテムの登録を開始します...");
 
@@ -57,10 +58,7 @@ public class ItemManager {
 //                    NBTCompound nbtEachAttribute = null;
 
 
-        int item_amount = 0;
-        int recipe_amount = 0;
-
-        for(int i=0, len=itemArray.length(); i<len; i++) {
+        for (int i = 0, len = itemArray.length(); i < len; i++) {
             itemObject = itemArray.getJSONObject(i);
 
             //id-------------------------------------↓
@@ -70,15 +68,15 @@ public class ItemManager {
                     if (material != null) {
                         item = new ItemStack(Objects.requireNonNull(material));
                     } else {
-                        ChatUtil.sendConsoleMessage("エラー: "+path+"の" + i + "番目のアイテムIDが無効です。 id: " + itemObject.getString("id"));
+                        ChatUtil.sendConsoleMessage("エラー: " + path + "の" + i + "番目のアイテムIDが無効です。 id: " + itemObject.getString("id"));
                         continue;
                     }
                 } else {
-                    ChatUtil.sendConsoleMessage("エラー: "+path+"の" + i + "番目のアイテムIDがString型である必要があります。 id: " + itemObject.get("id"));
+                    ChatUtil.sendConsoleMessage("エラー: " + path + "の" + i + "番目のアイテムIDがString型である必要があります。 id: " + itemObject.get("id"));
                     continue;
                 }
             } else {
-                ChatUtil.sendConsoleMessage("エラー: "+path+"の" + i + "番目のアイテムIDが未指定です。");
+                ChatUtil.sendConsoleMessage("エラー: " + path + "の" + i + "番目のアイテムIDが未指定です。");
                 continue;
             }
             //---------------------------------------↑
@@ -89,11 +87,11 @@ public class ItemManager {
                     mcr_id = itemObject.getString("mcr_id");
 
                 } else {
-                    ChatUtil.sendConsoleMessage("エラー: "+path+"の" + i + "番目のMCR_IDがString型である必要があります。 id: " + itemObject.get("mcr_id"));
+                    ChatUtil.sendConsoleMessage("エラー: " + path + "の" + i + "番目のMCR_IDがString型である必要があります。 id: " + itemObject.get("mcr_id"));
                     continue;
                 }
             } else {
-                ChatUtil.sendConsoleMessage("エラー: "+path+"の" + i + "番目のMCR_IDが未指定です。");
+                ChatUtil.sendConsoleMessage("エラー: " + path + "の" + i + "番目のMCR_IDが未指定です。");
                 continue;
             }
             //---------------------------------------↑
@@ -195,12 +193,25 @@ public class ItemManager {
             }
             //--------------------------------------↑↑
 
-
             item = nbtItem.getItem();
 
-            item_amount = item_amount + 1;
             itemStackMap.put(mcr_id, item);
         }
+        ChatUtil.sendConsoleMessage(itemStackMap.size() + "個のアイテムを登録しました。");
+    }
+
+    public void registerRecipe(JSONArray itemArray, String path) {
+
+        shapedRecipeMap = new HashMap<>();
+
+        ChatUtil.sendConsoleMessage("レシピの登録を開始します...");
+
+        Material material;
+        String mcr_id;
+
+        JSONObject itemObject;
+        JSONObject itemRecipeObject = null;
+        JSONArray itemRecipeShapeArray;
 
         for(int i=0, len=itemArray.length(); i<len; i++) {
             itemObject = itemArray.getJSONObject(i);
@@ -235,13 +246,15 @@ public class ItemManager {
                     for (int j=0, charListSize=charList.size(); j<charListSize; j++) {
                         if (itemRecipeObject.getJSONObject("ingredient").has(charList.get(j).toString())
                                 && itemRecipeObject.getJSONObject("ingredient").get(charList.get(j).toString()) instanceof String) {
-                            recipe.setIngredient(charList.get(j),
-                                    Objects.requireNonNull(material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString(charList.get(j).toString()).toUpperCase())));
+                            material = Material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString(charList.get(j).toString()).toUpperCase());
+                            if (material != null) {
+                                recipe.setIngredient(charList.get(j), material);
+                            }
                         }
                     }
 
-                        Bukkit.addRecipe(recipe);
-                        recipe_amount = recipe_amount + 1;
+                    Bukkit.addRecipe(recipe);
+                    shapedRecipeMap.put(mcr_id,recipe);
 
                 } else {
                     ChatUtil.sendConsoleMessage("エラー: "+path+"のレシピが不適切です。 mcr_id: " + mcr_id);
@@ -250,11 +263,14 @@ public class ItemManager {
             }
         }
 
-        ChatUtil.sendConsoleMessage("アイテムの登録が完了しました。 ");
-        ChatUtil.sendConsoleMessage(item_amount + "個のアイテムと" + recipe_amount + "個のレシピを登録しました。");
+        ChatUtil.sendConsoleMessage(shapedRecipeMap.size() + "個のレシピを登録しました。");
     }
 
-    public ItemStack getItem(String mcr_id) {
+   public ItemStack getItem(String mcr_id) {
         return itemStackMap.get(mcr_id);
+    }
+
+    public ShapedRecipe getRecipe(String mcr_id) {
+        return shapedRecipeMap  .get(mcr_id);
     }
 }
