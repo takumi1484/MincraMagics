@@ -3,9 +3,9 @@
 MincraServer2の独自プラグイン。[MincraMagicRod](https://github.com/celtas/MincraMagicRod)の後継。
 
 
-# Depend
+# Dependencies
 
-[NBT-API](https://github.com/tr7zw/Item-NBT-API)
+NBT-API: [SpigotMC](https://www.spigotmc.org/resources/nbt-api.7939/) [GitHub](https://github.com/tr7zw/Item-NBT-API)
 
 
 # Commands
