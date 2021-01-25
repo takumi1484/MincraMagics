@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class MincraPrepareItemCraftEvent implements Listener {
+public class onPrepareItemCraftEvent implements Listener {
 
     @EventHandler
     public void customCrafting(PrepareItemCraftEvent e) {

@@ -4,7 +4,7 @@ import jp.mincra.mincramagics.command.MincraCommands;
 import jp.mincra.mincramagics.item.ItemManager;
 import jp.mincra.mincramagics.listener.MincraListener;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
-import jp.mincra.mincramagics.listener.MincraPrepareItemCraftEvent;
+import jp.mincra.mincramagics.listener.onPrepareItemCraftEvent;
 import jp.mincra.mincramagics.property.JSONManager;
 import jp.mincra.mincramagics.property.PropertyManager;
 import jp.mincra.mincramagics.dao.SQLManager;
@@ -97,7 +97,7 @@ public final class MincraMagics extends JavaPlugin {
         //listener
 //        onTick();
         getServer().getPluginManager().registerEvents(new MincraListener(), this);
-        getServer().getPluginManager().registerEvents(new MincraPrepareItemCraftEvent(), this);
+        getServer().getPluginManager().registerEvents(new onPrepareItemCraftEvent(), this);
 
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));
