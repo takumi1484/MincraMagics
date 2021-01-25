@@ -1,16 +1,19 @@
 package jp.mincra.mincramagics.item;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import de.tr7zw.changeme.nbtapi.NBTList;
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.container.MincraCustomShapedRecipe;
 import jp.mincra.mincramagics.util.ChatUtil;
 import jp.mincra.mincramagics.util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.json.JSONArray;
@@ -22,6 +25,7 @@ public class ItemManager {
 
     private Map<String, ItemStack> itemStackMap = new HashMap<>();
     private Map<String, ShapedRecipe> shapedRecipeMap = new HashMap<>();
+    private Map<String, MincraCustomShapedRecipe> customShapedRecipeMap = new HashMap<>();
 
     public void registerItem(JSONArray itemArray, String path) {
 
@@ -208,14 +212,20 @@ public class ItemManager {
 
         Material material;
         String mcr_id;
+        String ingredient_id;
+        MincraCustomShapedRecipe customShapedRecipe;
+        boolean containCustomIngredient;
 
         JSONObject itemObject;
         JSONObject itemRecipeObject = null;
         JSONArray itemRecipeShapeArray;
 
         for(int i=0, len=itemArray.length(); i<len; i++) {
+
             itemObject = itemArray.getJSONObject(i);
             mcr_id = itemObject.getString("mcr_id");
+            customShapedRecipe = new MincraCustomShapedRecipe();
+            containCustomIngredient = false;
 
             //レシピ登録
             NamespacedKey key = new NamespacedKey(MincraMagics.getInstance(), mcr_id);
@@ -223,11 +233,14 @@ public class ItemManager {
             Bukkit.removeRecipe(key);
 
             if (itemObject.has("craftable") && itemObject.getBoolean("craftable")) {
+
                 if (itemObject.has("recipe"))
                     itemRecipeObject = itemObject.getJSONObject("recipe");
+
                     if (itemRecipeObject.has("shape")
                         && itemRecipeObject.get("shape") instanceof JSONArray
                         && ((JSONArray) itemRecipeObject.get("shape")).length() == 3) {
+
                     itemRecipeShapeArray = (JSONArray) itemRecipeObject.get("shape");
 
                     ShapedRecipe recipe = new ShapedRecipe(key, getItem(itemObject.getString("mcr_id")));
@@ -244,17 +257,46 @@ public class ItemManager {
                     List<Character> charList = StringUtil.getContainsCharacter(shape);
 
                     for (int j=0, charListSize=charList.size(); j<charListSize; j++) {
+
                         if (itemRecipeObject.getJSONObject("ingredient").has(charList.get(j).toString())
                                 && itemRecipeObject.getJSONObject("ingredient").get(charList.get(j).toString()) instanceof String) {
-                            material = Material.getMaterial(itemRecipeObject.getJSONObject("ingredient").getString(charList.get(j).toString()).toUpperCase());
-                            if (material != null) {
-                                recipe.setIngredient(charList.get(j), material);
+
+                            ingredient_id = itemRecipeObject.getJSONObject("ingredient").getString(charList.get(j).toString());
+
+                            if (itemStackMap.containsKey(ingredient_id)) {
+
+                                //カスタムレシピの場合
+                                containCustomIngredient = true;
+                                customShapedRecipe.setResult(getItem(itemObject.getString("mcr_id")));
+                                customShapedRecipe.setItemStackList(j,itemStackMap.get(ingredient_id));
+
+                            } else {
+
+                                //カスタムアイテムを使わないレシピの場合
+                                material = Material.getMaterial(ingredient_id.toUpperCase());
+                                if (material != null) {
+                                    recipe.setIngredient(charList.get(j), material);
+
+                                    //カスタムレシピの場合もあるかもなので毎時実行
+                                    customShapedRecipe.setItemStackList(j,new ItemStack(material));
+
+                                }
                             }
                         }
                     }
 
-                    Bukkit.addRecipe(recipe);
-                    shapedRecipeMap.put(mcr_id,recipe);
+                    if (containCustomIngredient) {
+
+                        //カスタムレシピの場合
+                        customShapedRecipeMap.put(mcr_id,customShapedRecipe);
+
+                    } else {
+
+                        //カスタムアイテムを使わないレシピの場合
+                        Bukkit.addRecipe(recipe);
+                        shapedRecipeMap.put(mcr_id, recipe);
+                    }
+
 
                 } else {
                     ChatUtil.sendConsoleMessage("エラー: "+path+"のレシピが不適切です。 mcr_id: " + mcr_id);
@@ -272,5 +314,9 @@ public class ItemManager {
 
     public ShapedRecipe getRecipe(String mcr_id) {
         return shapedRecipeMap  .get(mcr_id);
+    }
+
+    public Map<String, MincraCustomShapedRecipe> getCustomShapedRecipeMap() {
+        return customShapedRecipeMap;
     }
 }
