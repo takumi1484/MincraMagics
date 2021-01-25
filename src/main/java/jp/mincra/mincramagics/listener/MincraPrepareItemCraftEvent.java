@@ -2,7 +2,6 @@ package jp.mincra.mincramagics.listener;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraCustomShapedRecipe;
-import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
@@ -27,7 +26,6 @@ public class MincraPrepareItemCraftEvent implements Listener {
             if (isValidCustomShapedRecipe(itemStack,v)) {
                 e.getInventory().setResult(v.getResult());
             }
-            ChatUtil.sendConsoleMessage(v.getResult().toString());
         });
     }
 

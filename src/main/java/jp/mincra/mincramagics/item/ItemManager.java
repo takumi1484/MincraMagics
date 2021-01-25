@@ -29,7 +29,7 @@ public class ItemManager {
 
         itemStackMap = new HashMap<>();
 
-        ChatUtil.sendConsoleMessage("アイテムの登録を開始します...");
+        ChatUtil.sendConsoleMessage("アイテムの登録を開始します... from: "+path );
 
 //        JSONArray itemArray = new JSONArray(MincraMagics.getJSONManager().getItemNode().toString());
 
@@ -207,7 +207,7 @@ public class ItemManager {
         shapedRecipeMap = new HashMap<>();
         customShapedRecipeMap = new HashMap<>();
 
-        ChatUtil.sendConsoleMessage("レシピの登録を開始します...");
+        ChatUtil.sendConsoleMessage("レシピの登録を開始します... from: "+path);
 
         Material material;
         String mcr_id;
@@ -309,6 +309,7 @@ public class ItemManager {
         }
 
         ChatUtil.sendConsoleMessage(shapedRecipeMap.size() + "個のレシピを登録しました。");
+        ChatUtil.sendConsoleMessage(customShapedRecipeMap.size() + "個のカスタムレシピを登録しました。");
     }
 
    public ItemStack getItem(String mcr_id) {
@@ -316,7 +317,7 @@ public class ItemManager {
     }
 
     public ShapedRecipe getRecipe(String mcr_id) {
-        return shapedRecipeMap  .get(mcr_id);
+        return shapedRecipeMap.get(mcr_id);
     }
 
     public Map<String, MincraCustomShapedRecipe> getCustomShapedRecipeMap() {

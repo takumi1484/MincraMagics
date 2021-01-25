@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class JSONManager {
-    private JsonNode itemNode;
 
     /**
      * ディレクトリ内の全てのjsonを読み込み、一つの配列で返す
@@ -47,8 +46,8 @@ public class JSONManager {
 
                     tempJSONArray = getJSONArray(file.getPath());
 
-                    MincraMagics.getItemManager().registerItem(tempJSONArray,path);
-                    MincraMagics.getItemManager().registerRecipe(tempJSONArray,path);
+                    MincraMagics.getItemManager().registerItem(tempJSONArray,path+"/"+file.getName());
+                    MincraMagics.getItemManager().registerRecipe(tempJSONArray,path+"/"+file.getName());
 
 //                    for (int i=0, len=tempJSONArray.length(); i<len; i++) {
 //                        mergedJSONArray.put(tempJSONArray.get(i));
@@ -82,22 +81,6 @@ public class JSONManager {
 
             return null;
         }
-    }
-
-    public void loadItemNode() {
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            itemNode = mapper.readTree(new File("./plugins/MincraMagics/data/items.json"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public JsonNode getItemNode() {
-        return itemNode;
     }
 
     /**

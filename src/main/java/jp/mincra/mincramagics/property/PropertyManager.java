@@ -56,8 +56,8 @@ public class PropertyManager {
         }
 
         //Json
-        File jsonItemsDir = new File("./plugins/MincraMagics/data");
-        File jsonItemFile = new File("./plugins/MincraMagics/data/items.json");
+        File jsonItemsDir = new File("./plugins/MincraMagics/data/items");
+        File jsonItemFile = new File("./plugins/MincraMagics/data/items/example.json");
 
         if (!jsonItemsDir.exists()) {
             jsonItemsDir.mkdir();
