@@ -3,6 +3,7 @@ package jp.mincra.mincramagics.command;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.util.ChatUtil;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,9 +38,11 @@ public class MincraCommands implements CommandExecutor {
 
             case "test":
                 if (caster instanceof Player) {
-                    PlayerManager playerManager = MincraMagics.getPlayerManager();
-                    playerManager.addPlayerMP_value(caster.getUniqueId(), -20);
-                    playerManager.setPlayerCooltime(caster.getUniqueId(), 10);
+                    NamespacedKey key = new NamespacedKey(MincraMagics.getInstance(), "example");
+                    ((Player) caster).undiscoverRecipe(key);
+//                    PlayerManager playerManager = MincraMagics.getPlayerManager();
+//                    playerManager.addPlayerMP_value(caster.getUniqueId(), -20);
+//                    playerManager.setPlayerCooltime(caster.getUniqueId(), 10);
 
 //            ItemStack itemStack = caster.getInventory().getItemInMainHand();
 //            NBTItem nbtItem = new NBTItem(itemStack);
@@ -67,6 +70,7 @@ public class MincraCommands implements CommandExecutor {
                             if (MincraMagics.getItemManager().getItem(args[2]) != null) {
 
                                 caster.sendMessage(ChatUtil.debug(args[2]+"を付与しました。"));
+                                ChatUtil.sendConsoleMessage(caster.getName()+"に"+args[2]+"を付与しました。");
                                 ((Player) caster).getInventory().addItem(MincraMagics.getItemManager().getItem(args[2]));
                             } else {
                                 caster.sendMessage(ChatUtil.debug(args[2]+"は未登録のアイテムです。"));
