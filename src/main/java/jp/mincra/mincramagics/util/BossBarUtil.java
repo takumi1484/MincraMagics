@@ -17,11 +17,21 @@ public class BossBarUtil {
             BarColor.BLUE,
             BarStyle.SOLID);
 
-    public static void setCooltimeBossBar(Player player, String skill_name, float cooltime_value) {
+    public static void setCooltimeBossBar(Player player, String skill_name, float cooltime_value, boolean setMax) {
 
-        MincraMagics.getPlayerManager().setPlayerCooltime(player.getUniqueId(),cooltime_value);
+        MincraMagics.getPlayerManager().setPlayerCooltime_value(player.getUniqueId(), cooltime_value);
+        if (setMax) {
+            MincraMagics.getPlayerManager().setPlayerCooltime_max(player.getUniqueId(), cooltime_value);
+        }
+        MincraMagics.getPlayerManager().setCooltimeTitle(player.getUniqueId(),skill_name);
 
-        if (skill_name != null || !skill_name.equals("")) {
+        bossBar.setTitle(ChatUtil.translateHexColorCodes("&#d6eeff&f&lクールタイム"));
+
+        if (skill_name.equals("")) {
+            skill_name = null;
+        }
+
+        if (skill_name != null) {
             bossBar.setTitle(ChatUtil.translateHexColorCodes("&#bfe5ff&f[" + skill_name + "&#bfe5ff&f] &#d6eeff&f&lクールタイム"));
         }
 
@@ -29,25 +39,33 @@ public class BossBarUtil {
         TimerTask task = new TimerTask() {
             public void run() {
 
-                if (MincraMagics.getPlayerManager().getPlayerCooltime_value(player.getUniqueId()) > 0) {
-                    MincraMagics.getPlayerManager().addPlayerCooltime_value(player.getUniqueId(),-0.05f);
+                if (player.isOnline()){
 
-                    double progress = MincraMagics.getPlayerManager().getPlayerCooltime_value(player.getUniqueId())
-                            / MincraMagics.getPlayerManager().getPlayerCooltime_max(player.getUniqueId());
-                    if (progress < 0) {
-                        progress = 0d;
+                    if (MincraMagics.getPlayerManager().getPlayerCooltime_value(player.getUniqueId()) > 0) {
+                        MincraMagics.getPlayerManager().addPlayerCooltime_value(player.getUniqueId(), -0.05f);
+
+                        double progress = MincraMagics.getPlayerManager().getPlayerCooltime_value(player.getUniqueId())
+                                / MincraMagics.getPlayerManager().getPlayerCooltime_max(player.getUniqueId());
+                        if (progress < 0) {
+                            progress = 0d;
+                        }
+
+                        bossBar.setProgress(progress);
+
+                        bossBar.addPlayer(player);
+                    } else {
+                        bossBar.removePlayer(player);
+                        timer.cancel();
                     }
-
-                    bossBar.setProgress(progress);
-
-                    bossBar.addPlayer(player);
                 } else {
-                    bossBar.removePlayer(player);
                     timer.cancel();
                 }
-
             }
         };
-        timer.scheduleAtFixedRate(task,0,100);
+        timer.scheduleAtFixedRate(task, 0, 100);
+    }
+
+    public static void setCooltimeBossBar(Player player, String skill_name, float cooltime_value) {
+        setCooltimeBossBar(player,skill_name,cooltime_value,true);
     }
 }

@@ -1,7 +1,7 @@
 package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.command.MincraCommands;
-import jp.mincra.mincramagics.dao.SQLManager;
+import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.item.ItemManager;
 import jp.mincra.mincramagics.listener.*;
@@ -83,7 +83,8 @@ public final class MincraMagics extends JavaPlugin {
                 "uuid VARBINARY(36) NOT NULL UNIQUE," +
                 "mp_value FLOAT, " +
                 "cooltime_value FLOAT, " +
-                "cooltime_max FLOAT" +
+                "cooltime_max FLOAT, " +
+                "cooltime_title TEXT" +
                 ")", "player");
         //UIManager
         getUIManager();

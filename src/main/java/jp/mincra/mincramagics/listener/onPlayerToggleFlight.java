@@ -9,9 +9,9 @@ import org.bukkit.util.Vector;
 public class onPlayerToggleFlight implements Listener {
 
     @EventHandler
-    public void PlayerToggleFlightEvent(PlayerToggleFlightEvent e) {
+    public void onPlayerToggleFlight(PlayerToggleFlightEvent e) {
         Player player = e.getPlayer();
-        Vector vector = new Vector(player.getVelocity().getX()*3,0.7,player.getVelocity().getZ()*3);
+        Vector vector = new Vector(player.getVelocity().getX()*8,1,player.getVelocity().getZ()*8);
         e.getPlayer().setVelocity(vector);
         e.setCancelled(true);
     }

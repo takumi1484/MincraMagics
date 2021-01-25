@@ -67,12 +67,26 @@ public class PlayerManager {
     public float getPlayerCooltime_max(UUID uuid) {
         return MincraPlayerMap.get(uuid).getPlayerCooltime_max();
     }
-    //valueとmax両方セット
-    public void setPlayerCooltime(UUID uuid, float cooltime) {
+
+    public void setPlayerCooltime_value(UUID uuid, float cooltime) {
         MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
-        mincraPlayer.setPlayerCooltime_max(cooltime);
         mincraPlayer.setPlayerCooltime_value(cooltime);
         MincraPlayerMap.put(uuid,mincraPlayer);
+    }
+
+    public void setPlayerCooltime_max(UUID uuid, float cooltime) {
+        MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
+        mincraPlayer.setPlayerCooltime_max(cooltime);
+        MincraPlayerMap.put(uuid,mincraPlayer);
+    }
+
+    public void setCooltimeTitle(UUID uuid, String cooltimeTitle) {
+        MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
+        mincraPlayer.setCooltimeTitle(cooltimeTitle);
+        MincraPlayerMap.put(uuid,mincraPlayer);
+    }
+    public String getCooltimeTitle(UUID uuid){
+        return MincraPlayerMap.get(uuid).getCooltimeTitle();
     }
 
 

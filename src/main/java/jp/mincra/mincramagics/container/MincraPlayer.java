@@ -12,6 +12,7 @@ public class MincraPlayer {
 
     private float playerCooltime_value = 0;
     private float playerCooltime_max = 0;
+    private String cooltimeTitle;
 
 
     public void setPlayerName(String playerName) {
@@ -51,5 +52,8 @@ public class MincraPlayer {
         this.playerCooltime_max = playerCooltime_max;
     }
     public float getPlayerCooltime_max() {return playerCooltime_max;}
+
+    public void setCooltimeTitle(String cooltimeTitle){this.cooltimeTitle = cooltimeTitle;}
+    public String getCooltimeTitle(){return cooltimeTitle;}
 
 }

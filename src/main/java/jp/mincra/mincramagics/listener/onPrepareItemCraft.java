@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class onPrepareItemCraft implements Listener {
 
     @EventHandler
-    public void customCrafting(PrepareItemCraftEvent e) {
+    public void onPrepareItemCraft(PrepareItemCraftEvent e) {
         ItemStack[] itemStack = e.getInventory().getMatrix();
 
 /*        //デバッグメッセ―ジ
@@ -42,7 +42,7 @@ public class onPrepareItemCraft implements Listener {
         if (customShapedRecipe != null) {
 //            ChatUtil.sendConsoleMessage("length: "+customShapedRecipe.getItemStack().length);
 
-            for (int i = 0, len = customShapedRecipe.getItemStack().length; i < len; i++) {
+            for (int i = 0, len = itemStack.length; i < len; i++) {
 
                 //レシピファイルではiスロットにアイテムがあるとき
                 if (customShapedRecipe.getItemStack()[i] != null) {

@@ -2,6 +2,7 @@ package jp.mincra.mincramagics.listener;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraPlayer;
+import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,6 +23,10 @@ public class onPlayerJoin implements Listener {
             mincraPlayer.setPlayerName(player.getName());
             //プレイヤーをHashMapに追加
             MincraMagics.getPlayerManager().putMincraPlayer(mincraPlayer);
+
+            if (MincraMagics.getPlayerManager().getPlayerCooltime_value(player.getUniqueId()) > 0) {
+                BossBarUtil.setCooltimeBossBar(player,MincraMagics.getPlayerManager().getCooltimeTitle(player.getUniqueId()),MincraMagics.getPlayerManager().getPlayerCooltime_value(player.getUniqueId()),false);
+            }
 
         } else {
             //初回ログイン

@@ -1,4 +1,4 @@
-package jp.mincra.mincramagics.dao;
+package jp.mincra.mincramagics.sql;
 
 
 import jp.mincra.mincramagics.MincraMagics;
@@ -111,7 +111,8 @@ public class SQLManager {
                 "name = '" + mincraPlayer.getPlayerName() + "', " +
                 "mp_value = " + mincraPlayer.getPlayerMP_value() + ", " +
                 "cooltime_value = " + mincraPlayer.getPlayerCooltime_value() + ", " +
-                "cooltime_max = " + mincraPlayer.getPlayerCooltime_max() +
+                "cooltime_max = " + mincraPlayer.getPlayerCooltime_max() + ", " +
+                "cooltime_title = '" + mincraPlayer.getCooltimeTitle() + "'" +
                 " WHERE uuid = '" + mincraPlayer.getPlayerUUID() + "'";
         updateRecord(query);
     }
@@ -138,7 +139,7 @@ public class SQLManager {
         MincraPlayer mincraPlayer = new MincraPlayer();
         mincraPlayer.setPlayerUUID(uuid);
 
-        String sql = "SELECT name, uuid, mp_value, cooltime_value, cooltime_max FROM player WHERE uuid = '"+ uuid +"'";
+        String sql = "SELECT name, uuid, mp_value, cooltime_value, cooltime_max, cooltime_title FROM player WHERE uuid = '"+ uuid +"'";
 
         try {
             Statement stmt = getConnection().createStatement();
@@ -148,6 +149,7 @@ public class SQLManager {
                 mincraPlayer.setPlayerMP_value(rs.getFloat("mp_value"));
                 mincraPlayer.setPlayerCooltime_value(rs.getFloat("cooltime_value"));
                 mincraPlayer.setPlayerCooltime_max(rs.getFloat("cooltime_max"));
+                mincraPlayer.setCooltimeTitle(rs.getString("cooltime_title"));
             }
             stmt.close();
             rs.close();
