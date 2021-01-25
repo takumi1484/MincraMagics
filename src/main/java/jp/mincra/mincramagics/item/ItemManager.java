@@ -45,19 +45,12 @@ public class ItemManager {
         ItemStack item;
         Material material = null;
         String mcr_id;
-        ItemMeta recipeIngredientMeta;
-        List<String> recipeIngredientLoreList;
 
         JSONObject itemObject;
         JSONObject itemNBTObject;
         JSONObject itemDisplayObject;
         JSONArray itemEnchantmentsArray;
         JSONObject itemEachEnchant;
-//                    JSONArray itemAttributeModifiersArray;
-//                    JSONObject itemEachAttribute;
-        JSONObject itemMincraMagicsObject = null;
-        JSONObject itemRecipeObject = null;
-        JSONArray itemRecipeShapeArray;
 
         NBTItem nbtItem;
         NBTCompound nbtDisplay;
@@ -65,9 +58,6 @@ public class ItemManager {
         NBTCompoundList nbtEnchantments;
         NBTCompound nbtEachEnchant;
         NBTCompound nbtMincraMagics;
-//                    NBTCompoundList nbtAttributeModifiers;
-//                    NBTCompound nbtEachAttribute = null;
-
 
         for (int i = 0, len = itemArray.length(); i < len; i++) {
             itemObject = itemArray.getJSONObject(i);
@@ -117,14 +107,6 @@ public class ItemManager {
 
             if (itemObject.has("nbt") && itemObject.get("nbt") instanceof JSONObject) {
                 itemNBTObject = itemObject.getJSONObject("nbt");
-
-                //-MincraMagics------------------------↓↓↓
-//            itemMincraMagicsObject = itemNBTObject.getJSONObject("MincraMagics");
-                //id
-//            if (itemMincraMagicsObject.has("id") && itemMincraMagicsObject.get("id") instanceof String) {
-//                nbtMincraMagics.setString("id", itemMincraMagicsObject.getString("id"));
-//            }
-                //-------------------------------------↑↑↑
 
                 //-display-----------------------------↓↓↓
                 itemDisplayObject = itemNBTObject.getJSONObject("display");
