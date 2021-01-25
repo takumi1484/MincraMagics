@@ -86,7 +86,7 @@ public class PropertyManager {
                         "        \"aba\",\n" +
                         "        \" a \"],\n" +
                         "      \"ingredient\": {\n" +
-                        "        \"a\": \"red_dye\",\n" +
+                        "        \"a\": \"example\",\n" +
                         "        \"b\": \"apple\"\n" +
                         "      }\n" +
                         "    }\n" +

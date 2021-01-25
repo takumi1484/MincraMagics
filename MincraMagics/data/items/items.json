@@ -1,0 +1,82 @@
+[
+  {
+    "id": "diamond",
+    "mcr_id": "testtest",
+    "nbt": {
+      "display":{
+        "Name": "{\"text\":\"Test Item\",\"color\":\"white\",\"bold\":true,\"italic\":false}",
+        "Lore":[
+          "{\"text\":\"This is a test item.\",\"color\":\"gray\",\"italic\":false}"]},
+      "CustomModelData":931,
+      "MincraMagics":{
+        "id":"test"}
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        " a ",
+        "aba",
+        " a "],
+      "ingredient": {
+        "a": "blue_dye",
+        "b": "apple"
+      }
+    }
+  },
+  {
+    "id": "emerald",
+    "mcr_id": "egg",
+    "nbt": {
+      "display":{
+        "Name": "{\"text\":\"Hello Item\",\"color\":\"green\",\"bold\":true,\"italic\":false}"
+      },
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "aa ",
+        "aba",
+        " a "],
+      "ingredient": {
+        "a": "white_dye",
+        "b": "testtest"
+      }
+    }
+  },
+  {
+    "id": "apple",
+    "mcr_id": "aaa",
+    "nbt": {
+      "display":{
+        "Name": "{\"text\":\"Example Item\",\"color\":\"white\",\"bold\":true,\"italic\":false}",
+        "Lore":[
+          "{\"text\":\"This is a example item.\",\"color\":\"gray\",\"italic\":false}",
+          "{\"text\":\"Here is 2nd line.\",\"color\":\"gray\",\"italic\":false}"]
+        },
+      "CustomModelData": 810,
+      "HideFlags": 1,
+      "Enchantments":[{
+        "id": "minecraft:fortune",
+        "lvl": 10
+      },{
+        "id": "minecraft:looting",
+        "lvl": 1
+      }],
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        " a ",
+        "aba",
+        " a "],
+      "ingredient": {
+        "a": "red_dye",
+        "b": "testtest"
+      }
+    }
+  }
+]
