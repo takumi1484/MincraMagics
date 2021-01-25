@@ -132,7 +132,7 @@ public final class MincraMagics extends JavaPlugin {
     public static void reload() {
         ChatUtil.sendConsoleMessage("プラグインをリロードします...");
         propertyManager.loadProperty();
-        jsonManager.loadItemNode();
+//        jsonManager.loadItemNode();
         jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items");
 //        itemManager.registerItem();
     }

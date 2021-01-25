@@ -27,6 +27,7 @@ public class MincraPrepareItemCraftEvent implements Listener {
             if (isValidCustomShapedRecipe(itemStack,v)) {
                 e.getInventory().setResult(v.getResult());
             }
+            ChatUtil.sendConsoleMessage(v.getResult().toString());
         });
     }
 
@@ -54,10 +55,17 @@ public class MincraPrepareItemCraftEvent implements Listener {
                         isValid = false;
 
                     } else {
-                        //クラフトテーブルのiスロットのアイテムが一致しない
-                        if (!itemStack[i].getItemMeta().equals(customShapedRecipe.getItemStack()[i].getItemMeta())) {
-
-                            isValid = false;
+                        //メタがあるとき
+                        if (itemStack[i].hasItemMeta()) {
+                            //クラフトテーブルのiスロットのアイテムが一致しない
+                            if (!itemStack[i].getItemMeta().equals(customShapedRecipe.getItemStack()[i].getItemMeta())) {
+                                isValid = false;
+                            }
+                        } else {
+                            //アイテムidが違う
+                            if (!itemStack[i].getType().equals(customShapedRecipe.getItemStack()[i].getType())) {
+                                isValid = false;
+                            }
                         }
                     }
                 } else {

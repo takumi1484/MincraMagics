@@ -205,6 +205,7 @@ public class ItemManager {
     public void registerRecipe(JSONArray itemArray, String path) {
 
         shapedRecipeMap = new HashMap<>();
+        customShapedRecipeMap = new HashMap<>();
 
         ChatUtil.sendConsoleMessage("レシピの登録を開始します...");
 
@@ -254,6 +255,7 @@ public class ItemManager {
 
                     //カスタムレシピの形
                     customRecipe.shape(shape);
+                    customRecipe.setResult(getItem(itemObject.getString("mcr_id")));
 
                     List<Character> charList = StringUtil.getContainsCharacter(shape);
 
@@ -268,7 +270,6 @@ public class ItemManager {
 
                                 //カスタムレシピの場合
                                 containCustomIngredient = true;
-                                customRecipe.setResult(getItem(itemObject.getString("mcr_id")));
                                 customRecipe.setIngredient(charList.get(j),itemStackMap.get(ingredient_id));
                                 customRecipe.setItemStack();
 
