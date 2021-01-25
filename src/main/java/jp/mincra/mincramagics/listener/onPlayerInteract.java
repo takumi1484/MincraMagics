@@ -24,13 +24,10 @@ public class onPlayerInteract extends SkillInstance implements Listener {
             if (player.getInventory().getItemInMainHand() != null) {
                 NBTItem nbtItem = new NBTItem(player.getInventory().getItemInMainHand());
 
-                if (nbtItem.getCompound("MincraMagics").hasKey("id")) {
-
-                    switch (nbtItem.getCompound("MincraMagics").getString("id")) {
-                        case "rod_move_1":
-                            getMoveRod().MoveOne(player);
-                            break;
-                    }
+                switch (nbtItem.getCompound("MincraMagics").getString("id")) {
+                    case "rod_move_1":
+                        getMoveRod().MoveOne(player);
+                        break;
                 }
             }
         }

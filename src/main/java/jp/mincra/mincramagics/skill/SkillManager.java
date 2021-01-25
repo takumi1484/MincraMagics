@@ -79,7 +79,11 @@ public class SkillManager {
 
         if (randomValue < mincraSkill.getBreak_rate()) {
             player.getInventory().setItemInMainHand(null);
-            player.sendMessage(ChatUtil.translateHexColorCodes("&#f03c3c&f&l杖がっ・・・"));
+
+            if (mincraSkill.getName().contains("rod")) {
+                player.sendMessage(ChatUtil.translateHexColorCodes("&#f03c3c&f&l杖がっ・・・"));
+            }
+
             player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK,1f,1f);
         }
     }
