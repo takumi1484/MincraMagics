@@ -10,10 +10,11 @@ jp\mincra\mincramagics\util\ChatUtil.class
 jp\mincra\mincramagics\dao\SQLManager.class
 jp\mincra\mincramagics\property\PropertyManager.class
 jp\mincra\mincramagics\MincraMagics$1.class
-jp\mincra\mincramagics\listener\MincraPrepareItemCraftEvent.class
 jp\mincra\mincramagics\util\StringUtil.class
 jp\mincra\mincramagics\listener\MincraListener$1.class
 jp\mincra\mincramagics\util\BossBarUtil$1.class
+jp\mincra\mincramagics\listener\onPlayerToggleFlightEvent.class
 jp\mincra\mincramagics\item\ItemManager.class
 jp\mincra\mincramagics\container\MincraCustomShapedRecipe.class
 jp\mincra\mincramagics\property\JSONManager.class
+jp\mincra\mincramagics\listener\onPrepareItemCraftEvent.class

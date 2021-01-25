@@ -1,13 +1,12 @@
 package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.command.MincraCommands;
-import jp.mincra.mincramagics.item.ItemManager;
-import jp.mincra.mincramagics.listener.MincraListener;
+import jp.mincra.mincramagics.dao.SQLManager;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
-import jp.mincra.mincramagics.listener.onPrepareItemCraftEvent;
+import jp.mincra.mincramagics.item.ItemManager;
+import jp.mincra.mincramagics.listener.*;
 import jp.mincra.mincramagics.property.JSONManager;
 import jp.mincra.mincramagics.property.PropertyManager;
-import jp.mincra.mincramagics.dao.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -96,8 +95,11 @@ public final class MincraMagics extends JavaPlugin {
 
         //listener
 //        onTick();
-        getServer().getPluginManager().registerEvents(new MincraListener(), this);
-        getServer().getPluginManager().registerEvents(new onPrepareItemCraftEvent(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerJoin(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerQuit(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerChat(), this);
+        getServer().getPluginManager().registerEvents(new onPrepareItemCraft(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerToggleFlight(), this);
 
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));
