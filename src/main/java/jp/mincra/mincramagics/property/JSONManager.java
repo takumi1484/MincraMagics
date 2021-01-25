@@ -2,26 +2,30 @@ package jp.mincra.mincramagics.property;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.json.JSONArray;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JSONManager {
 
     /**
-     * ディレクトリ内の全てのjsonを読み込み、一つの配列で返す
+     * ディレクトリ内の全てのjsonを読み込み、pathとJSONArrayのHashMapで返す。
      * @param path 読み込むjsonが配置されているパス。 (e.g. "./plugins/MincraMagics/data/items/")
      */
-    public void getAllJSONArray(String path) {
+    public Map<String,JSONArray> getAllJSONArray(String path) {
 
 //        StringBuffer directoryBuffer =new StringBuffer("./plugins/MincraMagics");
 //        directoryBuffer.append(path);
 //        String finalPath = directoryBuffer.toString();
 //
 //        File directory = new File(finalPath);
+
+        Map<String,JSONArray> jsonArrayMap = new HashMap<>();
+
         File directory = new File(path);
 
         /**
@@ -32,7 +36,6 @@ public class JSONManager {
         //ディレクトリ内にファイルが存在するか否か
         if (directory.list().length > 0) {
 
-            JSONArray mergedJSONArray = new JSONArray();
             JSONArray tempJSONArray;
 
             StringBuffer messageBuffer =new StringBuffer(path);
@@ -46,14 +49,14 @@ public class JSONManager {
 
                     tempJSONArray = getJSONArray(file.getPath());
 
-                    MincraMagics.getItemManager().registerItem(tempJSONArray,path+"/"+file.getName());
-                    MincraMagics.getItemManager().registerRecipe(tempJSONArray,path+"/"+file.getName());
+                    jsonArrayMap.put(path+"/"+file.getName(),tempJSONArray);
 
 //                    for (int i=0, len=tempJSONArray.length(); i<len; i++) {
 //                        mergedJSONArray.put(tempJSONArray.get(i));
 //                    }
                 }
             }
+            return jsonArrayMap;
 
 //            return mergedJSONArray;
 
@@ -64,6 +67,7 @@ public class JSONManager {
 
             ChatUtil.sendConsoleMessage(message);
 
+            return null;
         }
     }
 

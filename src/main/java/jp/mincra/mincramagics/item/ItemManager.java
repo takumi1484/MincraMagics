@@ -25,6 +25,15 @@ public class ItemManager {
     private Map<String, ShapedRecipe> shapedRecipeMap = new HashMap<>();
     private Map<String, MincraCustomShapedRecipe> customShapedRecipeMap = new HashMap<>();
 
+    public void register(Map<String,JSONArray> jsonArrayMap){
+
+        jsonArrayMap.forEach((k, v) -> {
+            registerItem(v,k);
+            registerRecipe(v,k);
+        });
+
+    }
+
     public void registerItem(JSONArray itemArray, String path) {
 
         itemStackMap = new HashMap<>();

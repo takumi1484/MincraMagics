@@ -91,11 +91,9 @@ public final class MincraMagics extends JavaPlugin {
         getUIManager();
         //JsonManager
         getJSONManager();
-        jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items");
         //ItemManager
         getItemManager();
-//        itemManager.registerItem();
-//        itemManager.registerItem();
+        itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
 
         //listener
         onTick();
