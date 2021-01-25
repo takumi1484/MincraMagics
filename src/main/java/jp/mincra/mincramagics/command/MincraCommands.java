@@ -38,8 +38,8 @@ public class MincraCommands implements CommandExecutor {
             case "test":
                 if (caster instanceof Player) {
 
-                    BossBarUtil.setCooltimeBossBar(((Player) caster).getPlayer(),args[1],Float.parseFloat((args[2])));
-
+//                    BossBarUtil.setCooltimeBossBar(((Player) caster).getPlayer(),args[1],Float.parseFloat((args[2])));
+                    ChatUtil.sendConsoleMessage(MincraMagics.getSkillManager().getSkillMap().get(args[1]).getName());
 
 //                    PlayerManager playerManager = MincraMagics.getPlayerManager();
 //                    playerManager.addPlayerMP_value(caster.getUniqueId(), -20);

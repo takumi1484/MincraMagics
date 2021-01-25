@@ -39,7 +39,6 @@ public class JSONManager {
             JSONArray tempJSONArray;
 
             StringBuffer messageBuffer =new StringBuffer(path);
-            messageBuffer.append(" 内のファイルの読み込みを開始します...");
             String message = messageBuffer.toString();
 
             ChatUtil.sendConsoleMessage(message);

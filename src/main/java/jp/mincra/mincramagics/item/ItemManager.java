@@ -26,17 +26,17 @@ public class ItemManager {
     private Map<String, MincraCustomShapedRecipe> customShapedRecipeMap = new HashMap<>();
 
     public void register(Map<String,JSONArray> jsonArrayMap){
+        itemStackMap = new HashMap<>();
+        shapedRecipeMap = new HashMap<>();
+        customShapedRecipeMap = new HashMap<>();
 
         jsonArrayMap.forEach((k, v) -> {
             registerItem(v,k);
             registerRecipe(v,k);
         });
-
     }
 
     public void registerItem(JSONArray itemArray, String path) {
-
-        itemStackMap = new HashMap<>();
 
         ChatUtil.sendConsoleMessage("アイテムの登録を開始します... from: "+path );
 
@@ -212,9 +212,6 @@ public class ItemManager {
     }
 
     public void registerRecipe(JSONArray itemArray, String path) {
-
-        shapedRecipeMap = new HashMap<>();
-        customShapedRecipeMap = new HashMap<>();
 
         ChatUtil.sendConsoleMessage("レシピの登録を開始します... from: "+path);
 

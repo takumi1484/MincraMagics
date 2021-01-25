@@ -74,6 +74,11 @@ public class PlayerManager {
         MincraPlayerMap.put(uuid,mincraPlayer);
     }
 
+    public void setPlayerCooltime(UUID uuid, float cooltime) {
+        setPlayerCooltime_max(uuid,cooltime);
+        setPlayerCooltime_value(uuid,cooltime);
+    }
+
     public void setPlayerCooltime_max(UUID uuid, float cooltime) {
         MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
         mincraPlayer.setPlayerCooltime_max(cooltime);

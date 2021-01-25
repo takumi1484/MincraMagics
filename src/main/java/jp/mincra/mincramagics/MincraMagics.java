@@ -1,6 +1,7 @@
 package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.command.MincraCommands;
+import jp.mincra.mincramagics.skill.SkillManager;
 import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.item.ItemManager;
@@ -58,6 +59,13 @@ public final class MincraMagics extends JavaPlugin {
         return itemManager;
     }
 
+    private static SkillManager skillManager;
+    public static SkillManager getSkillManager() {
+        if (skillManager == null)
+            skillManager = new SkillManager();
+        return skillManager;
+    }
+
     protected static MincraMagics instance;
     public static MincraMagics getInstance(){
         return instance;
@@ -93,6 +101,9 @@ public final class MincraMagics extends JavaPlugin {
         //ItemManager
         getItemManager();
         itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
+        //SkillManager
+        getSkillManager();
+        skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
 
         //listener
 //        onTick();
@@ -101,6 +112,7 @@ public final class MincraMagics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onPlayerChat(), this);
         getServer().getPluginManager().registerEvents(new onPrepareItemCraft(), this);
         getServer().getPluginManager().registerEvents(new onPlayerToggleFlight(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerInteract(), this);
 
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));
@@ -133,7 +145,7 @@ public final class MincraMagics extends JavaPlugin {
         ChatUtil.sendConsoleMessage("プラグインをリロードします...");
         propertyManager.loadProperty();
 //        jsonManager.loadItemNode();
-        jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items");
-//        itemManager.registerItem();
+        itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
+        skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
     }
 }
