@@ -2,8 +2,14 @@ package jp.mincra.mincramagics.command;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
+import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -38,11 +44,13 @@ public class MincraCommands implements CommandExecutor {
 
             case "test":
                 if (caster instanceof Player) {
-                    NamespacedKey key = new NamespacedKey(MincraMagics.getInstance(), "example");
-                    ((Player) caster).undiscoverRecipe(key);
+
+                    BossBarUtil.setCooltimeBossBar(((Player) caster).getPlayer(),args[1],Float.parseFloat((args[2])));
+
+
 //                    PlayerManager playerManager = MincraMagics.getPlayerManager();
 //                    playerManager.addPlayerMP_value(caster.getUniqueId(), -20);
-//                    playerManager.setPlayerCooltime(caster.getUniqueId(), 10);
+
 
 //            ItemStack itemStack = caster.getInventory().getItemInMainHand();
 //            NBTItem nbtItem = new NBTItem(itemStack);

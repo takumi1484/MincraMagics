@@ -59,7 +59,6 @@ public final class MincraMagics extends JavaPlugin {
         return itemManager;
     }
 
-
     protected static MincraMagics instance;
     public static MincraMagics getInstance(){
         return instance;
@@ -96,7 +95,7 @@ public final class MincraMagics extends JavaPlugin {
         itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
 
         //listener
-        onTick();
+//        onTick();
         getServer().getPluginManager().registerEvents(new MincraListener(), this);
         getServer().getPluginManager().registerEvents(new MincraPrepareItemCraftEvent(), this);
 
@@ -120,10 +119,11 @@ public final class MincraMagics extends JavaPlugin {
         TimerTask task = new TimerTask() {
             public void run() {
                 // 定期的に実行したい処理
-                uiManager.onTick();
+//                uiManager.onTick();
+
             }
         };
-        timer.scheduleAtFixedRate(task,0,50);
+        timer.scheduleAtFixedRate(task,0,100);
     }
 
     public static void reload() {
