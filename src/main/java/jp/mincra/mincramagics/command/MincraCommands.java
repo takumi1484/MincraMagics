@@ -1,8 +1,11 @@
 package jp.mincra.mincramagics.command;
 
 import jp.mincra.mincramagics.MincraMagics;
-import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
+import jp.mincra.mincramagics.util.ParticleUtil;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -38,12 +41,14 @@ public class MincraCommands implements CommandExecutor {
             case "test":
                 if (caster instanceof Player) {
 
-//                    BossBarUtil.setCooltimeBossBar(((Player) caster).getPlayer(),args[1],Float.parseFloat((args[2])));
-                    ChatUtil.sendConsoleMessage(MincraMagics.getSkillManager().getSkillMap().get(args[1]).getName());
+                    Location location = Bukkit.getPlayer("Harineko1").getLocation();
+//                    location.setX(location.getX()+5);
+//                    location.setY(location.getY()+5);
+//                    location.setZ(location.getZ()+5);
 
-//                    PlayerManager playerManager = MincraMagics.getPlayerManager();
-//                    playerManager.addPlayerMP_value(caster.getUniqueId(), -20);
-
+//                    ((Player) caster).spawnParticle(Particle.FIREWORKS_SPARK,location,10);
+                    ParticleUtil.drawLine(Particle.FLAME, (Player) caster,caster.getLocation(), location,10,0.1, Float.parseFloat(args[1]));
+                    ParticleUtil.drawCircle(Particle.FIREWORKS_SPARK, (Player) caster, caster.getLocation(), 3, 0,2, 100);
 
 //            ItemStack itemStack = caster.getInventory().getItemInMainHand();
 //            NBTItem nbtItem = new NBTItem(itemStack);

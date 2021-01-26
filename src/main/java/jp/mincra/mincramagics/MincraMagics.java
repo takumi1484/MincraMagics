@@ -149,3 +149,15 @@ public final class MincraMagics extends JavaPlugin {
         skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
     }
 }
+
+        /*
+       y↑
+         H.----------.G :loc2
+         /|         /|
+       E.----------.F|
+        |D.--------|-.C
+        |/         |/
+ loc1: A.----------.B  →x
+       /
+      /↗z
+         */

@@ -5,8 +5,10 @@ import jp.mincra.mincramagics.container.MincraSkill;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
 import jp.mincra.mincramagics.util.ExpUtil;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -64,42 +66,60 @@ public class SkillManager {
 
 
     public void useSkill(Player player, String id) {
-        MincraSkill mincraSkill = skillMap.get(id);
 
-        //クールタイム
-        BossBarUtil.setCooltimeBossBar(player,mincraSkill.getName(),mincraSkill.getCooltime());
+        if (skillMap.keySet().contains(id)) {
+            MincraSkill mincraSkill = skillMap.get(id);
 
-        //MP(経験値
-        player.giveExpLevels(-mincraSkill.getExp_lv());
-        player.giveExp(-mincraSkill.getExp());
+            //クールタイム
+            BossBarUtil.setCooltimeBossBar(player,mincraSkill.getName(),mincraSkill.getCooltime());
 
-        //崩壊
-        Random random = new Random();
-        int randomValue = random.nextInt(100);
+            //MP(経験値
+            player.giveExpLevels(-mincraSkill.getExp_lv());
+            player.giveExp(-mincraSkill.getExp());
 
-        if (randomValue < mincraSkill.getBreak_rate()) {
-            player.getInventory().setItemInMainHand(null);
+            //崩壊
+            Random random = new Random();
+            int randomValue = random.nextInt(100);
 
-            if (mincraSkill.getName().contains("rod")) {
-                player.sendMessage(ChatUtil.translateHexColorCodes("&#f03c3c&f&l杖がっ・・・"));
+            if (randomValue < mincraSkill.getBreak_rate()) {
+                ItemStack item = player.getInventory().getItemInMainHand();
+                if (item.getAmount() > 1) {
+                    item.setAmount(item.getAmount() - 1);
+                    player.getInventory().setItemInMainHand(item);
+                } else {
+                    player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
+                }
+
+                if (mincraSkill.getName().contains("rod")) {
+                    player.sendMessage(ChatUtil.translateHexColorCodes("&#f03c3c&f&l杖がっ・・・"));
+                }
+
+                player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK,1f,1f);
             }
-
-            player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK,1f,1f);
+        } else {
+            ChatUtil.sendConsoleMessage("エラー: "+id+"のスキルが存在しません。");
         }
     }
 
     public boolean canUseSkill(Player player, String id) {
         boolean canUse = true;
 
-        //クールタイム
-        if (MincraMagics.getPlayerManager().getPlayerCooltime_value(player.getUniqueId()) > 0) {canUse = false;}
-        //経験値
-        if (player.getLevel() < skillMap.get(id).getExp_lv()) {
-            player.sendMessage(ChatUtil.translateHexColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
-            canUse = false;
-        }
-        if (ExpUtil.getPlayerExp(player) < skillMap.get(id).getExp()) {
-            player.sendMessage(ChatUtil.translateHexColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
+        if (skillMap.keySet().contains(id)) {
+            //クールタイム
+            if (MincraMagics.getPlayerManager().getPlayerCooltime_value(player.getUniqueId()) > 0) {
+                canUse = false;
+            }
+            //経験値
+            if (player.getLevel() < skillMap.get(id).getExp_lv()) {
+                player.sendMessage(ChatUtil.translateHexColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
+                canUse = false;
+            }
+            if (ExpUtil.getPlayerExp(player) < skillMap.get(id).getExp()) {
+                player.sendMessage(ChatUtil.translateHexColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
+                canUse = false;
+            }
+        } else {
+            ChatUtil.sendConsoleMessage("エラー: "+id+"のスキルが存在しません。");
             canUse = false;
         }
 
