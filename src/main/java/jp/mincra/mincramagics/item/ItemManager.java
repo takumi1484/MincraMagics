@@ -6,11 +6,15 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import de.tr7zw.changeme.nbtapi.NBTList;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraCustomShapedRecipe;
+import jp.mincra.mincramagics.container.MincraSkill;
 import jp.mincra.mincramagics.util.ChatUtil;
+import jp.mincra.mincramagics.util.MathUtil;
 import jp.mincra.mincramagics.util.StringUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -24,6 +28,7 @@ public class ItemManager {
     private Map<String, ItemStack> itemStackMap = new HashMap<>();
     private Map<String, ShapedRecipe> shapedRecipeMap = new HashMap<>();
     private Map<String, MincraCustomShapedRecipe> customShapedRecipeMap = new HashMap<>();
+    private Collection<NamespacedKey> showRecipeList = new ArrayList<>();
 
     public void register(Map<String,JSONArray> jsonArrayMap){
         itemStackMap = new HashMap<>();
@@ -188,6 +193,36 @@ public class ItemManager {
 
             item = nbtItem.getItem();
 
+            //スキルアイテムのLore
+            if (MincraMagics.getSkillManager().getSkillMap().containsKey(mcr_id)) {
+                MincraSkill mincraSkill = MincraMagics.getSkillManager().getSkillMap().get(mcr_id);
+                ItemMeta itemMeta = item.getItemMeta();
+
+                StringBuilder spaceCooltime = new StringBuilder(" ");
+                if (MathUtil.getPrecision(mincraSkill.getCooltime()) < 2) {
+                    spaceCooltime.append(" ");
+                }
+
+                StringBuilder spaceExp = new StringBuilder("        ");
+                if (MathUtil.getPrecision((float) mincraSkill.getExp_lv()) < 2) {
+                    spaceExp.append(" ");
+                }
+
+                StringBuilder spaceBreak = new StringBuilder("     ");
+                if (MathUtil.getPrecision(mincraSkill.getBreak_rate()) <= 2) {
+                    spaceBreak.append(" ");
+                }
+
+                List<String> loreList = Arrays.asList(
+                        ChatColor.AQUA + mincraSkill.getLore(),
+                        ChatColor.AQUA + "クールタイム:" + spaceCooltime.toString() + ChatColor.AQUA + mincraSkill.getCooltime(),
+                        ChatColor.AQUA + "MP消費:" + spaceExp.toString() + ChatColor.AQUA + mincraSkill.getExp_lv(),
+                        ChatColor.DARK_RED + "崩壊確率:" + spaceBreak.toString() + ChatColor.DARK_RED + mincraSkill.getBreak_rate()
+                );
+                itemMeta.setLore(loreList);
+                item.setItemMeta(itemMeta);
+            }
+
             itemStackMap.put(mcr_id, item);
         }
         ChatUtil.sendConsoleMessage(itemStackMap.size() + "個のアイテムを登録しました。");
@@ -245,6 +280,10 @@ public class ItemManager {
                     customRecipe.shape(shape);
                     customRecipe.setResult(getItem(itemObject.getString("mcr_id")));
 
+                    if (itemRecipeObject.has("show") && itemRecipeObject.getBoolean("show")) {
+                        showRecipeList.add(key);
+                    }
+
                     List<Character> charList = StringUtil.getContainsCharacter(shape);
 
                     for (int j=0, charListSize=charList.size(); j<charListSize; j++) {
@@ -270,7 +309,6 @@ public class ItemManager {
 
                                     //カスタムレシピの場合もあるかもなので毎時実行
                                     customRecipe.setIngredient(charList.get(j),new ItemStack(material));
-
                                 }
                             }
                         }
@@ -300,8 +338,16 @@ public class ItemManager {
         ChatUtil.sendConsoleMessage(customShapedRecipeMap.size() + "個のカスタムレシピを登録しました。");
     }
 
+    public void discoverShowRecipes(Player player){
+        player.discoverRecipes(showRecipeList);
+    }
+
    public ItemStack getItem(String mcr_id) {
         return itemStackMap.get(mcr_id);
+    }
+
+    public Map<String, ItemStack> getItemStackMap() {
+        return itemStackMap;
     }
 
     public ShapedRecipe getRecipe(String mcr_id) {

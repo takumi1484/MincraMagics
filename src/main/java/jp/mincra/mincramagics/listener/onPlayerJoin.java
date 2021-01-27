@@ -2,6 +2,7 @@ package jp.mincra.mincramagics.listener;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraPlayer;
+import jp.mincra.mincramagics.container.MincraSkill;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.entity.Player;
@@ -42,6 +43,9 @@ public class onPlayerJoin implements Listener {
             MincraMagics.getPlayerManager().putMincraPlayer(mincraPlayer);
 
         }
+
+        //初期レシピ解放
+        MincraMagics.getItemManager().discoverShowRecipes(player);
 
         //オンラインプレイヤーリストを設定
         MincraMagics.getPlayerManager().setOnlinePlayerList();

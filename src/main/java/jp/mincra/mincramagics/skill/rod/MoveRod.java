@@ -11,7 +11,7 @@ import org.bukkit.util.Vector;
 
 public class MoveRod {
 
-    public void MoveOne(Player player) {
+    public void Move(Player player, int level) {
         String id = "rod_move_1";
 
         if (MincraMagics.getSkillManager().canUseSkill(player,id)) {
@@ -21,22 +21,21 @@ public class MoveRod {
 
                 MincraMagics.getSkillManager().useSkill(player, id);
 
-                final double speed = 1.0;
-
                 //メイン
                 float yaw = player.getLocation().getYaw();
-                Vector vec = new Vector(-speed * Math.sin(yaw * Math.PI / 180.0) * 1, -0.5 * speed, Math.cos(yaw * Math.PI / 180.0) * speed);
+
+                Vector vec = new Vector(-level * Math.sin(yaw * Math.PI / 180.0),-0.5, Math.cos(yaw * Math.PI / 180.0) * level);
                 player.setVelocity(vec);
 
                 //装飾
                 player.playSound(loc, Sound.ENTITY_WITHER_SHOOT, 0.2F, 1F);
 
                 MincraParticle mincraParticle = new MincraParticle();
-                mincraParticle.setRadius(2);
+                mincraParticle.setRadius(2.4);
                 mincraParticle.setParticle(Particle.SPELL_INSTANT);
                 //距離調整
-                vec.multiply(2.2 * speed);
-                vec.setY(vec.getY()+1d);
+                vec.multiply(level);
+                vec.setY(vec.getY() + 1 + 0.25 * level);
 
                 mincraParticle.drawMagicCircle(loc.add(vec), 5, 1);
 

@@ -4,16 +4,17 @@ public class MincraSkill {
 
     private String id = "Unknown";
     private String name = "";
+    private String lore = "";
     private float cooltime = 0f;
     private int exp_lv = 0;
     private int exp = 0;
-    private int break_rate = 0;
+    private float break_rate = 0;
 
-    public int getBreak_rate() {
+    public float getBreak_rate() {
         return break_rate;
     }
 
-    public void setBreak_rate(int break_rate) {
+    public void setBreak_rate(float break_rate) {
         this.break_rate = break_rate;
     }
 
@@ -23,6 +24,14 @@ public class MincraSkill {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLore() {
+        return lore;
+    }
+
+    public void setLore(String lore) {
+        this.lore = lore;
     }
 
     public int getExp() {

@@ -3,6 +3,7 @@ package jp.mincra.mincramagics.command;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.ChatUtil;
 import jp.mincra.mincramagics.skill.MincraParticle;
+import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -40,10 +41,11 @@ public class MincraCommands implements CommandExecutor {
                 if (caster instanceof Player) {
 
                     MincraParticle mincraParticle = new MincraParticle();
-                    mincraParticle.setRadius(Double.parseDouble(args[2]));
+                    mincraParticle.setRadius(4);
                     mincraParticle.setParticle(Particle.SPELL_INSTANT,Particle.FLAME,Particle.SOUL_FIRE_FLAME);
-
-                    mincraParticle.drawMagicCircle(caster.getLocation(), Integer.parseInt(args[1]), 1);
+                    mincraParticle.setAngle(Math.toRadians(Double.parseDouble(args[1])),Math.toRadians(Double.parseDouble(args[2])),Math.toRadians(Double.parseDouble(args[3])));
+                    mincraParticle.drawMagicCircle(caster.getLocation(), 5, 1);
+//                    mincraParticle.drawLine(Particle.FLAME,caster.getLocation(), Bukkit.getPlayer("Harineko1").getLocation(),1,0,0.2);
 
 //            ItemStack itemStack = caster.getInventory().getItemInMainHand();
 //            NBTItem nbtItem = new NBTItem(itemStack);

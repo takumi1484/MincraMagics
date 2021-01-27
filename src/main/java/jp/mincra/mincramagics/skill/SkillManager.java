@@ -1,5 +1,6 @@
 package jp.mincra.mincramagics.skill;
 
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraSkill;
 import jp.mincra.mincramagics.util.BossBarUtil;
@@ -45,6 +46,8 @@ public class SkillManager {
                 mincraSkill.setId(skillObject.getString("id"));
                 //name
                 mincraSkill.setName(skillObject.getString("name"));
+                //lore
+                mincraSkill.setLore(skillObject.getString("lore"));
                 //cooltime
                 mincraSkill.setCooltime(skillObject.getFloat("cooltime"));
                 //exp_lv
@@ -52,7 +55,7 @@ public class SkillManager {
                 //exp
                 mincraSkill.setExp(skillObject.getInt("exp"));
                 //break_rate
-                mincraSkill.setBreak_rate(skillObject.getInt("break_rate"));
+                mincraSkill.setBreak_rate(skillObject.getFloat("break_rate"));
 
                 amount = amount + 1;
             }
@@ -63,7 +66,6 @@ public class SkillManager {
     public Map<String, MincraSkill> getSkillMap(){
         return skillMap;
     }
-
 
     public void useSkill(Player player, String id) {
 
@@ -81,7 +83,7 @@ public class SkillManager {
             Random random = new Random();
             int randomValue = random.nextInt(100);
 
-            if (randomValue < mincraSkill.getBreak_rate()) {
+            if (randomValue < mincraSkill.getBreak_rate() * 100) {
                 ItemStack item = player.getInventory().getItemInMainHand();
                 if (item.getAmount() > 1) {
                     item.setAmount(item.getAmount() - 1);
@@ -90,7 +92,7 @@ public class SkillManager {
                     player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                 }
 
-                if (mincraSkill.getName().contains("rod")) {
+                if (mincraSkill.getId().contains("rod")) {
                     player.sendMessage(ChatUtil.translateHexColorCodes("&#f03c3c&f&l杖がっ・・・"));
                 }
 
