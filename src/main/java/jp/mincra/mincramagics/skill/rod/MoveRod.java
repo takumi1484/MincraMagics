@@ -21,21 +21,25 @@ public class MoveRod {
 
                 MincraMagics.getSkillManager().useSkill(player, id);
 
+                final double speed = 1.0;
+
                 //メイン
                 float yaw = player.getLocation().getYaw();
-                Vector vec = new Vector(-1 * Math.sin(yaw * Math.PI / 180.0) * 1, -0.5F, Math.cos(yaw * Math.PI / 180.0) * 1);
+                Vector vec = new Vector(-speed * Math.sin(yaw * Math.PI / 180.0) * 1, -0.5 * speed, Math.cos(yaw * Math.PI / 180.0) * speed);
                 player.setVelocity(vec);
 
                 //装飾
                 player.playSound(loc, Sound.ENTITY_WITHER_SHOOT, 0.2F, 1F);
 
                 MincraParticle mincraParticle = new MincraParticle();
-                mincraParticle.setType(1);
                 mincraParticle.setRadius(2);
-                mincraParticle.setParticle(0, Particle.SPELL_INSTANT);
-
+                mincraParticle.setParticle(Particle.SPELL_INSTANT);
+                //距離調整
+                vec.multiply(2.2 * speed);
                 vec.setY(vec.getY()+1d);
-                mincraParticle.drawMagicCircle(player, loc.add(vec));
+
+                mincraParticle.drawMagicCircle(loc.add(vec), 5, 1);
+
             } else {
                 player.sendMessage(ChatUtil.translateHexColorCodes("&c高すぎるため使えません！"));
             }
