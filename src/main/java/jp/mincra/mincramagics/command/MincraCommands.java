@@ -2,7 +2,7 @@ package jp.mincra.mincramagics.command;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.ChatUtil;
-import jp.mincra.mincramagics.util.ParticleUtil;
+import jp.mincra.mincramagics.skill.MincraParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -47,8 +47,9 @@ public class MincraCommands implements CommandExecutor {
 //                    location.setZ(location.getZ()+5);
 
 //                    ((Player) caster).spawnParticle(Particle.FIREWORKS_SPARK,location,10);
-                    ParticleUtil.drawLine(Particle.FLAME, (Player) caster,caster.getLocation(), location,10,0.1, Float.parseFloat(args[1]));
-                    ParticleUtil.drawCircle(Particle.FIREWORKS_SPARK, (Player) caster, caster.getLocation(), 3, 0,2, 100);
+                    MincraParticle mincraParticle = new MincraParticle();
+                    mincraParticle.drawLine(Particle.FLAME, (Player) caster,caster.getLocation(), location,10,0.1, Float.parseFloat(args[1]));
+                    mincraParticle.drawCircle(Particle.FIREWORKS_SPARK, (Player) caster, caster.getLocation(), 3, 0,2, 100);
 
 //            ItemStack itemStack = caster.getInventory().getItemInMainHand();
 //            NBTItem nbtItem = new NBTItem(itemStack);

@@ -1,5 +1,6 @@
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPrepareItemCraft.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerToggleFlight.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\MincraParticle.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\container\MincraSkill.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\StringUtil.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\ExpUtil.java
@@ -13,7 +14,6 @@ C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\co
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\MincraMagics.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\MathUtil.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\container\MagicPoint.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\ParticleUtil.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\SkillManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\ui\UIManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\item\ItemManager.java
@@ -22,7 +22,6 @@ C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\sq
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\command\MincraCommands.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\container\MincraPlayer.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerQuit.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\container\MagicCircle.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\property\PropertyManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\property\JSONManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerChat.java

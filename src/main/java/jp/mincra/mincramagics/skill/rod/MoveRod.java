@@ -1,9 +1,8 @@
 package jp.mincra.mincramagics.skill.rod;
 
 import jp.mincra.mincramagics.MincraMagics;
-import jp.mincra.mincramagics.container.MagicCircle;
 import jp.mincra.mincramagics.util.ChatUtil;
-import jp.mincra.mincramagics.util.ParticleUtil;
+import jp.mincra.mincramagics.skill.MincraParticle;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -30,12 +29,13 @@ public class MoveRod {
                 //装飾
                 player.playSound(loc, Sound.ENTITY_WITHER_SHOOT, 0.2F, 1F);
 
-                MagicCircle magicCircle = new MagicCircle();
-                magicCircle.setType(1);
-                magicCircle.setRadius(2);
-                magicCircle.setParticle(0, Particle.FIREWORKS_SPARK);
+                MincraParticle mincraParticle = new MincraParticle();
+                mincraParticle.setType(1);
+                mincraParticle.setRadius(2);
+                mincraParticle.setParticle(0, Particle.SPELL_INSTANT);
+
                 vec.setY(vec.getY()+1d);
-                ParticleUtil.drawMagicCircle(magicCircle, player, loc.add(vec));
+                mincraParticle.drawMagicCircle(player, loc.add(vec));
             } else {
                 player.sendMessage(ChatUtil.translateHexColorCodes("&c高すぎるため使えません！"));
             }
