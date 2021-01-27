@@ -19,6 +19,8 @@ public class MincraParticle {
 
     private Location center;
 
+    private Particle.DustOptions dustOptions;
+
     public double getRadius() {
         return radius;
     }
@@ -51,6 +53,9 @@ public class MincraParticle {
         particleList.add(3,particle4);
     }
 
+    public void setDustOptions(Particle.DustOptions dustOptions) {
+        this.dustOptions = dustOptions;
+    }
 
     /**
      * X軸方向の傾きをラジアンで指定する。
@@ -100,7 +105,7 @@ public class MincraParticle {
      * @param offsetY Y軸方向の最大のバラつき
      * @param offsetZ Z軸方向の最大のバラつき
      */
-    public void drawLine(Particle particle, Location locationStart, Location locationEnd, int count, double speed, double distanceBetween, double offsetX, double offsetY, double offsetZ) {
+    public void drawLine(Particle particle, Location locationStart, Location locationEnd, int count, double speed, double distanceBetween, double offsetX, double offsetY, double offsetZ, Particle.DustOptions dustOptions) {
         //https://www.spigotmc.org/threads/drawing-particle-line.446101/
 //        Vector startFromCenter = getDirectionBetweenLocations(center,locationStart);
 //        Vector endFromCenter = getDirectionBetweenLocations(center,locationEnd);
@@ -112,7 +117,13 @@ public class MincraParticle {
             Vector addition = new Vector().copy(vector).multiply(i);
             Location newLoc = locationStart.clone().add(addition);
 
-            locationStart.getWorld().spawnParticle(particle, newLoc, count, offsetX, offsetY, offsetZ, speed);
+            if (particle == Particle.REDSTONE) {
+                locationStart.getWorld().spawnParticle(particle, newLoc, count, offsetX, offsetY, offsetZ, speed, dustOptions);
+
+            } else {
+                locationStart.getWorld().spawnParticle(particle, newLoc, count, offsetX, offsetY, offsetZ, speed);
+
+            }
         }
     }
 
@@ -127,7 +138,8 @@ public class MincraParticle {
      * @param offset 全ての軸方向の最大のバラつき
      */
     public void drawLine(Particle particle, Location locationStart, Location locationEnd, int count, double offset, double speed, double distanceBetween) {
-        drawLine(particle, locationStart, locationEnd, count, speed, distanceBetween, offset, offset, offset);
+        drawLine(particle, locationStart, locationEnd, count, speed, distanceBetween, offset, offset, offset, dustOptions);
+
     }
 
     /**
@@ -140,7 +152,7 @@ public class MincraParticle {
      * @param distanceBetween パーティクル同士の距離
      */
     public void drawLine(Particle particle, Location locationStart, Location locationEnd, int count, double speed, double distanceBetween) {
-        drawLine(particle, locationStart, locationEnd, count, speed, distanceBetween, 0, 0, 0);
+        drawLine(particle, locationStart, locationEnd, count, speed, distanceBetween, 0, 0, 0, dustOptions);
     }
 
 
@@ -156,7 +168,7 @@ public class MincraParticle {
      * @param radius　円の半径
      * @param amount 描画するパーティクルの点数
      */
-    public void drawCircle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, double speed, double radius, int amount) {
+    public void drawCircle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, double speed, double radius, int amount, Particle.DustOptions dustOptions) {
         double increment = (2 * Math.PI) / amount;
         for(int i = 0;i < amount; i++)
         {
@@ -164,7 +176,13 @@ public class MincraParticle {
             double x = location.getX() + (radius * Math.cos(angle));
             double z = location.getZ() + (radius * Math.sin(angle));
 
-            location.getWorld().spawnParticle(particle, x, location.getY(), z, count, offsetX, offsetY, offsetZ, speed);
+            if (particle == Particle.REDSTONE) {
+                location.getWorld().spawnParticle(particle, x, location.getY(), z, count, offsetX, offsetY, offsetZ, speed, dustOptions);
+
+            } else {
+                location.getWorld().spawnParticle(particle, x, location.getY(), z, count, offsetX, offsetY, offsetZ, speed);
+
+            }
         }
     }
 
@@ -179,7 +197,7 @@ public class MincraParticle {
      * @param amount 描画するパーティクルの点数
      */
     public void drawCircle(Particle particle, Location location, int count, double offset, double speed, double radius, int amount) {
-        drawCircle(particle, location, count, offset, offset, offset, speed, radius, amount);
+        drawCircle(particle, location, count, offset, offset, offset, speed, radius, amount, dustOptions);
     }
     
     /**
@@ -192,7 +210,7 @@ public class MincraParticle {
      * @param amount 描画するパーティクルの点数
      */
     public void drawCircle(Particle particle, Location location, int count, double speed, double radius, int amount) {
-        drawCircle(particle, location, count, 0, 0, 0, speed, radius, amount);
+        drawCircle(particle, location, count, 0, 0, 0, speed, radius, amount, dustOptions);
     }
 
 

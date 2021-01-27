@@ -2,6 +2,7 @@ package jp.mincra.mincramagics.listener;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.skill.SkillInstance;
+import jp.mincra.mincramagics.skill.rod.JumpRod;
 import jp.mincra.mincramagics.skill.rod.MoveRod;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -29,20 +30,30 @@ public class onPlayerInteract extends SkillInstance implements Listener {
                     NBTItem nbtItem = new NBTItem(item);
 
                     if (nbtItem.hasKey("MincraMagics")) {
+                        e.setCancelled(true);
                         switch (nbtItem.getCompound("MincraMagics").getString("id")) {
                             case "rod_move_1":
-                                e.setCancelled(true);
                                 getMoveRod().Move(player,1);
                                 break;
 
                             case "rod_move_2":
-                                e.setCancelled(true);
                                 getMoveRod().Move(player,2);
                                 break;
 
                             case "rod_move_3":
-                                e.setCancelled(true);
                                 getMoveRod().Move(player,3);
+                                break;
+
+                            case "rod_jump_1":
+                                getJumpRod().JumpOne(player);
+                                break;
+
+                            case "rod_jump_2":
+                                getJumpRod().JumpTwo(player);
+                                break;
+
+                            case "rod_jump_3":
+                                getJumpRod().JumpThree(player);
                                 break;
                         }
                     }

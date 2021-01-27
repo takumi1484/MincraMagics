@@ -73,7 +73,7 @@ public class SkillManager {
             MincraSkill mincraSkill = skillMap.get(id);
 
             //クールタイム
-            BossBarUtil.setCooltimeBossBar(player,mincraSkill.getName(),mincraSkill.getCooltime());
+            BossBarUtil.setCooltimeBossBar(player,mincraSkill.getName(),mincraSkill.getCooltime(),true);
 
             //MP(経験値
             player.giveExpLevels(-mincraSkill.getExp_lv());

@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 public class MoveRod {
 
     public void Move(Player player, int level) {
-        String id = "rod_move_1";
+        String id = "rod_move_"+level;
 
         if (MincraMagics.getSkillManager().canUseSkill(player,id)) {
             Location loc = player.getLocation();
