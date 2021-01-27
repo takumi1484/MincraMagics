@@ -2,9 +2,55 @@
   {
     "id": "rod_move_1",
     "name": "&a&l翠水晶の杖lv1",
-    "cooltime": 0.4,
+    "lore": "自分自身を少し加速させる。",
+    "cooltime": 0,
     "exp_lv": 0,
     "exp": 0,
-    "break_rate": 1
+    "break_rate": 0.01
+  },
+  {
+    "id": "rod_move_2",
+    "name": "&a&l翠水晶の杖lv2",
+    "lore": "自分自身を加速させる。",
+    "cooltime": 0,
+    "exp_lv": 0,
+    "exp": 0,
+    "break_rate": 0.01
+  },
+  {
+    "id": "rod_move_3",
+    "name": "&a&l翠水晶の杖lv3",
+    "lore": "自分自身を大きく加速させる。",
+    "cooltime": 0,
+    "exp_lv": 0,
+    "exp": 0,
+    "break_rate": 0.01
+  },
+  {
+    "id": "rod_jump_1",
+    "name": "&#006dff&f&l蒼水晶の杖lv1",
+    "lore": "空中で小さくジャンプする。",
+    "cooltime": 0.8,
+    "exp_lv": 0,
+    "exp": 0,
+    "break_rate": 0.01
+  },
+  {
+    "id": "rod_jump_2",
+    "name": "&#006dff&f&l蒼水晶の杖lv2",
+    "lore": "空中でジャンプする。",
+    "cooltime": 1.4,
+    "exp_lv": 1,
+    "exp": 0,
+    "break_rate": 0.01
+  },
+  {
+    "id": "rod_jump_3",
+    "name": "&#006dff&f&l蒼水晶の杖lv3",
+    "lore": "空中で大きくジャンプする。",
+    "cooltime": 2.0,
+    "exp_lv": 0,
+    "exp": 0,
+    "break_rate": 0.01
   }
 ]

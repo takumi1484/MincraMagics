@@ -1,0 +1,151 @@
+[{
+  "id": "blaze_rod",
+  "mcr_id": "rod_move_1",
+  "nbt": {
+    "display":{
+      "Name":"{\"text\":\"翠水晶の杖lv1\",\"color\":\"green\",\"bold\":true,\"italic\":false}",
+      "Lore":[]},
+    "CustomModelData": 10000,
+    "MincraMagics":{
+    }
+  },
+  "craftable": true,
+  "recipe": {
+    "shape": [
+      " ed",
+      " be",
+      "b  "],
+    "ingredient": {
+      "d": "diamond",
+      "e": "experience_bottle",
+      "b": "blaze_rod"
+    },
+    "show": true
+  }
+},
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_move_2",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"翠水晶の杖lv2\",\"color\":\"green\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10001,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        " de",
+        " bd",
+        "b  "],
+      "ingredient": {
+        "d": "diamond",
+        "e": "experience_bottle",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_move_3",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"翠水晶の杖lv3\",\"color\":\"green\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10002,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "bde",
+        " bd",
+        "b b"],
+      "ingredient": {
+        "d": "diamond_block",
+        "e": "experience_bottle",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_jump_1",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"蒼水晶の杖lv1\",\"color\":\"#006dff\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10003,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "fff",
+        "fbf",
+        "fff"],
+      "ingredient": {
+        "b": "blaze_rod",
+        "f": "feather"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_jump_2",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"蒼水晶の杖lv2\",\"color\":\"#006dff\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10004,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "flf",
+        "lbl",
+        "flf"],
+      "ingredient": {
+        "b": "blaze_rod",
+        "f": "feather",
+        "l": "lapis_lazuli"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_jump_3",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"蒼水晶の杖lv3\",\"color\":\"#006dff\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10005,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "ldl",
+        "fbf",
+        "fbf"],
+      "ingredient": {
+        "b": "blaze_rod",
+        "f": "feather",
+        "l": "lapis_lazuli",
+        "d": "diamond_block"
+      },
+      "show": true
+    }
+  }
+]
