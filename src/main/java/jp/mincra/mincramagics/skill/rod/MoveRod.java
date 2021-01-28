@@ -31,6 +31,7 @@ public class MoveRod {
                 player.playSound(loc, Sound.ENTITY_WITHER_SHOOT, 0.2F, 1F);
 
                 MincraParticle mincraParticle = new MincraParticle();
+                mincraParticle.setYaw(Math.toRadians(yaw));
                 mincraParticle.setRadius(2.4);
                 mincraParticle.setParticle(Particle.SPELL_INSTANT);
                 //距離調整

@@ -1,19 +1,16 @@
 package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.command.MincraCommands;
-import jp.mincra.mincramagics.skill.SkillManager;
-import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.item.ItemManager;
 import jp.mincra.mincramagics.listener.*;
 import jp.mincra.mincramagics.property.JSONManager;
 import jp.mincra.mincramagics.property.PropertyManager;
+import jp.mincra.mincramagics.skill.SkillManager;
+import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public final class MincraMagics extends JavaPlugin {
 
@@ -127,18 +124,6 @@ public final class MincraMagics extends JavaPlugin {
         instance = null;
         ChatUtil.sendConsoleMessage("プラグインが正常に終了しました。");
         setEnabled(false);
-    }
-
-    public void onTick() {
-        Timer timer = new Timer(); // 今回追加する処理
-        TimerTask task = new TimerTask() {
-            public void run() {
-                // 定期的に実行したい処理
-//                uiManager.onTick();
-
-            }
-        };
-        timer.scheduleAtFixedRate(task,0,100);
     }
 
     public static void reload() {

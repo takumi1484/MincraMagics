@@ -14,6 +14,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MincraCommands implements CommandExecutor {
 
     private JavaPlugin plugin;
@@ -41,26 +44,37 @@ public class MincraCommands implements CommandExecutor {
 
             case "test":
                 if (caster instanceof Player) {
+                    MincraParticle mincraParticle = new MincraParticle();
+                    mincraParticle.setRadius(5);
+                    mincraParticle.setParticle(Particle.SPELL_INSTANT);
+                    mincraParticle.setAngle(Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
+                    mincraParticle.drawMagicCircle(caster.getLocation(),5, 1,1,0,0);
 
-                    BossBarUtil.setCooltimeBossBar((Player) caster,"ああ",Float.parseFloat(args[1]),true);
+                    /*
+                    Timer timer = new Timer(); // 今回追加する処理
+                    Entity finalCaster = caster;
+                    final double[] i = {0};
 
-//            ItemStack itemStack = caster.getInventory().getItemInMainHand();
-//            NBTItem nbtItem = new NBTItem(itemStack);
-//            caster.sendMessage(MincraChatUtil.makeDebugMessage(nbtItem.toString()));
-//            NBTCompound nbtDisplay = nbtItem.addCompound("MincraMagics");
-//            nbtDisplay.setString("id","daiyanoken");
-//            caster.sendMessage(MincraChatUtil.makeDebugMessage(nbtDisplay.toString()));
-//            caster.sendMessage(MincraChatUtil.makeDebugMessage(nbtItem.toString()));
-//
-//            itemStack = nbtItem.getItem();
-//            int slot = caster.getInventory().getHeldItemSlot();
-//            caster.getInventory().setItem(slot,itemStack);
-//
-//                    caster.sendMessage(MincraChatUtil.debug(MincraMagics.getJsonManager().getItemNode().get(1).get("mcr_id").toString()));
+                    TimerTask task = new TimerTask() {
+                            public void run() {
+                                i[0] += 0.1;
+
+                                mincraParticle.setAngle(Double.parseDouble(args[1]) + i[0], Double.parseDouble(args[2]) + i[0], Double.parseDouble(args[3]) + i[0]);
+                                mincraParticle.drawMagicCircle(finalCaster.getLocation(),5, 1,1,0,0);
+
+                                if (i[0] > 50) {
+                                    timer.cancel();
+                                }
+                            }
+                        };
+                    timer.scheduleAtFixedRate(task,0,100);
+                    */
 
                     return true;
-
                 }
+
+
+
 
             case "item":
 

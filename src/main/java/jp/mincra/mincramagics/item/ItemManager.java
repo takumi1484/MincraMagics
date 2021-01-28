@@ -43,7 +43,7 @@ public class ItemManager {
 
     public void registerItem(JSONArray itemArray, String path) {
 
-        ChatUtil.sendConsoleMessage("アイテムの登録を開始します... from: "+path );
+//        ChatUtil.sendConsoleMessage("アイテムの登録を開始します... from: "+path );
 
 //        JSONArray itemArray = new JSONArray(MincraMagics.getJSONManager().getItemNode().toString());
 
@@ -230,7 +230,7 @@ public class ItemManager {
 
     public void registerRecipe(JSONArray itemArray, String path) {
 
-        ChatUtil.sendConsoleMessage("レシピの登録を開始します... from: "+path);
+//        ChatUtil.sendConsoleMessage("レシピの登録を開始します... from: "+path);
 
         Material material;
         String mcr_id;

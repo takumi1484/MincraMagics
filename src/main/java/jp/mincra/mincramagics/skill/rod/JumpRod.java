@@ -43,6 +43,8 @@ public class JumpRod {
                 mincraParticle.setRadius(2.4);
                 mincraParticle.setParticle(Particle.REDSTONE);
                 mincraParticle.setDustOptions(new Particle.DustOptions(Color.RED, 1));
+                mincraParticle.setAngle(0, 0, Math.toRadians(player.getLocation().getYaw()));
+                ChatUtil.sendConsoleMessage(String.valueOf(Math.toRadians(player.getLocation().getYaw())));
                 mincraParticle.drawMagicCircle(location.add(0, 1.25, 0), 6, 1, 3, 0.05, 0.1);
 
             } else {
@@ -83,6 +85,7 @@ public class JumpRod {
 
                 MincraParticle mincraParticle = new MincraParticle();
                 mincraParticle.setRadius(2.4);
+                mincraParticle.setYaw(Math.toRadians(player.getLocation().getYaw()));
                 mincraParticle.setParticle(Particle.CLOUD);
                 mincraParticle.drawMagicCircle(location.add(0, 1.0, 0), 6, 1, 1, 0, 0.01);
 
@@ -124,6 +127,7 @@ public class JumpRod {
 
                 MincraParticle mincraParticle = new MincraParticle();
                 mincraParticle.setRadius(2.4);
+                mincraParticle.setYaw(Math.toRadians(player.getLocation().getYaw()));
                 mincraParticle.setParticle(Particle.CLOUD);
                 mincraParticle.drawMagicCircle(location.add(0, 1.25, 0), 6, 1, 1, 0, 0.01);
 

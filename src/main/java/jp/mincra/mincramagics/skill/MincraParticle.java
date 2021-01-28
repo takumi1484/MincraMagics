@@ -1,6 +1,5 @@
 package jp.mincra.mincramagics.skill;
 
-import jp.mincra.mincramagics.util.Matrix2D;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.util.Vector;
@@ -13,11 +12,11 @@ public class MincraParticle {
     private double radius = 1;
     private List<Particle> particleList = new ArrayList<>();
 
-    private double angleX = 0;
-    private double angleY = 0;
-    private double angleZ = 0;
+    private double roll = 0;
+    private double yaw = 0;
+    private double pitch = 0;
 
-    private Location center;
+    private Location origin;
 
     private Particle.DustOptions dustOptions;
 
@@ -59,38 +58,38 @@ public class MincraParticle {
 
     /**
      * X軸方向の傾きをラジアンで指定する。
-     * @param angleX
+     * @param roll
      */
-    public void setAngleX(double angleX) {
-        this.angleX = angleX;
+    public void setRoll(double roll) {
+        this.roll = roll;
     }
 
     /**
      * Y軸方向の傾きをラジアンで指定する。
-     * @param angleY
+     * @param yaw
      */
-    public void setAngleY(double angleY) {
-        this.angleY = angleY;
+    public void setYaw(double yaw) {
+        this.yaw = yaw;
     }
 
     /**
      * Z軸方向の傾きをラジアンで指定する。
-     * @param angleZ
+     * @param pitch
      */
-    public void setAngleZ(double angleZ) {
-        this.angleZ = angleZ;
+    public void setPitch(double pitch) {
+        this.pitch = pitch;
     }
 
     /**
      * 傾きをラジアンで指定する。
-     * @param angleX X軸方向の傾き
-     * @param angleY Y軸方向の傾き
-     * @param angleZ Z軸方向の傾き
+     * @param roll X軸方向の傾き
+     * @param pitch Y軸方向の傾き
+     * @param yaw Z軸方向の傾き
      */
-    public void setAngle(double angleX, double angleY, double angleZ) {
-        setAngleX(angleX);
-        setAngleY(angleY);
-        setAngleZ(angleZ);
+    public void setAngle(double roll, double pitch, double yaw) {
+        setRoll(roll);
+        setYaw(yaw);
+        setPitch(pitch);
     }
 
     /**
@@ -107,11 +106,6 @@ public class MincraParticle {
      */
     public void drawLine(Particle particle, Location locationStart, Location locationEnd, int count, double speed, double distanceBetween, double offsetX, double offsetY, double offsetZ, Particle.DustOptions dustOptions) {
         //https://www.spigotmc.org/threads/drawing-particle-line.446101/
-//        Vector startFromCenter = getDirectionBetweenLocations(center,locationStart);
-//        Vector endFromCenter = getDirectionBetweenLocations(center,locationEnd);
-//        Location rotatedStart = locationStart.add(setRotation(startFromCenter));
-//        Location rotatedEnd = locationEnd.add(setRotation(endFromCenter);
-
         Vector vector = getDirectionBetweenLocations(locationStart, locationEnd).normalize(); //make sure it has length one at start
         for (double i = 0, dis = locationStart.distance(locationEnd); i < dis; i += distanceBetween) {
             Vector addition = new Vector().copy(vector).multiply(i);
@@ -214,6 +208,9 @@ public class MincraParticle {
     }
 
 
+
+
+
     /**
      * パーティクルの星を描画します。
      * @param particle 描画するパーティクル
@@ -223,7 +220,7 @@ public class MincraParticle {
      */
     public void drawStar(Particle particle, Location location, int count, double offset, double speed, double distanceBetween, double radius, int vertex) {
 
-        center = location;
+        origin = location;
 
         //多角形の頂点の座標を取得
         List<Vector> vectorList = getVertexCoordinate(vertex, radius);
@@ -231,9 +228,8 @@ public class MincraParticle {
 
         //頂点座標と実行座標をマージ
         for (Vector vector : vectorList) {
-//            Location tempLocation = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
             Location tempLocation = location.clone();
-            tempLocation.add(vector);
+            tempLocation.add(rotateVector(vector));
 
             locationList.add(tempLocation);
         }
@@ -336,64 +332,43 @@ public class MincraParticle {
         return to.subtract(from);
     }
 
-    Vector setRotation(Vector vector) {
+    /**
+     * roll,pitch,yawで指定した分だけベクトルを回転させます。
+     * @param vector ベクトル
+     * @return 回転したベクトル
+     */
+    Vector rotateVector(Vector vector) {
 
-        /*
-        double theta = 1;
+        double sinX = Math.sin(roll);
+        double cosX = Math.cos(roll);
+        double sinY = Math.sin(yaw);
+        double cosY = Math.cos(yaw);
+        double sinZ = Math.sin(pitch);
+        double cosZ = Math.cos(pitch);
 
-        double x, y, z;
-        double u, v, w;
-        x=vector.getX();y=vector.getY();z=vector.getZ();
-        u=angleX;v=angleY;w=angleZ;
-        double v1 = u * x + v * y + w * z;
-        double xPrime = u* v1 *(1d - Math.cos(theta))
-                + x*Math.cos(theta)
-                + (-w*y + v*z)*Math.sin(theta);
-        double yPrime = v* v1 *(1d - Math.cos(theta))
-                + y*Math.cos(theta)
-                + (w*x - u*z)*Math.sin(theta);
-        double zPrime = w* v1 *(1d - Math.cos(theta))
-                + z*Math.cos(theta)
-                + (-v*x + u*y)*Math.sin(theta);
-        return new Vector(xPrime, yPrime, zPrime);
-        */
+        double xVector = 0;
+        double yVector = 0;
+        double zVector = 0;
 
-        /*
-        double sinX = Math.sin(angleX);
-        double cosX = Math.cos(angleX);
-        double sinY = Math.sin(angleY);
-        double cosY = Math.cos(angleY);
-        double sinZ = Math.sin(angleZ);
-        double cosZ = Math.cos(angleZ);
+        //roll(x軸)
+        xVector = xVector + vector.getX();
+        yVector = yVector + vector.getY() * cosX - vector.getZ() * sinX;
+        zVector = zVector + vector.getY() * sinX + vector.getZ() * cosX;
 
-        double[][] xMatrix = {
-                {1,0,0},
-                {0,cosX,sinX},
-                {0,-sinX,cosX}
-        };
-        double[][] yMatrix = {
-                {cosY,0,-sinY},
-                {0,1,0},
-                {sinY,0,cosX}
-        };
-        double[][] zMatrix = {
-                {cosZ,sinZ,0},
-                {-sinZ,cosZ,0},
-                {0,0,1}
-        };
+        //pitch(z軸)
+        xVector = xVector + vector.getX() * cosZ + vector.getY() * cosZ;
+        yVector = yVector - vector.getX() * sinZ + vector.getY() * cosZ;
+        zVector = zVector + vector.getZ();
 
-        double[] origin = {vector.getX(),vector.getY(),vector.getZ()};
+        //yaw(y軸)
+        xVector = xVector + vector.getX() * cosY - vector.getZ() * sinY;
+        yVector = yVector + vector.getY();
+        zVector = zVector + vector.getX() * sinY + vector.getZ() * cosY;
 
-        double[][] xRotation = Matrix2D.dot(new Matrix2D(xMatrix), new Matrix2D(origin)).getArrays();
-        double[][] yRotation = Matrix2D.dot(new Matrix2D(yMatrix), new Matrix2D(origin)).getArrays();
-        double[][] zRotation = Matrix2D.dot(new Matrix2D(zMatrix), new Matrix2D(origin)).getArrays();
+        Vector resultVector = new Vector(xVector, yVector, zVector);
+        resultVector.normalize();
+        resultVector.multiply(radius);
 
-        double xVector = xRotation[0][0] + yRotation[0][0] + zRotation[0][0];
-        double yVector = xRotation[1][0] + yRotation[1][0] + zRotation[1][0];
-        double zVector = xRotation[2][0] + yRotation[2][0] + zRotation[2][0];
-
-        return new Vector(xVector,yVector,zVector).normalize();
-        */
-        return null;
+        return resultVector;
     }
 }
