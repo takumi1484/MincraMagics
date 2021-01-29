@@ -1,6 +1,5 @@
 package jp.mincra.mincramagics.skill;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraSkill;
 import jp.mincra.mincramagics.util.BossBarUtil;
@@ -93,7 +92,7 @@ public class SkillManager {
                 }
 
                 if (mincraSkill.getId().contains("rod")) {
-                    player.sendMessage(ChatUtil.translateHexColorCodes("&#f03c3c&f&l杖がっ・・・"));
+                    player.sendMessage(ChatUtil.setColorCodes("&#f03c3c&f&l杖がっ・・・"));
                 }
 
                 player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK,1f,1f);
@@ -113,11 +112,11 @@ public class SkillManager {
             }
             //経験値
             if (player.getLevel() < skillMap.get(id).getExp_lv()) {
-                player.sendMessage(ChatUtil.translateHexColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
+                player.sendMessage(ChatUtil.setColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
                 canUse = false;
             }
             if (ExpUtil.getPlayerExp(player) < skillMap.get(id).getExp()) {
-                player.sendMessage(ChatUtil.translateHexColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
+                player.sendMessage(ChatUtil.setColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
                 canUse = false;
             }
         } else {

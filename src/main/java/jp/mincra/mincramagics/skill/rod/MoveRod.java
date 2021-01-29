@@ -41,7 +41,7 @@ public class MoveRod {
                 mincraParticle.drawMagicCircle(loc.add(vec), 5, 1);
 
             } else {
-                player.sendMessage(ChatUtil.translateHexColorCodes("&c高すぎるため使えません！"));
+                player.sendMessage(ChatUtil.setColorCodes("&c高すぎるため使えません！"));
             }
         }
     }

@@ -1,6 +1,7 @@
 package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.command.MincraCommands;
+import jp.mincra.mincramagics.command.MincraTabCompleter;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.item.ItemManager;
 import jp.mincra.mincramagics.listener.*;
@@ -10,6 +11,7 @@ import jp.mincra.mincramagics.skill.SkillManager;
 import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
 import jp.mincra.mincramagics.util.ChatUtil;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MincraMagics extends JavaPlugin {
@@ -113,6 +115,7 @@ public final class MincraMagics extends JavaPlugin {
 
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));
+        getCommand("mcr").setTabCompleter(new MincraTabCompleter());
     }
 
     @Override

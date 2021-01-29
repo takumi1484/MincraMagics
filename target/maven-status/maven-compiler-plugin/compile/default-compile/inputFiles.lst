@@ -25,6 +25,7 @@ C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\sq
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\command\MincraCommands.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\container\MincraPlayer.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerQuit.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\command\MincraTabCompleter.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\property\PropertyManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\property\JSONManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\Matrix2D.java

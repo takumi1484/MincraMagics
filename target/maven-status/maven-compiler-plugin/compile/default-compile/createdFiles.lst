@@ -1,6 +1,7 @@
 jp\mincra\mincramagics\container\MincraPlayer.class
 jp\mincra\mincramagics\util\ExpUtil.class
 jp\mincra\mincramagics\listener\onPlayerJoin.class
+jp\mincra\mincramagics\command\MincraTabCompleter.class
 jp\mincra\mincramagics\command\MincraCommands.class
 jp\mincra\mincramagics\listener\onPlayerInteract.class
 jp\mincra\mincramagics\entity\player\PlayerManager.class
@@ -13,6 +14,7 @@ jp\mincra\mincramagics\item\ItemManager.class
 jp\mincra\mincramagics\sql\SQLManager.class
 jp\mincra\mincramagics\ui\UIManager.class
 jp\mincra\mincramagics\util\BossBarUtil.class
+jp\mincra\mincramagics\command\MincraCommands$1.class
 jp\mincra\mincramagics\container\MagicPoint.class
 jp\mincra\mincramagics\listener\onPlayerQuit$1.class
 jp\mincra\mincramagics\skill\MincraParticle.class

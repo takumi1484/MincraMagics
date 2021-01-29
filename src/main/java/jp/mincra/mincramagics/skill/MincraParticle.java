@@ -16,6 +16,9 @@ public class MincraParticle {
     private double yaw = 0;
     private double pitch = 0;
 
+    private Vector rotationAxis = new Vector(0,0,0);
+    private double angle = 0;
+
     private Location origin;
 
     private Particle.DustOptions dustOptions;
@@ -56,6 +59,7 @@ public class MincraParticle {
         this.dustOptions = dustOptions;
     }
 
+
     /**
      * X軸方向の傾きをラジアンで指定する。
      * @param roll
@@ -86,10 +90,26 @@ public class MincraParticle {
      * @param pitch Y軸方向の傾き
      * @param yaw Z軸方向の傾き
      */
-    public void setAngle(double roll, double pitch, double yaw) {
+    public void setRolling(double roll, double pitch, double yaw) {
         setRoll(roll);
         setYaw(yaw);
         setPitch(pitch);
+    }
+
+    /**
+     * 回転軸を指定する。
+     * @param rotationAxis 回転軸
+     */
+    public void setRotationAxis(Vector rotationAxis) {
+        this.rotationAxis = rotationAxis;
+    }
+
+    /**
+     * rotationAxis回転軸に対する回転角度をラジアンで指定する。
+     * @param angle 角度
+     */
+    public void setAngle(double angle) {
+        this.angle = angle;
     }
 
     /**
@@ -167,14 +187,16 @@ public class MincraParticle {
         for(int i = 0;i < amount; i++)
         {
             double angle = i * increment;
-            double x = location.getX() + (radius * Math.cos(angle));
-            double z = location.getZ() + (radius * Math.sin(angle));
+            Vector vector = new Vector(radius * Math.cos(angle), 0, radius * Math.sin(angle));
+            double x = location.getX() + rotateVector(vector).getX();
+            double y = location.getY() + rotateVector(vector).getY();
+            double z = location.getZ() + rotateVector(vector).getZ();
 
             if (particle == Particle.REDSTONE) {
-                location.getWorld().spawnParticle(particle, x, location.getY(), z, count, offsetX, offsetY, offsetZ, speed, dustOptions);
+                location.getWorld().spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, speed, dustOptions);
 
             } else {
-                location.getWorld().spawnParticle(particle, x, location.getY(), z, count, offsetX, offsetY, offsetZ, speed);
+                location.getWorld().spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, speed);
 
             }
         }
@@ -298,6 +320,7 @@ public class MincraParticle {
     }
 
 
+
     /**
      * 半径radiusの多角形の頂点の座標を取得します。
      * @param vertex 頂点の数
@@ -333,11 +356,11 @@ public class MincraParticle {
     }
 
     /**
-     * roll,pitch,yawで指定した分だけベクトルを回転させます。
+     * ベクトルをxyz軸について回転させます
      * @param vector ベクトル
      * @return 回転したベクトル
      */
-    Vector rotateVector(Vector vector) {
+    Vector rotateVectorFromRolling(Vector vector) {
 
         double sinX = Math.sin(roll);
         double cosX = Math.cos(roll);
@@ -370,5 +393,51 @@ public class MincraParticle {
         resultVector.multiply(radius);
 
         return resultVector;
+    }
+
+    /**
+     * rotationAxisで指定した軸に対してangleだけ回転させます。
+     * @param vector ベクトル
+     * @return 回転したベクトル
+     */
+    Vector rotateVector(Vector vector) {
+
+        vector = rotateVectorFromRolling(vector);
+
+        double axisX = rotationAxis.getX();
+        double axisY = rotationAxis.getY();
+        double axisZ = rotationAxis.getZ();
+
+        double argX = vector.getX();
+        double argY = vector.getY();
+        double argZ = vector.getZ();
+
+        double sinTheta = Math.sin(angle);
+        double cosTheta = Math.cos(angle);
+
+        //計算軽量化
+        double oneSubCos = 1 - cosTheta;
+        double axisXY = axisX * axisY;
+        double axisYZ = axisY * axisZ;
+        double axisZX = axisZ * axisX;
+        double axisXsin = axisX * sinTheta;
+        double axisYsin = axisY * sinTheta;
+        double axisZsin = axisZ * sinTheta;
+
+        double resultX =
+                ( Math.pow(axisX,2) * oneSubCos + cosTheta ) * argX
+                + ( axisXY * oneSubCos - axisZsin ) * argY
+                + ( axisZX * oneSubCos + axisYsin ) * argZ;
+        double resultY =
+                ( axisXY * oneSubCos + axisZsin ) * argX
+                + ( Math.pow(axisY,2) * oneSubCos + cosTheta ) * argY
+                + ( axisYZ * oneSubCos - axisXsin ) * argZ;
+        double resultZ =
+                + ( axisZX * oneSubCos - axisYsin ) * argX
+                + ( axisYZ * oneSubCos + axisXsin ) * argY
+                + ( Math.pow(axisZ,2) * oneSubCos + cosTheta ) * argZ ;
+
+        return new Vector(resultX,resultY,resultZ);
+
     }
 }
