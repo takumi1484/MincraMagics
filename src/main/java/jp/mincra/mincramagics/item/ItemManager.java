@@ -1,9 +1,6 @@
 package jp.mincra.mincramagics.item;
 
-import de.tr7zw.changeme.nbtapi.NBTCompound;
-import de.tr7zw.changeme.nbtapi.NBTCompoundList;
-import de.tr7zw.changeme.nbtapi.NBTItem;
-import de.tr7zw.changeme.nbtapi.NBTList;
+import de.tr7zw.changeme.nbtapi.*;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraCustomShapedRecipe;
 import jp.mincra.mincramagics.container.MincraSkill;
@@ -105,90 +102,18 @@ public class ItemManager {
             //-nbt----------------------------------↓↓
             nbtItem = new NBTItem(item);
 
+            if (itemObject.has("nbt") && itemObject.get("nbt") instanceof JSONObject) {
+                itemNBTObject = itemObject.getJSONObject("nbt");
+
+                ChatUtil.sendConsoleMessage(itemNBTObject.toString());
+                nbtItem.mergeCompound(new NBTContainer(itemNBTObject.toString()));
+            }
+
             //-mcr_id------------------------------↓↓↓
             nbtMincraMagics = nbtItem.addCompound("MincraMagics");
             nbtMincraMagics.setString("id", mcr_id);
             //-------------------------------------↑↑↑
 
-            if (itemObject.has("nbt") && itemObject.get("nbt") instanceof JSONObject) {
-                itemNBTObject = itemObject.getJSONObject("nbt");
-
-                //-display-----------------------------↓↓↓
-                itemDisplayObject = itemNBTObject.getJSONObject("display");
-                nbtDisplay = nbtItem.addCompound("display");
-                //Name
-                if (itemDisplayObject.has("Name") && itemDisplayObject.get("Name") instanceof String) {
-                    nbtDisplay.setString("Name", itemDisplayObject.getString("Name"));
-                }
-                //Lore
-                if (itemDisplayObject.has("Lore") && itemDisplayObject.get("Lore") instanceof JSONArray) {
-                    nbtLore = nbtDisplay.getStringList("Lore");
-                    for (int j = 0, loreLen = itemDisplayObject.getJSONArray("Lore").length(); j < loreLen; j++) {
-                        nbtLore.add(itemDisplayObject.getJSONArray("Lore").get(j));
-                    }
-                }
-                //-------------------------------------↑↑↑
-
-                //CustomModelData
-                if (itemNBTObject.has("CustomModelData") && itemNBTObject.get("CustomModelData") instanceof Integer) {
-                    nbtItem.setInteger("CustomModelData", itemNBTObject.getInt("CustomModelData"));
-                }
-
-                //HideFlags
-                if (itemNBTObject.has("HideFlags") && itemNBTObject.get("HideFlags") instanceof Integer) {
-                    nbtItem.setInteger("HideFlags", itemNBTObject.getInt("HideFlags"));
-                }
-
-                //-Enchantments------------------------↓↓↓
-                if (itemNBTObject.has("Enchantments") && itemNBTObject.get("Enchantments") instanceof JSONArray) {
-                    itemEnchantmentsArray = itemNBTObject.getJSONArray("Enchantments");
-                    nbtEnchantments = nbtItem.getCompoundList("Enchantments");
-                    for (int j = 0, enLen = itemEnchantmentsArray.length(); j < enLen; j++) {
-                        itemEachEnchant = ((JSONObject) itemEnchantmentsArray.get(j));
-                        nbtEachEnchant = nbtItem.addCompound("Enchantments");
-
-                        if (itemEachEnchant.has("id") && itemEachEnchant.get("id") instanceof String) {
-                            nbtEachEnchant.setString("id", itemEachEnchant.getString("id"));
-                        }
-
-                        if (itemEachEnchant.has("lvl") && itemEachEnchant.get("lvl") instanceof Integer) {
-                            nbtEachEnchant.setInteger("lvl", itemEachEnchant.getInt("lvl"));
-                        }
-
-                        nbtEnchantments.addCompound(nbtEachEnchant);
-                    }
-                }
-                //-------------------------------------↑↑↑
-
-                //-AttributeModifiers------------------↓↓↓
-//                        if (itemNBTObject.has("AttributeModifiers") && itemNBTObject.get("AttributeModifiers") instanceof JSONArray) {
-//                            itemAttributeModifiersArray = itemNBTObject.getJSONArray("AttributeModifiers");
-//                            nbtAttributeModifiers = nbtItem.getCompoundList("AttributeModifiers");
-//                            for (int j = 0, atrLen = itemAttributeModifiersArray.length(); j < atrLen; j++) {
-//                                itemEachAttribute = ((JSONObject) itemAttributeModifiersArray.get(j));
-//                                nbtEachAttribute = nbtItem.addCompound("AttributeModifiers");
-//
-//                                if (itemEachAttribute.has("AttributeName") && itemEachAttribute.get("AttributeName") instanceof String){
-//                                    nbtEachAttribute.setString("AttributeName",itemEachAttribute.getString("AttributeName"));
-//                                }
-//
-//                                if (itemEachAttribute.has("Name") && itemEachAttribute.get("Name") instanceof String){
-//                                    nbtEachAttribute.setString("Name",itemEachAttribute.getString("Name"));
-//                                }
-//
-//                                if (itemEachAttribute.has("Amount") && itemEachAttribute.get("Amount") instanceof Integer){
-//                                    nbtEachAttribute.setInteger("Amount",itemEachAttribute.getInt("Amount"));
-//                                }
-//
-//                                if (itemEachAttribute.has("Operation") && itemEachAttribute.get("Operation") instanceof Integer){
-//                                    nbtEachAttribute.setInteger("Operation",itemEachAttribute.getInt("Operation"));
-//                                }
-//
-//                                nbtAttributeModifiers.addCompound(nbtEachAttribute);
-//                            }
-//                        }
-                //-------------------------------------↑↑↑
-            }
             //--------------------------------------↑↑
 
             item = nbtItem.getItem();
