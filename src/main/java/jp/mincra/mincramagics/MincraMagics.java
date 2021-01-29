@@ -11,10 +11,73 @@ import jp.mincra.mincramagics.skill.SkillManager;
 import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
 import jp.mincra.mincramagics.util.ChatUtil;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MincraMagics extends JavaPlugin {
+
+    protected static MincraMagics instance;
+    public static MincraMagics getInstance(){
+        return instance;
+    }
+
+    @Override
+    public void onEnable() {
+        instance = this;
+
+        //manager
+        getPropertyManager();
+        propertyManager.loadProperty();
+        getPlayerManager();
+        playerManager.setOnlinePlayerList();
+        getSQLManager();
+//        sqlManager.getConnection();
+        sqlManager.createTable("CREATE TABLE IF NOT EXISTS player (" +
+                //AUTO_INCREMENT 値が指定されなくても自動で入力される。
+                "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                "name varchar(20), " +
+                "uuid VARBINARY(36) NOT NULL UNIQUE," +
+                "mp_value FLOAT, " +
+                "cooltime_value FLOAT, " +
+                "cooltime_max FLOAT, " +
+                "cooltime_title TEXT" +
+                ")", "player");
+        getUIManager();
+        getJSONManager();
+        getSkillManager();
+        skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
+        getItemManager();
+        itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
+
+        //listener
+        getServer().getPluginManager().registerEvents(new onPlayerJoin(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerQuit(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerChat(), this);
+        getServer().getPluginManager().registerEvents(new onPrepareItemCraft(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerToggleFlight(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerInteract(), this);
+
+        //command
+        getCommand("mcr").setExecutor(new MincraCommands(this));
+        getCommand("mcr").setTabCompleter(new MincraTabCompleter());
+    }
+
+    @Override
+    public void onDisable() {
+        //SQL全て保存
+        sqlManager.saveMincraPlayer();
+
+        instance = null;
+        ChatUtil.sendConsoleMessage("プラグインが正常に終了しました。");
+        setEnabled(false);
+    }
+
+    public static void reload() {
+        ChatUtil.sendConsoleMessage("プラグインをリロードします...");
+        propertyManager.loadProperty();
+//        jsonManager.loadItemNode();
+        itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
+        skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
+    }
 
     private static PlayerManager playerManager;
     public static PlayerManager getPlayerManager() {
@@ -64,78 +127,6 @@ public final class MincraMagics extends JavaPlugin {
             skillManager = new SkillManager();
         return skillManager;
     }
-
-    protected static MincraMagics instance;
-    public static MincraMagics getInstance(){
-        return instance;
-    }
-
-    @Override
-    public void onEnable() {
-        instance = this;
-
-        //PropertyManager
-        getPropertyManager();
-        propertyManager.loadProperty();
-        //PlayerManager
-        getPlayerManager();
-        playerManager.setOnlinePlayerList();
-        //SQLManager
-        getSQLManager();
-//        sqlManager.getConnection();
-        sqlManager.createTable("CREATE TABLE IF NOT EXISTS player (" +
-                //AUTO_INCREMENT 値が指定されなくても自動で入力される。
-                "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
-                "name varchar(20), " +
-                "uuid VARBINARY(36) NOT NULL UNIQUE," +
-                "mp_value FLOAT, " +
-                "cooltime_value FLOAT, " +
-                "cooltime_max FLOAT, " +
-                "cooltime_title TEXT" +
-                ")", "player");
-        //UIManager
-        getUIManager();
-        //JsonManager
-        getJSONManager();
-        //SkillManager
-        getSkillManager();
-        skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
-        //ItemManager
-        getItemManager();
-        itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
-
-        //listener
-//        onTick();
-        getServer().getPluginManager().registerEvents(new onPlayerJoin(), this);
-        getServer().getPluginManager().registerEvents(new onPlayerQuit(), this);
-        getServer().getPluginManager().registerEvents(new onPlayerChat(), this);
-        getServer().getPluginManager().registerEvents(new onPrepareItemCraft(), this);
-        getServer().getPluginManager().registerEvents(new onPlayerToggleFlight(), this);
-        getServer().getPluginManager().registerEvents(new onPlayerInteract(), this);
-
-        //command
-        getCommand("mcr").setExecutor(new MincraCommands(this));
-        getCommand("mcr").setTabCompleter(new MincraTabCompleter());
-    }
-
-    @Override
-    public void onDisable() {
-
-        //SQL全て保存
-        sqlManager.saveMincraPlayer();
-
-        instance = null;
-        ChatUtil.sendConsoleMessage("プラグインが正常に終了しました。");
-        setEnabled(false);
-    }
-
-    public static void reload() {
-        ChatUtil.sendConsoleMessage("プラグインをリロードします...");
-        propertyManager.loadProperty();
-//        jsonManager.loadItemNode();
-        itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
-        skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
-    }
 }
 
         /*
@@ -148,4 +139,14 @@ public final class MincraMagics extends JavaPlugin {
  loc1: A.----------.B  →x
        /
       /↗z
+         */
+
+
+        /*
+        　　   　 ＿＿　　　　　　           　 ｼﾞｬｰ 　 　　＿＿__
+　  ／⌒ヽ　 　  　|;;lヽ::/　　  　 　 　 　　　　∧_∧　  /__　o、 |、
+　（　＾ω＾）∫.　.|;;|:: :|~　　 　　　　　　　（ ´・ω・）ﾉ.ii | ・　＼ﾉ
+　（　　つc□　　i===i=i c□c□c□　　 　　旦旦旦旦（　ｏ　   旦| ・　　|
+|￣￣￣￣￣￣￣￣￣￣￣￣￣￣|　　|￣￣￣￣￣￣￣￣￣￣￣￣￣￣|
+|　　　コーヒーの方はこちらへ 　　|　　|　　　お茶の方はこちらへ  　  .|
          */
