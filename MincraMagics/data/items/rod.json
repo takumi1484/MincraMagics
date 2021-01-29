@@ -222,5 +222,83 @@
       },
       "show": true
     }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_inferno_1",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"インフェルノの杖lv1\",\"color\":\"#e60202\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10009,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "lhl",
+        "ibi",
+        "ibi"],
+      "ingredient": {
+        "l": "lava_bucket",
+        "h": "iron_helmet",
+        "i": "iron_block",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_inferno_2",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"インフェルノの杖lv2\",\"color\":\"#e60202\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10010,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "lhl",
+        "gbg",
+        "gbg"],
+      "ingredient": {
+        "l": "lava_bucket",
+        "h": "golden_helmet",
+        "g": "gold_block",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_inferno_3",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"インフェルノの杖lv3\",\"color\":\"#e60202\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10011,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "lhl",
+        "dbd",
+        "dbd"],
+      "ingredient": {
+        "l": "lava_bucket",
+        "h": "diamond_helmet",
+        "d": "diamond_block",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
   }
 ]

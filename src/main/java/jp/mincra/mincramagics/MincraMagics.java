@@ -2,6 +2,7 @@ package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.command.MincraCommands;
 import jp.mincra.mincramagics.command.MincraTabCompleter;
+import jp.mincra.mincramagics.entity.mob.MobManager;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.item.ItemManager;
 import jp.mincra.mincramagics.listener.*;
@@ -84,6 +85,13 @@ public final class MincraMagics extends JavaPlugin {
         if (playerManager == null)
             playerManager = new PlayerManager();
         return playerManager;
+    }
+
+    private static MobManager mobManager;
+    public static MobManager getMobManager() {
+        if (mobManager == null)
+            mobManager = new MobManager();
+        return mobManager;
     }
 
     private static PropertyManager propertyManager;

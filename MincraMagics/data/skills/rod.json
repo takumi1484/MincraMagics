@@ -73,11 +73,38 @@
   },
   {
     "id": "rod_exp_3",
-    "name": "&#00ec9a&f&lエクスぺの杖lv2",
+    "name": "&#00ec9a&f&lエクスぺの杖lv3",
     "lore": "MPを小回復する。",
     "cooltime": 0,
     "exp_lv": 0,
     "exp": 0,
     "break_rate": 0.01
+  },
+  {
+    "id": "rod_inferno_1",
+    "name": "&#e60202&f&lインフェルノの杖lv1",
+    "lore": "灼熱の炎に抱かれろ。",
+    "cooltime": 1,
+    "exp_lv": 1,
+    "exp": 0,
+    "break_rate": 0.01
+  },
+  {
+    "id": "rod_inferno_2",
+    "name": "&#e60202&f&lインフェルノの杖lv2",
+    "lore": "灼熱の炎に抱かれろ。",
+    "cooltime": 2,
+    "exp_lv": 4,
+    "exp": 0,
+    "break_rate": 0.01
+  },
+  {
+    "id": "rod_inferno_3",
+    "name": "&#e60202&f&lインフェルノの杖lv1",
+    "lore": "灼熱の炎に抱かれろ。",
+    "cooltime": 3,
+    "exp_lv": 6,
+    "exp": 0,
+    "break_rate": 0.05
   }
 ]

@@ -3,6 +3,7 @@ package jp.mincra.mincramagics.listener;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.skill.SkillInstance;
 import jp.mincra.mincramagics.skill.rod.ExpRod;
+import jp.mincra.mincramagics.skill.rod.InfernoRod;
 import jp.mincra.mincramagics.skill.rod.JumpRod;
 import jp.mincra.mincramagics.skill.rod.MoveRod;
 import org.bukkit.Material;
@@ -77,6 +78,22 @@ public class onPlayerInteract implements Listener {
                                 ExpRod expRod3 = new ExpRod();
                                 expRod3.ExpThree(player);
                                 break;
+
+                            case "rod_inferno_1":
+                                InfernoRod infernoRod1 = new InfernoRod();
+                                infernoRod1.Inferno(player,1);
+                                break;
+
+                            case "rod_inferno_2":
+                                InfernoRod infernoRod2 = new InfernoRod();
+                                infernoRod2.Inferno(player,2);
+                                break;
+
+                            case "rod_inferno_3":
+                                InfernoRod infernoRod3 = new InfernoRod();
+                                infernoRod3.Inferno(player,3);
+                                break;
+
                         }
                     }
                 }

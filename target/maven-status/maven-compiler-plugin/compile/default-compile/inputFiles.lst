@@ -5,6 +5,7 @@ C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\co
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\StringUtil.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\ExpUtil.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\BossBarUtil.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\entity\mob\MobManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\JumpRod.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\entity\player\PlayerManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\TemplateRod.java
@@ -28,6 +29,7 @@ C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\co
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerQuit.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\command\MincraTabCompleter.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\property\PropertyManager.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\InfernoRod.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\property\JSONManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\Matrix2D.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerChat.java

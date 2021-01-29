@@ -47,9 +47,9 @@ public class ExpRod {
                     mincraParticle.setRadius(2.4);
                     mincraParticle.setParticle(Particle.ENCHANTMENT_TABLE);
 
-                    Vector vector = new Vector(0,0.25,0);
+                    mincraParticle.drawMagicCircle(location.add(0,0.25,0), 6, 1, 4, 0.03, 0);
 
-                    mincraParticle.drawMagicCircle(location.add(vector), 6, 1, 4, 0.03, 0);
+                    this.cancel();
                 }
             }.runTaskLater(MincraMagics.getInstance(),80);
         }
@@ -90,9 +90,9 @@ public class ExpRod {
                     mincraParticle.setRadius(2.4);
                     mincraParticle.setParticle(Particle.ENCHANTMENT_TABLE);
 
-                    Vector vector = new Vector(0,0.25,0);
+                    mincraParticle.drawMagicCircle(location.add(0,0.25,0), 6, 1, 10, 0.03, 0);
 
-                    mincraParticle.drawMagicCircle(location.add(vector), 6, 1, 10, 0.03, 0);
+                    this.cancel();
                 }
             }.runTaskLater(MincraMagics.getInstance(),80);
         }
@@ -121,9 +121,7 @@ public class ExpRod {
             mincraParticle.setRadius(2.4);
             mincraParticle.setParticle(Particle.ENCHANTMENT_TABLE);
 
-            Vector vector = new Vector(0,0.25,0);
-
-            mincraParticle.drawMagicCircle(location.add(vector), 6, 1, 10, 0.03, 0);
+            mincraParticle.drawMagicCircle(location.add(0,0.25,0), 6, 1, 10, 0.03, 0);
 
         }
     }
