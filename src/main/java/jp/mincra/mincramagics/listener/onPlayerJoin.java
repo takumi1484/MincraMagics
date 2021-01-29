@@ -5,6 +5,7 @@ import jp.mincra.mincramagics.container.MincraPlayer;
 import jp.mincra.mincramagics.container.MincraSkill;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

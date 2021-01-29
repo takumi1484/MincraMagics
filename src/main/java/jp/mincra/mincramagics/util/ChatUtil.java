@@ -2,6 +2,8 @@ package jp.mincra.mincramagics.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +17,7 @@ public class ChatUtil {
      * カラーコードを翻訳する。&修飾子はそのまま使える。
      * @param message usage: &#FF0000&fテキスト
      */
-    public static String translateHexColorCodes(String message) {
+    public static String setColorCodes(String message) {
         //Sourced from this post by imDaniX: https://github.com/SpigotMC/BungeeCord/pull/2883#issuecomment-653955600
         Matcher matcher = HEX_PATTERN.matcher(message);
         StringBuffer buffer = new StringBuffer(message.length() + 4 * 8);
@@ -40,7 +42,20 @@ public class ChatUtil {
         buf.append(prefix);
         buf.append(msg);
 
-        return translateHexColorCodes(buf.toString());
+        return setColorCodes(buf.toString());
+    }
+
+    /**
+     * メッセージの対象によってコンソールに送るかプレイヤーに送るか変わる
+     * @param msg 本文
+     * @param listener プレイヤー
+     */
+    public static void sendMessage(String msg, Entity listener) {
+        if (listener instanceof Player) {
+            listener.sendMessage(msg);
+        } else {
+            Bukkit.getServer().getConsoleSender().sendMessage(msg);
+        }
     }
 
     /**

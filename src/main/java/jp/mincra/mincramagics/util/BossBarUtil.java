@@ -13,7 +13,7 @@ import java.util.TimerTask;
 public class BossBarUtil {
 
     //ボスバー
-    private static BossBar bossBar = Bukkit.createBossBar(ChatUtil.translateHexColorCodes("&#d6eeff&f&lクールタイム"),
+    private static BossBar bossBar = Bukkit.createBossBar(ChatUtil.setColorCodes("&#d6eeff&f&lクールタイム"),
             BarColor.BLUE,
             BarStyle.SOLID);
 
@@ -25,14 +25,14 @@ public class BossBarUtil {
         }
         MincraMagics.getPlayerManager().setCooltimeTitle(player.getUniqueId(),skill_name);
 
-        bossBar.setTitle(ChatUtil.translateHexColorCodes("&#d6eeff&f&lクールタイム"));
+        bossBar.setTitle(ChatUtil.setColorCodes("&#d6eeff&f&lクールタイム"));
 
         if (skill_name.equals("")) {
             skill_name = null;
         }
 
         if (skill_name != null) {
-            bossBar.setTitle(ChatUtil.translateHexColorCodes("&#bfe5ff&f[" + skill_name + "&#bfe5ff&f] &#d6eeff&f&lクールタイム"));
+            bossBar.setTitle(ChatUtil.setColorCodes("&#bfe5ff&f[" + skill_name + "&#bfe5ff&f] &#d6eeff&f&lクールタイム"));
         }
 
         Timer timer = new Timer(); // 今回追加する処理
