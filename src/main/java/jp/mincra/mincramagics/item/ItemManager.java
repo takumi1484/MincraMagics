@@ -40,25 +40,14 @@ public class ItemManager {
 
     public void registerItem(JSONArray itemArray, String path) {
 
-//        ChatUtil.sendConsoleMessage("アイテムの登録を開始します... from: "+path );
-
-//        JSONArray itemArray = new JSONArray(MincraMagics.getJSONManager().getItemNode().toString());
-
         ItemStack item;
         Material material = null;
         String mcr_id;
 
         JSONObject itemObject;
         JSONObject itemNBTObject;
-        JSONObject itemDisplayObject;
-        JSONArray itemEnchantmentsArray;
-        JSONObject itemEachEnchant;
 
         NBTItem nbtItem;
-        NBTCompound nbtDisplay;
-        NBTList nbtLore;
-        NBTCompoundList nbtEnchantments;
-        NBTCompound nbtEachEnchant;
         NBTCompound nbtMincraMagics;
 
         for (int i = 0, len = itemArray.length(); i < len; i++) {
