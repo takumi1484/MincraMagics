@@ -90,14 +90,16 @@ public class MincraCommands implements CommandExecutor {
         Player player = Bukkit.getPlayer(args[1]);
 
             ItemStack itemStack = MincraMagics.getItemManager().getItem(args[2]);
-            if (StringUtils.isNumeric(args[3])) {
-                itemStack.setAmount(Integer.parseInt(args[3]));
+            if (args.length > 3) {
+                if (StringUtils.isNumeric(args[3])) {
+                    itemStack.setAmount(Integer.parseInt(args[3]));
 
-            } else {
-                ChatUtil.sendMessage(ChatUtil.debug("第三引数に整数が必要です。\n"),caster);
-                sendErrorMessage(caster, args,3);
-                return true;
+                } else {
+                    ChatUtil.sendMessage(ChatUtil.debug("第三引数に整数が必要です。\n"), caster);
+                    sendErrorMessage(caster, args, 3);
+                    return true;
 
+                }
             }
 
             player.getInventory().addItem(itemStack);
@@ -123,10 +125,10 @@ public class MincraCommands implements CommandExecutor {
 
         String finalArgs = "";
         for (int i=0; i<=errorArg; i++) {
-//            StringBuffer buffer = new StringBuffer(finalArgs);
-//            buffer.append(args[i]);
-//            buffer.append(" ");
-            finalArgs = finalArgs + args[i] + " ";
+            StringBuffer buffer = new StringBuffer(finalArgs);
+            buffer.append(args[i]);
+            buffer.append(" ");
+            finalArgs = buffer.toString();
         }
 
         if (caster instanceof Player) {

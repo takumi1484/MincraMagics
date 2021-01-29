@@ -52,5 +52,32 @@
     "exp_lv": 0,
     "exp": 0,
     "break_rate": 0.01
+  },
+  {
+    "id": "rod_exp_1",
+    "name": "&#00ec9a&f&lエクスぺの杖lv1",
+    "lore": "MPを小回復する。",
+    "cooltime": 5.0,
+    "exp_lv": 0,
+    "exp": 0,
+    "break_rate": 0.1
+  },
+  {
+    "id": "rod_exp_2",
+    "name": "&#00ec9a&f&lエクスぺの杖lv2",
+    "lore": "MPを中回復する。",
+    "cooltime": 5.0,
+    "exp_lv": 2,
+    "exp": 0,
+    "break_rate": 0.01
+  },
+  {
+    "id": "rod_exp_3",
+    "name": "&#00ec9a&f&lエクスぺの杖lv2",
+    "lore": "MPを小回復する。",
+    "cooltime": 0,
+    "exp_lv": 0,
+    "exp": 0,
+    "break_rate": 0.01
   }
 ]

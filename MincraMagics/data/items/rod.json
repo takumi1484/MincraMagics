@@ -12,12 +12,12 @@
   "craftable": true,
   "recipe": {
     "shape": [
-      " ed",
-      " be",
+      " fe",
+      " bf",
       "b  "],
     "ingredient": {
-      "d": "diamond",
-      "e": "experience_bottle",
+      "f": "feather",
+      "e": "emerald",
       "b": "blaze_rod"
     },
     "show": true
@@ -37,12 +37,12 @@
     "craftable": true,
     "recipe": {
       "shape": [
-        " de",
-        " bd",
+        " fe",
+        " bf",
         "b  "],
       "ingredient": {
-        "d": "diamond",
-        "e": "experience_bottle",
+        "f": "feather",
+        "e": "emerald_block",
         "b": "blaze_rod"
       },
       "show": true
@@ -62,12 +62,12 @@
     "craftable": true,
     "recipe": {
       "shape": [
-        "bde",
+        " de",
         " bd",
-        "b b"],
+        "b  "],
       "ingredient": {
-        "d": "diamond_block",
-        "e": "experience_bottle",
+        "d": "diamond",
+        "e": "emerald_block",
         "b": "blaze_rod"
       },
       "show": true
@@ -144,6 +144,81 @@
         "f": "feather",
         "l": "lapis_lazuli",
         "d": "diamond_block"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_exp_1",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"エクスぺの杖lv1\",\"color\":\"#00ec9a\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10006,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        " ed",
+        " be",
+        "b  "],
+      "ingredient": {
+        "d": "diamond",
+        "e": "experience_bottle",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_exp_2",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"エクスぺの杖lv2\",\"color\":\"#00ec9a\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10007,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        " de",
+        " bd",
+        "b  "],
+      "ingredient": {
+        "d": "diamond",
+        "e": "experience_bottle",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_exp_3",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"エクスぺの杖lv3\",\"color\":\"#00ec9a\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10008,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "bde",
+        " bd",
+        "b b"],
+      "ingredient": {
+        "d": "diamond_block",
+        "e": "experience_bottle",
+        "b": "blaze_rod"
       },
       "show": true
     }

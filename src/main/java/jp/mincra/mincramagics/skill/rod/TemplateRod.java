@@ -12,6 +12,12 @@ public class TemplateRod {
 
             MincraMagics.getSkillManager().useSkill(player,id);
 
+            //メイン
+
+
+            //装飾
+
+
         }
     }
 }
