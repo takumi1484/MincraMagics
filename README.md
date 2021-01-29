@@ -13,4 +13,4 @@ NBT-API: [SpigotMC](https://www.spigotmc.org/resources/nbt-api.7939/) [GitHub](h
 |Command|Description|
 |:---|:---|
 |/mcr reload|プラグインをリロードします。|
-|/mcr item get <MCR_ID>|/data/items/＊.jsonで定義されたアイテムをMCR_IDから取得します。|
+|/mcr give <PLAYER_NAME> <MCR_ID>|<MCR_ID>を<PLAYER_NAME>に与えます。|
