@@ -45,7 +45,6 @@ public class ItemManager {
         String mcr_id;
 
         JSONObject itemObject;
-        JSONObject itemNBTObject;
 
         NBTItem nbtItem;
         NBTCompound nbtMincraMagics;
@@ -92,10 +91,8 @@ public class ItemManager {
             nbtItem = new NBTItem(item);
 
             if (itemObject.has("nbt") && itemObject.get("nbt") instanceof JSONObject) {
-                itemNBTObject = itemObject.getJSONObject("nbt");
 
-                ChatUtil.sendConsoleMessage(itemNBTObject.toString());
-                nbtItem.mergeCompound(new NBTContainer(itemNBTObject.toString()));
+                nbtItem.mergeCompound(new NBTContainer(itemObject.getJSONObject("nbt").toString()));
             }
 
             //-mcr_id------------------------------↓↓↓
