@@ -106,5 +106,32 @@
     "exp_lv": 6,
     "exp": 0,
     "break_rate": 0.05
+  },
+  {
+    "id": "rod_cure_1",
+    "name": "&#ec463a&f&l癒しの杖lv1",
+    "lore": "周囲3マスの味方の体力を少量回復する。",
+    "cooltime": 2,
+    "exp_lv": 2,
+    "exp": 0,
+    "break_rate": 0.1
+  },
+  {
+    "id": "rod_cure_2",
+    "name": "&#ec463a&f&l癒しの杖lv2",
+    "lore": "周囲6マスの味方の体力を回復する。",
+    "cooltime": 4,
+    "exp_lv": 2,
+    "exp": 0,
+    "break_rate": 0.1
+  },
+  {
+    "id": "rod_cure_3",
+    "name": "&#ec463a&f&l癒しの杖lv3",
+    "lore": "周囲3マスの味方の体力を大きく回復する。",
+    "cooltime": 6,
+    "exp_lv": 6,
+    "exp": 0,
+    "break_rate": 0.1
   }
 ]
