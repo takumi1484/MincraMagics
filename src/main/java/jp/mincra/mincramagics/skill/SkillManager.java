@@ -5,6 +5,7 @@ import jp.mincra.mincramagics.container.MincraSkill;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
 import jp.mincra.mincramagics.util.ExpUtil;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -111,14 +112,17 @@ public class SkillManager {
                 canUse = false;
             }
             //経験値
-            if (player.getLevel() < skillMap.get(id).getExp_lv()) {
-                player.sendMessage(ChatUtil.setColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
-                canUse = false;
+            if (player.getGameMode() != GameMode.CREATIVE) {
+                if (player.getLevel() < skillMap.get(id).getExp_lv()) {
+                    player.sendMessage(ChatUtil.setColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
+                    canUse = false;
+                }
+                if (ExpUtil.getPlayerExp(player) < skillMap.get(id).getExp()) {
+                    player.sendMessage(ChatUtil.setColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
+                    canUse = false;
+                }
             }
-            if (ExpUtil.getPlayerExp(player) < skillMap.get(id).getExp()) {
-                player.sendMessage(ChatUtil.setColorCodes("&#adadad&fうわっ・・・私のMP、低すぎ・・・？"));
-                canUse = false;
-            }
+
         } else {
             ChatUtil.sendConsoleMessage("エラー: "+id+"のスキルが存在しません。");
             canUse = false;

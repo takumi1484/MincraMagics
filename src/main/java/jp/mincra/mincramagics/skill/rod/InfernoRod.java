@@ -44,7 +44,6 @@ public class InfernoRod {
 
                 List<String> friendlyMobs = MincraMagics.getMobManager().getFriendlyMobs();
                 for (Entity entity : entityList) {
-                    ChatUtil.sendConsoleMessage(entity.getType().toString());
                     if (!friendlyMobs.contains(entity.getType().toString())) {
                         entity.setFireTicks(1250);
                         entity.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_HUGE,entity.getLocation(),1,0.35,0.35,0.35,35);

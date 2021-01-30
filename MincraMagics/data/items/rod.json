@@ -300,5 +300,77 @@
       },
       "show": true
     }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_cure_1",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"癒しの杖lv1\",\"color\":\"#ec463a\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10012,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        " bg",
+        " bg",
+        "b  "],
+      "ingredient": {
+        "g": "golden_carrot",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_cure_2",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"癒しの杖lv2\",\"color\":\"#ec463a\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10013,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        " bg",
+        " bg",
+        "b  "],
+      "ingredient": {
+        "g": "golden_apple",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_cure_3",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"癒しの杖lv3\",\"color\":\"#ec463a\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10014,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        " bg",
+        " bg",
+        "b  "],
+      "ingredient": {
+        "g": "gold_block",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
   }
 ]

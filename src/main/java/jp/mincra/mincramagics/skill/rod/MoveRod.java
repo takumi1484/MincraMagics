@@ -1,8 +1,8 @@
 package jp.mincra.mincramagics.skill.rod;
 
 import jp.mincra.mincramagics.MincraMagics;
-import jp.mincra.mincramagics.util.ChatUtil;
 import jp.mincra.mincramagics.skill.MincraParticle;
+import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -12,19 +12,21 @@ import org.bukkit.util.Vector;
 public class MoveRod {
 
     public void Move(Player player, int level) {
+
         String id = "rod_move_"+level;
 
-        if (MincraMagics.getSkillManager().canUseSkill(player,id)) {
+        if (MincraMagics.getSkillManager().canUseSkill(player, id)) {
             Location loc = player.getLocation();
 
-            if(loc.getBlockY() < 170) {
+
+            if (loc.getBlockY() < 170) {
 
                 MincraMagics.getSkillManager().useSkill(player, id);
 
                 //メイン
                 float yaw = player.getLocation().getYaw();
 
-                Vector vec = new Vector(-level * Math.sin(yaw * Math.PI / 180.0),-0.5, Math.cos(yaw * Math.PI / 180.0) * level);
+                Vector vec = new Vector(-level * Math.sin(yaw * Math.PI / 180.0), -0.5, Math.cos(yaw * Math.PI / 180.0) * level);
                 player.setVelocity(vec);
 
                 //装飾
@@ -37,8 +39,7 @@ public class MoveRod {
                 //距離調整
                 vec.multiply(level);
                 vec.setY(vec.getY() + 1 + 0.25 * level);
-
-                mincraParticle.drawMagicCircle(loc.add(vec), 5, 1);
+                 mincraParticle.drawMagicCircle(loc.add(vec), 5, 1);
 
             } else {
                 player.sendMessage(ChatUtil.setColorCodes("&c高すぎるため使えません！"));

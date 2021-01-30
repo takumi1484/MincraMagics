@@ -1,11 +1,7 @@
 package jp.mincra.mincramagics.listener;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import jp.mincra.mincramagics.skill.SkillInstance;
-import jp.mincra.mincramagics.skill.rod.ExpRod;
-import jp.mincra.mincramagics.skill.rod.InfernoRod;
-import jp.mincra.mincramagics.skill.rod.JumpRod;
-import jp.mincra.mincramagics.skill.rod.MoveRod;
+import jp.mincra.mincramagics.skill.rod.*;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,7 +29,9 @@ public class onPlayerInteract implements Listener {
 
                     if (nbtItem.hasKey("MincraMagics")) {
                         e.setCancelled(true);
+
                         switch (nbtItem.getCompound("MincraMagics").getString("id")) {
+
                             case "rod_move_1":
                                 MoveRod moveRod1 = new MoveRod();
                                 moveRod1.Move(player,1);
@@ -92,6 +90,21 @@ public class onPlayerInteract implements Listener {
                             case "rod_inferno_3":
                                 InfernoRod infernoRod3 = new InfernoRod();
                                 infernoRod3.Inferno(player,3);
+                                break;
+
+                            case "rod_cure_1":
+                                CureRod cureRod1 = new CureRod();
+                                cureRod1.Cure(player,1);
+                                break;
+
+                            case "rod_cure_2":
+                                CureRod cureRod2 = new CureRod();
+                                cureRod2.Cure(player,2);
+                                break;
+
+                            case "rod_cure_3":
+                                CureRod cureRod3 = new CureRod();
+                                cureRod3.Cure(player,3);
                                 break;
 
                         }
