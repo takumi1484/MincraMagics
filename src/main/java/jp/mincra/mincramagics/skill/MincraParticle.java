@@ -184,19 +184,29 @@ public class MincraParticle {
      */
     public void drawCircle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, double speed, double radius, int amount, Particle.DustOptions dustOptions) {
         double increment = (2 * Math.PI) / amount;
-        for(int i = 0;i < amount; i++)
-        {
+        for(int i = 0;i < amount; i++) {
             double angle = i * increment;
-            Vector vector = new Vector(radius * Math.cos(angle), 0, radius * Math.sin(angle));
-            double x = location.getX() + rotateVector(vector).getX();
-            double y = location.getY() + rotateVector(vector).getY();
-            double z = location.getZ() + rotateVector(vector).getZ();
+//            Vector vector = new Vector(radius * Math.cos(angle), 0, radius * Math.sin(angle));
+//            double x = location.getX() + rotateVector(vector).getX();
+//            double y = location.getY() + rotateVector(vector).getY();
+//            double z = location.getZ() + rotateVector(vector).getZ();
+//
+//            if (particle == Particle.REDSTONE) {
+//                location.getWorld().spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, speed, dustOptions);
+//
+//            } else {
+//                location.getWorld().spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, speed);
+//
+//            }
+
+            double x = location.getX() + (radius * Math.cos(angle));
+            double z = location.getZ() + (radius * Math.sin(angle));
 
             if (particle == Particle.REDSTONE) {
-                location.getWorld().spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, speed, dustOptions);
+                location.getWorld().spawnParticle(particle, x, location.getY(), z, count, offsetX, offsetY, offsetZ, speed, dustOptions);
 
             } else {
-                location.getWorld().spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, speed);
+                location.getWorld().spawnParticle(particle, x, location.getY(), z, count, offsetX, offsetY, offsetZ, speed);
 
             }
         }
