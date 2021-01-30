@@ -24,17 +24,25 @@ public class CureRod {
 
             MincraMagics.getSkillManager().useSkill(player,id);
 
+            //装飾
             MincraParticle mincraParticle = new MincraParticle();
             mincraParticle.setRadius(2.0);
             mincraParticle.setParticle(Particle.VILLAGER_HAPPY);
+
+            Location casterLocation = player.getLocation();
+
+            casterLocation.getWorld().playSound(casterLocation, Sound.BLOCK_PORTAL_TRAVEL, (float) 0.1, 2);
+
+            mincraParticle.setRadius(2.4);
+            mincraParticle.drawMagicCircle(casterLocation,5,1,3,0.01,0.005);
 
             //メイン
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    Player targetPlayer = Bukkit.getPlayer(player.getName());
-                    List<Entity> entityList = targetPlayer.getNearbyEntities(3 * level, 5 * level, 3 * level);
-                    entityList.add(targetPlayer);
+                    Player caster = Bukkit.getPlayer(player.getName());
+                    List<Entity> entityList = caster.getNearbyEntities(3 * level, 5 * level, 3 * level);
+                    entityList.add(caster);
 
                     int maxTargetAmount = level * 2; //人数制限
 
@@ -45,19 +53,19 @@ public class CureRod {
                             maxTargetAmount = maxTargetAmount - 1;
 
                             //メイン
-                            ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.HEAL,1,1 * level));
-                            ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,1,100 * level));
+                            ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.HEAL,1,level));
+                            ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,100 * level,level));
 
                             //装飾
-                            Location targetLocation = targetPlayer.getLocation();
+                            Location targetLocation = entity.getLocation();
                             targetLocation.getWorld().playSound(targetLocation, Sound.ENTITY_VILLAGER_YES, (float) 0.3, 1);
 
-                            targetLocation.getWorld().spawnParticle(Particle.HEART, targetLocation.add(0,1.7,0), 10 * level,0.42,0.42,0.42,1);
                             mincraParticle.drawMagicCircle(targetLocation,5,1,3,0.01,0.005);
+                            targetLocation.getWorld().spawnParticle(Particle.HEART, targetLocation.add(0,1.7,0), 10 * level,0.42,0.42,0.42,1);
 
                             //メッセージ
-                            if (!entity.equals(targetPlayer)) {
-                                buffer.append(targetPlayer.getName());
+                            if (!entity.equals(caster)) {
+                                buffer.append(caster.getName());
                                 buffer.append("から癒しの杖lv1を効果を受けました。");
 
                                 entity.sendMessage(ChatUtil.setColorCodes(buffer.toString()));
@@ -68,18 +76,6 @@ public class CureRod {
                     this.cancel();
                 }
             }.runTaskLater(MincraMagics.getInstance(),40);
-
-
-            //装飾
-            Location casterLocation = player.getLocation();
-
-            casterLocation.getWorld().playSound(casterLocation, Sound.BLOCK_PORTAL_TRAVEL, (float) 0.01, 2);
-
-            mincraParticle.setRadius(2.4);
-            mincraParticle.drawMagicCircle(casterLocation,5,1,3,0.01,0.005);
-
-
-
         }
     }
 }
