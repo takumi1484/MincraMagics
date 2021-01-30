@@ -16,6 +16,7 @@ NBT-API (https://github.com/tr7zw/Item-NBT-API)
 
 
 # 開発者さんへ
+Wiki見てね https://github.com/Harineko0/MincraMagics/wiki
 
 
 
