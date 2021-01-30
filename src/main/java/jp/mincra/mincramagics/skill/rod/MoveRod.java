@@ -39,7 +39,7 @@ public class MoveRod {
                 //距離調整
                 vec.multiply(level);
                 vec.setY(vec.getY() + 1 + 0.25 * level);
-                 mincraParticle.drawMagicCircle(loc.add(vec), 5, 1);
+                mincraParticle.drawMagicCircle(loc.add(vec), 5, 1);
 
             } else {
                 player.sendMessage(ChatUtil.setColorCodes("&c高すぎるため使えません！"));
