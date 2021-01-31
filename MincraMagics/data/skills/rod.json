@@ -133,5 +133,14 @@
     "exp_lv": 6,
     "exp": 0,
     "break_rate": 0.1
+  },
+  {
+    "id": "rod_water_1",
+    "name": "&#2863df&f&l水杖lv1",
+    "lore": "水中での移動速度が上昇する。",
+    "cooltime": 30,
+    "exp_lv": 0,
+    "exp": 0,
+    "break_rate": 0.1
   }
 ]

@@ -107,6 +107,11 @@ public class onPlayerInteract implements Listener {
                                 cureRod3.Cure(player,3);
                                 break;
 
+                            case "rod_water_1":
+                                WaterRod waterRod1 = new WaterRod();
+                                waterRod1.WaterOne(player);
+                                break;
+
                         }
                     }
                 }

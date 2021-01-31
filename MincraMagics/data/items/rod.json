@@ -372,5 +372,29 @@
       },
       "show": true
     }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_water_1",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"水杖lv1\",\"color\":\"#2863df\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10015,
+      "MincraMagics":{
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "www",
+        "wbw",
+        "www"],
+      "ingredient": {
+        "w": "water_bucket",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
   }
 ]
