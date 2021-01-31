@@ -1,5 +1,6 @@
 package jp.mincra.mincramagics.event;
 
+import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;

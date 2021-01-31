@@ -1,7 +1,7 @@
 package jp.mincra.mincramagics.skill.rod;
 
 import jp.mincra.mincramagics.MincraMagics;
-import jp.mincra.mincramagics.event.PlayerUseMagicRodEvent;
+import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.skill.MincraParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

@@ -58,10 +58,14 @@ public final class MincraMagics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onPrepareItemCraft(), this);
         getServer().getPluginManager().registerEvents(new onPlayerToggleFlight(), this);
         getServer().getPluginManager().registerEvents(new onPlayerInteract(), this);
-
         //独自リスナー
         getEventNotifier();
-        registerMincraEvents();
+        eventNotifier.registerEvents(new MoveRod());
+        eventNotifier.registerEvents(new CureRod());
+        eventNotifier.registerEvents(new ExpRod());
+        eventNotifier.registerEvents(new InfernoRod());
+        eventNotifier.registerEvents(new JumpRod());
+        eventNotifier.registerEvents(new WaterRod());
 
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));
@@ -81,19 +85,8 @@ public final class MincraMagics extends JavaPlugin {
     public static void reload() {
         ChatUtil.sendConsoleMessage("プラグインをリロードします...");
         propertyManager.loadProperty();
-//        jsonManager.loadItemNode();
         itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
         skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
-    }
-
-    private void registerMincraEvents() {
-        //独自リスナー
-        eventNotifier.registerEvents(new MoveRod());
-        eventNotifier.registerEvents(new CureRod());
-        eventNotifier.registerEvents(new ExpRod());
-        eventNotifier.registerEvents(new InfernoRod());
-        eventNotifier.registerEvents(new JumpRod());
-        eventNotifier.registerEvents(new WaterRod());
     }
 
     private static EventNotifier eventNotifier;

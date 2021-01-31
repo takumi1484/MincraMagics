@@ -2,7 +2,6 @@ package jp.mincra.mincramagics.listener;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.MincraMagics;
-import jp.mincra.mincramagics.skill.rod.*;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,8 +10,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Objects;
 
 public class onPlayerInteract implements Listener {
 
