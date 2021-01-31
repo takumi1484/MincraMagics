@@ -7,6 +7,7 @@
       "Lore":[]},
     "CustomModelData": 10000,
     "MincraMagics":{
+      "type": "rod"
     }
   },
   "craftable": true,
@@ -32,6 +33,7 @@
         "Lore":[]},
       "CustomModelData": 10001,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -57,6 +59,7 @@
         "Lore":[]},
       "CustomModelData": 10002,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -82,6 +85,7 @@
         "Lore":[]},
       "CustomModelData": 10003,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -106,6 +110,7 @@
         "Lore":[]},
       "CustomModelData": 10004,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -131,6 +136,7 @@
         "Lore":[]},
       "CustomModelData": 10005,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -157,6 +163,7 @@
         "Lore":[]},
       "CustomModelData": 10006,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -182,6 +189,7 @@
         "Lore":[]},
       "CustomModelData": 10007,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -207,6 +215,7 @@
         "Lore":[]},
       "CustomModelData": 10008,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -232,6 +241,7 @@
         "Lore":[]},
       "CustomModelData": 10009,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -258,6 +268,7 @@
         "Lore":[]},
       "CustomModelData": 10010,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -284,6 +295,7 @@
         "Lore":[]},
       "CustomModelData": 10011,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -310,6 +322,7 @@
         "Lore":[]},
       "CustomModelData": 10012,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -334,6 +347,7 @@
         "Lore":[]},
       "CustomModelData": 10013,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -358,6 +372,7 @@
         "Lore":[]},
       "CustomModelData": 10014,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
@@ -382,6 +397,7 @@
         "Lore":[]},
       "CustomModelData": 10015,
       "MincraMagics":{
+        "type": "rod"
       }
     },
     "craftable": true,
