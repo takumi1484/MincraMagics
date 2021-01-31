@@ -1,24 +1,34 @@
 package jp.mincra.mincramagics.skill.rod;
 
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.event.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.skill.MincraParticle;
-import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class WaterRod {
+public class WaterRod implements PlayerUseMagicRodEvent {
 
-    public void WaterOne(Player player) {
-        String id = "rod_water_1";
+    @Override
+    public void onPlayerUseMagicRod(Player player, String mcr_id) {
+        if (mcr_id.contains("rod_water")) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, id)) {
+            switch (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1))) {
+                case 1:
+                    WaterOne(player, mcr_id);
+                    break;
+            }
+        }
+    }
 
-            MincraMagics.getSkillManager().useSkill(player,id);
+    public void WaterOne(Player player, String mcr_id) {
+
+        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
+
+            MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
             //メイン
             final int[] duration = {600};
@@ -52,7 +62,6 @@ public class WaterRod {
                         duration[0] = duration[0] - 1;
                         if (duration[0] < 0) {
                             timer.cancel();
-                            ChatUtil.sendConsoleMessage("cancel");
                         }
                     }
                 }

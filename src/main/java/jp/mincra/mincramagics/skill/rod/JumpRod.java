@@ -1,6 +1,7 @@
 package jp.mincra.mincramagics.skill.rod;
 
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.event.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.skill.MincraParticle;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.Color;
@@ -10,16 +11,34 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class JumpRod {
+public class JumpRod implements PlayerUseMagicRodEvent {
 
-    public void JumpOne(Player player) {
-        String id = "rod_jump_1";
+    @Override
+    public void onPlayerUseMagicRod(Player player, String mcr_id) {
+        if (mcr_id.contains("rod_jump")) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, id)) {
+            switch (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1))) {
+                case 1:
+                    JumpOne(player, mcr_id);
+                    break;
+
+                case 2:
+                    JumpTwo(player, mcr_id);
+                    break;
+
+                case 3:
+                    JumpThree(player, mcr_id);
+            }
+        }
+    }
+
+    public void JumpOne(Player player, String mcr_id) {
+
+        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
             Location location = player.getLocation();
 
             if (location.getBlockY() < 170) {
-                MincraMagics.getSkillManager().useSkill(player, id);
+                MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
                 //メイン
                 player.setFallDistance(-5);
@@ -52,14 +71,13 @@ public class JumpRod {
         }
     }
 
-    public void JumpTwo(Player player) {
-        String id = "rod_jump_2";
+    public void JumpTwo(Player player, String mcr_id) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, id)) {
+        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
             Location location = player.getLocation();
 
             if (location.getBlockY() < 170) {
-                MincraMagics.getSkillManager().useSkill(player, id);
+                MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
                 //メイン
                 player.setFallDistance(-12);
@@ -94,14 +112,13 @@ public class JumpRod {
         }
     }
 
-    public void JumpThree(Player player) {
-        String id = "rod_jump_3";
+    public void JumpThree(Player player, String mcr_id) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, id)) {
+        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
             Location location = player.getLocation();
 
             if (location.getBlockY() < 170) {
-                MincraMagics.getSkillManager().useSkill(player, id);
+                MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
                 //メイン
                 player.setFallDistance(-16);

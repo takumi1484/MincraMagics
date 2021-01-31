@@ -1,6 +1,7 @@
 package jp.mincra.mincramagics.skill.rod;
 
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.event.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.skill.MincraParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -10,14 +11,32 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class ExpRod {
+public class ExpRod implements PlayerUseMagicRodEvent {
 
-    public void ExpOne(Player player) {
-        String id = "rod_exp_1";
+    @Override
+    public void onPlayerUseMagicRod(Player player, String mcr_id) {
+        if (mcr_id.contains("rod_exp")) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, id)) {
+            switch (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1))) {
+                case 1:
+                    ExpOne(player, mcr_id);
+                    break;
 
-            MincraMagics.getSkillManager().useSkill(player,id);
+                case 2:
+                    ExpTwo(player, mcr_id);
+                    break;
+
+                case 3:
+                    ExpThree(player, mcr_id);
+            }
+        }
+    }
+
+    public void ExpOne(Player player, String mcr_id) {
+
+        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
+
+            MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
             //事前装飾
             Location location = player.getLocation();
@@ -55,12 +74,11 @@ public class ExpRod {
         }
     }
 
-    public void ExpTwo(Player player) {
-        String id = "rod_exp_2";
+    public void ExpTwo(Player player, String mcr_id) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, id)) {
+        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
 
-            MincraMagics.getSkillManager().useSkill(player,id);
+            MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
             //事前装飾
             Location location = player.getLocation();
@@ -99,12 +117,11 @@ public class ExpRod {
     }
 
 
-    public void ExpThree(Player player) {
-        String id = "rod_exp_3";
+    public void ExpThree(Player player, String mcr_id) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, id)) {
+        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
 
-            MincraMagics.getSkillManager().useSkill(player,id);
+            MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
             //メイン
             if (player.getLevel() < 5) {

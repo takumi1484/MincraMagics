@@ -10,10 +10,7 @@ import jp.mincra.mincramagics.listener.*;
 import jp.mincra.mincramagics.property.JSONManager;
 import jp.mincra.mincramagics.property.PropertyManager;
 import jp.mincra.mincramagics.skill.SkillManager;
-import jp.mincra.mincramagics.skill.rod.CureRod;
-import jp.mincra.mincramagics.skill.rod.ExpRod;
-import jp.mincra.mincramagics.skill.rod.InfernoRod;
-import jp.mincra.mincramagics.skill.rod.MoveRod;
+import jp.mincra.mincramagics.skill.rod.*;
 import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
 import jp.mincra.mincramagics.util.ChatUtil;
@@ -95,6 +92,8 @@ public final class MincraMagics extends JavaPlugin {
         eventNotifier.registerEvents(new CureRod());
         eventNotifier.registerEvents(new ExpRod());
         eventNotifier.registerEvents(new InfernoRod());
+        eventNotifier.registerEvents(new JumpRod());
+        eventNotifier.registerEvents(new WaterRod());
     }
 
     private static EventNotifier eventNotifier;

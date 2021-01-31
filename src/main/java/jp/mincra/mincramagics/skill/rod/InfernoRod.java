@@ -2,8 +2,8 @@ package jp.mincra.mincramagics.skill.rod;
 
 import de.tr7zw.changeme.nbtapi.NBTEntity;
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.event.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.skill.MincraParticle;
-import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -17,50 +17,53 @@ import java.util.List;
 import java.util.Random;
 
 
-public class InfernoRod {
+public class InfernoRod implements PlayerUseMagicRodEvent {
 
     Player player;
     int level;
 
-    public void Inferno(Player player, int level) {
-        String id = "rod_inferno_" + level;
+    @Override
+    public void onPlayerUseMagicRod(Player player, String mcr_id) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, id)) {
+        if (mcr_id.contains("rod_inferno")) {
 
-            MincraMagics.getSkillManager().useSkill(player,id);
+            if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
 
-            //メイン
-            this.player = player;
-            this.level = level;
+                MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
-            BukkitTask[] task = new BukkitTask[level * 7];
+                //メイン
+                this.player = player;
+                level = Integer.parseInt(mcr_id.substring(mcr_id.length() - 1));
 
-            for (int i=0; i<level * 7; i++) {
-                task[i] = new spawnFireball().runTaskLater(MincraMagics.getInstance(),  i * (6 - level));
-            }
+                BukkitTask[] task = new BukkitTask[level * 7];
 
-            if (level == 3) {
-                List<Entity> entityList = player.getNearbyEntities(25,5,25);
+                for (int i = 0; i < level * 7; i++) {
+                    task[i] = new spawnFireball().runTaskLater(MincraMagics.getInstance(), i * (6 - level));
+                }
 
-                List<String> friendlyMobs = MincraMagics.getMobManager().getFriendlyMobs();
-                for (Entity entity : entityList) {
-                    if (!friendlyMobs.contains(entity.getType().toString())) {
-                        entity.setFireTicks(1250);
-                        entity.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_HUGE,entity.getLocation(),1,0.35,0.35,0.35,35);
+                if (level == 3) {
+                    List<Entity> entityList = player.getNearbyEntities(25, 5, 25);
 
+                    List<String> friendlyMobs = MincraMagics.getMobManager().getFriendlyMobs();
+                    for (Entity entity : entityList) {
+                        if (!friendlyMobs.contains(entity.getType().toString())) {
+                            entity.setFireTicks(1250);
+                            entity.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_HUGE, entity.getLocation(), 1, 0.35, 0.35, 0.35, 35);
+
+                        }
                     }
                 }
+
+                //装飾
+                Location location = player.getLocation();
+
+                location.getWorld().playSound(location, Sound.BLOCK_PORTAL_TRAVEL, (float) 0.1, 2);
+
+                MincraParticle mincraParticle = new MincraParticle();
+                mincraParticle.setParticle(Particle.FLAME);
+                mincraParticle.setRadius(2.4);
+                mincraParticle.drawMagicCircle(location.add(0, 0.25, 0), 6, 1, 3, 0.01, 0.05);
             }
-
-            //装飾
-            Location location = player.getLocation();
-
-            location.getWorld().playSound(location, Sound.BLOCK_PORTAL_TRAVEL, (float) 0.1,2);
-
-            MincraParticle mincraParticle = new MincraParticle();
-            mincraParticle.setParticle(Particle.FLAME);
-            mincraParticle.setRadius(2.4);
-            mincraParticle.drawMagicCircle(location.add(0,0.25,0),6,1,3,0.01,0.05);
         }
     }
 
