@@ -58,6 +58,7 @@ public final class MincraMagics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onPrepareItemCraft(), this);
         getServer().getPluginManager().registerEvents(new onPlayerToggleFlight(), this);
         getServer().getPluginManager().registerEvents(new onPlayerInteract(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerInteractEntity(), this);
         //独自リスナー
         getEventNotifier();
         eventNotifier.registerEvents(new MoveRod());
@@ -66,6 +67,7 @@ public final class MincraMagics extends JavaPlugin {
         eventNotifier.registerEvents(new InfernoRod());
         eventNotifier.registerEvents(new JumpRod());
         eventNotifier.registerEvents(new WaterRod());
+        eventNotifier.registerEvents(new BarrierRod());
 
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));

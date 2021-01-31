@@ -14,6 +14,7 @@ C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\sk
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\ExpRod.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerInteract.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerJoin.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerInteractEntity.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\event\EventNotifier.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\ChatUtil.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\MoveRod.java
@@ -33,6 +34,7 @@ C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\co
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\container\MincraPlayer.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerQuit.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\command\MincraTabCompleter.java
+C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\event\player\PlayerUseMagicRodToEntityEvent.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\property\PropertyManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\InfernoRod.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\property\JSONManager.java

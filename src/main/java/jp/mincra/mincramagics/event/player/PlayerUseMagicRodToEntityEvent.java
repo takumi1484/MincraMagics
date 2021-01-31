@@ -14,5 +14,5 @@ public interface PlayerUseMagicRodToEntityEvent extends EventListener, MincraLis
      * @param target 実行した対象
      * @param mcr_id 魔法杖のID
      */
-    void run(Player player, Entity target, String mcr_id);
+    void onPlayerUseMagicRodToEntity(Player player, Entity target, String mcr_id);
 }

@@ -19,7 +19,7 @@ import java.util.List;
 public class CureRod implements PlayerUseMagicRodEvent {
 
     @Override
-    public void run(Player player, String mcr_id) {
+    public void onPlayerUseMagicRod(Player player, String mcr_id) {
 
         if (mcr_id.contains("rod_cure")) {
 

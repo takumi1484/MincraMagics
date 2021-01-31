@@ -17,6 +17,7 @@ jp\mincra\mincramagics\skill\MincraParticle.class
 jp\mincra\mincramagics\container\MincraSkill.class
 jp\mincra\mincramagics\skill\SkillManager.class
 jp\mincra\mincramagics\listener\onPlayerToggleFlight.class
+jp\mincra\mincramagics\listener\onPlayerInteractEntity.class
 jp\mincra\mincramagics\skill\rod\MoveRod.class
 jp\mincra\mincramagics\skill\rod\JumpRod.class
 jp\mincra\mincramagics\listener\onPlayerChat.class
@@ -40,6 +41,7 @@ jp\mincra\mincramagics\skill\rod\TemplateRod.class
 jp\mincra\mincramagics\skill\rod\InfernoRod.class
 jp\mincra\mincramagics\skill\SkillInstance.class
 jp\mincra\mincramagics\skill\rod\ExpRod.class
+jp\mincra\mincramagics\event\player\PlayerUseMagicRodToEntityEvent.class
 jp\mincra\mincramagics\util\MathUtil.class
 jp\mincra\mincramagics\util\StringUtil.class
 jp\mincra\mincramagics\skill\rod\ExpRod$1.class

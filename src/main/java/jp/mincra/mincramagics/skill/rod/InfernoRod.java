@@ -23,7 +23,7 @@ public class InfernoRod implements PlayerUseMagicRodEvent {
     int level;
 
     @Override
-    public void run(Player player, String mcr_id) {
+    public void onPlayerUseMagicRod(Player player, String mcr_id) {
 
         if (mcr_id.contains("rod_inferno")) {
 

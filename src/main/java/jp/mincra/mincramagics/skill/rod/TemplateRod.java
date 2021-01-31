@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class TemplateRod implements PlayerUseMagicRodEvent {
 
     @Override
-    public void run(Player player, String mcr_id) {
+    public void onPlayerUseMagicRod(Player player, String mcr_id) {
         if (mcr_id.contains("rod_exp")) {
 
             switch (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1))) {

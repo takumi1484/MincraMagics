@@ -21,7 +21,7 @@ public class EventNotifier {
     public void runPlayerUseMagicRod(Player player, String mcr_id) {
         if (this.playerUseMagicRod != null) {
             for (PlayerUseMagicRodEvent playerUseMagicRodEvent : playerUseMagicRod) {
-                playerUseMagicRodEvent.run(player, mcr_id);
+                playerUseMagicRodEvent.onPlayerUseMagicRod(player, mcr_id);
             }
         }
     }
@@ -35,7 +35,7 @@ public class EventNotifier {
     public void runPlayerUseMagicRodToEntity(Player player, Entity target, String mcr_id) {
         if (this.playerUseMagicRodToEntity != null) {
             for (PlayerUseMagicRodToEntityEvent playerUseMagicRodToEntityEvent : playerUseMagicRodToEntity) {
-                playerUseMagicRodToEntityEvent.onPlayerUseMagicRod(player, target, mcr_id);
+                playerUseMagicRodToEntityEvent.onPlayerUseMagicRodToEntity(player, target, mcr_id);
             }
         }
     }
@@ -47,7 +47,8 @@ public class EventNotifier {
     public void registerEvents(MincraListener listener) {
         if (listener instanceof PlayerUseMagicRodEvent) {
             playerUseMagicRod.add((PlayerUseMagicRodEvent) listener);
-        } else if (listener instanceof PlayerUseMagicRodToEntityEvent) {
+        }
+        if (listener instanceof PlayerUseMagicRodToEntityEvent) {
             playerUseMagicRodToEntity.add((PlayerUseMagicRodToEntityEvent) listener);
         }
     }

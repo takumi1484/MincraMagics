@@ -12,5 +12,5 @@ public interface PlayerUseMagicRodEvent extends EventListener, MincraListener {
      * @param player プレイヤー
      * @param mcr_id 魔法杖のID
      */
-    void run(Player player, String mcr_id);
+    void onPlayerUseMagicRod(Player player, String mcr_id);
 }

@@ -95,10 +95,10 @@ public class SkillManager {
 
                 NBTItem nbtItem = new NBTItem(item);
 
-                if (nbtItem.hasKey("MincraMagics") && nbtItem.getCompound("MincraMagics").hasKey("type")) {
-                    if (nbtItem.getCompound("MincraMagics").getString("type").equals("rod")) {
-                        player.sendMessage(ChatUtil.setColorCodes("&#f03c3c&f&l杖がっ・・・"));
-                    }
+                if (mincraSkill.getName().contains("杖")) {
+                    player.sendMessage(ChatUtil.setColorCodes("&#f03c3c&f&l杖がっ・・・"));
+                } else if (mincraSkill.getName().contains("書")) {
+                    player.sendMessage(ChatUtil.setColorCodes("&#f03c3c&f&l書がっ・・・"));
                 }
 
                 player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK,1f,1f);

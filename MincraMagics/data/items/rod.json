@@ -33,7 +33,7 @@
         "Lore":[]},
       "CustomModelData": 10001,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -59,7 +59,7 @@
         "Lore":[]},
       "CustomModelData": 10002,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -85,7 +85,7 @@
         "Lore":[]},
       "CustomModelData": 10003,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -110,7 +110,7 @@
         "Lore":[]},
       "CustomModelData": 10004,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -136,7 +136,7 @@
         "Lore":[]},
       "CustomModelData": 10005,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -163,7 +163,7 @@
         "Lore":[]},
       "CustomModelData": 10006,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -189,7 +189,7 @@
         "Lore":[]},
       "CustomModelData": 10007,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -215,7 +215,7 @@
         "Lore":[]},
       "CustomModelData": 10008,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -241,7 +241,7 @@
         "Lore":[]},
       "CustomModelData": 10009,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -268,7 +268,7 @@
         "Lore":[]},
       "CustomModelData": 10010,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -295,7 +295,7 @@
         "Lore":[]},
       "CustomModelData": 10011,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -322,7 +322,7 @@
         "Lore":[]},
       "CustomModelData": 10012,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -347,7 +347,7 @@
         "Lore":[]},
       "CustomModelData": 10013,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -372,7 +372,7 @@
         "Lore":[]},
       "CustomModelData": 10014,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -397,7 +397,7 @@
         "Lore":[]},
       "CustomModelData": 10015,
       "MincraMagics":{
-        "type": "rod"
+
       }
     },
     "craftable": true,
@@ -409,6 +409,85 @@
       "ingredient": {
         "w": "water_bucket",
         "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_barrier_1",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"結界の書lv1\",\"color\":\"#6f7695\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10016,
+      "MincraMagics":{
+
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        " oc",
+        " bo",
+        "b  "],
+      "ingredient": {
+        "c": "iron_chestplate",
+        "o": "obsidian",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "blaze_rod",
+    "mcr_id": "rod_barrier_2",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"結界の書lv2\",\"color\":\"#6f7695\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10017,
+      "MincraMagics":{
+
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        " oc",
+        " bo",
+        "b  "],
+      "ingredient": {
+        "c": "gold_chestplate",
+        "o": "obsidian",
+        "b": "blaze_rod"
+      },
+      "show": true
+    }
+  },
+  {
+    "id": "enchanted_book",
+    "mcr_id": "rod_barrier_3",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"結界の書lv3\",\"color\":\"#6f7695\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10018,
+      "MincraMagics":{
+
+      }
+    },
+    "craftable": true,
+    "recipe": {
+      "shape": [
+        "dcd",
+        "obo",
+        "ooo"],
+      "ingredient": {
+        "c": "diamond_chestplate",
+        "o": "obsidian",
+        "d": "diamond",
+        "b": "book"
       },
       "show": true
     }

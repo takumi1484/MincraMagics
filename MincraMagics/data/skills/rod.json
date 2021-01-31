@@ -142,5 +142,32 @@
     "exp_lv": 0,
     "exp": 0,
     "break_rate": 0.1
+  },
+  {
+    "id": "rod_barrier_1",
+    "name": "&#6f7695&f&l結界の書lv1",
+    "lore": "右クリックした味方の防御力を上昇させる。",
+    "cooltime": 0,
+    "exp_lv": 3,
+    "exp": 0,
+    "break_rate": 0.1
+  },
+  {
+    "id": "rod_barrier_2",
+    "name": "&#6f7695&f&l結界の書lv2",
+    "lore": "右クリックした味方の防御力を大きく上昇させる。",
+    "cooltime": 0,
+    "exp_lv": 6,
+    "exp": 0,
+    "break_rate": 0.01
+  },
+  {
+    "id": "rod_barrier_3",
+    "name": "&#6f7695&f&l結界の書lv3",
+    "lore": "周囲の味方の防御力を大きく上昇させる。",
+    "cooltime": 6,
+    "exp_lv": 9,
+    "exp": 0,
+    "break_rate": 0.01
   }
 ]
