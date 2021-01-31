@@ -1,6 +1,7 @@
 package jp.mincra.mincramagics.command;
 
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
 import jp.mincra.mincramagics.skill.MincraParticle;
 import org.apache.commons.lang.StringUtils;
@@ -80,6 +81,9 @@ public class MincraCommands implements CommandExecutor {
             case "give":
                 return give(caster,args);
 
+            case "cooltime":
+                return cooltime(caster,args);
+
         }
         return false;
     }
@@ -104,7 +108,7 @@ public class MincraCommands implements CommandExecutor {
 
             player.getInventory().addItem(itemStack);
 
-            if (Bukkit.getServer().getPlayer(args[1]) != null) {
+            if (player != null) {
 
                 if (MincraMagics.getItemManager().getItem(args[2]) != null) {
                     ChatUtil.sendMessage(ChatUtil.debug(player.getName() + "に" + args[2] + "を付与しました。"),caster);
@@ -119,6 +123,21 @@ public class MincraCommands implements CommandExecutor {
 
         return true;
 
+    }
+
+    private boolean cooltime(Entity caster, @NotNull String[] args) {
+        switch (args[1]) {
+            case "set":
+                Player player = Bukkit.getPlayer(args[2]);
+                if (player != null) {
+                    BossBarUtil.setCooltimeBossBar(player,"", Float.parseFloat(args[3]),true);
+                    ChatUtil.sendMessage(ChatUtil.debug(args[2]+"のクールタイムを"+args[3]+"にセットしました。"),caster);
+                } else  {
+                    ChatUtil.sendMessage(ChatUtil.debug(args[2]+"は存在しません。"),caster);
+                }
+                return true;
+        }
+        return false;
     }
 
     private void sendErrorMessage(Entity caster, String[] args, int errorArg){
