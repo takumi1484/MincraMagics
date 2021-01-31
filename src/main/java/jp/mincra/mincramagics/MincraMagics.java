@@ -4,11 +4,16 @@ import jp.mincra.mincramagics.command.MincraCommands;
 import jp.mincra.mincramagics.command.MincraTabCompleter;
 import jp.mincra.mincramagics.entity.mob.MobManager;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
+import jp.mincra.mincramagics.event.EventNotifier;
 import jp.mincra.mincramagics.item.ItemManager;
 import jp.mincra.mincramagics.listener.*;
 import jp.mincra.mincramagics.property.JSONManager;
 import jp.mincra.mincramagics.property.PropertyManager;
 import jp.mincra.mincramagics.skill.SkillManager;
+import jp.mincra.mincramagics.skill.rod.CureRod;
+import jp.mincra.mincramagics.skill.rod.ExpRod;
+import jp.mincra.mincramagics.skill.rod.InfernoRod;
+import jp.mincra.mincramagics.skill.rod.MoveRod;
 import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
 import jp.mincra.mincramagics.util.ChatUtil;
@@ -57,6 +62,10 @@ public final class MincraMagics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onPlayerToggleFlight(), this);
         getServer().getPluginManager().registerEvents(new onPlayerInteract(), this);
 
+        //独自リスナー
+        getEventNotifier();
+        registerMincraEvents();
+
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));
         getCommand("mcr").setTabCompleter(new MincraTabCompleter());
@@ -79,6 +88,23 @@ public final class MincraMagics extends JavaPlugin {
         itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
         skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
     }
+
+    private void registerMincraEvents() {
+        //独自リスナー
+        eventNotifier.registerEvents(new MoveRod());
+        eventNotifier.registerEvents(new CureRod());
+        eventNotifier.registerEvents(new ExpRod());
+        eventNotifier.registerEvents(new InfernoRod());
+    }
+
+    private static EventNotifier eventNotifier;
+    public static EventNotifier getEventNotifier() {
+        if (eventNotifier == null) {
+            eventNotifier = new EventNotifier();
+        }
+        return eventNotifier;
+    }
+
 
     private static PlayerManager playerManager;
     public static PlayerManager getPlayerManager() {
