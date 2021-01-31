@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 public class MoveRod implements PlayerUseMagicRodEvent {
 
     @Override
-    public void onPlayerUseMagicRod(Player player, String mcr_id) {
+    public void run(Player player, String mcr_id) {
 
         if (mcr_id.contains("rod_move")) {
 

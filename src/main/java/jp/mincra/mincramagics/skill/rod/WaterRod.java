@@ -13,7 +13,7 @@ import java.util.TimerTask;
 public class WaterRod implements PlayerUseMagicRodEvent {
 
     @Override
-    public void onPlayerUseMagicRod(Player player, String mcr_id) {
+    public void run(Player player, String mcr_id) {
         if (mcr_id.contains("rod_water")) {
 
             switch (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1))) {

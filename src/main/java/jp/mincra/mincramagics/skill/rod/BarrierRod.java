@@ -1,13 +1,14 @@
 package jp.mincra.mincramagics.skill.rod;
 
 import jp.mincra.mincramagics.MincraMagics;
-import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
+import jp.mincra.mincramagics.event.player.PlayerUseMagicRodToEntityEvent;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-public class BarrierRod implements PlayerUseMagicRodEvent {
+public class BarrierRod implements PlayerUseMagicRodToEntityEvent {
 
     @Override
-    public void onPlayerUseMagicRod(Player player, String mcr_id) {
+    public void run(Player player, Entity target, String mcr_id) {
         if (mcr_id.contains("rod_exp")) {
 
             switch (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1))) {
