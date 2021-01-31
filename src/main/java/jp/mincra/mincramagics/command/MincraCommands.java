@@ -94,6 +94,7 @@ public class MincraCommands implements CommandExecutor {
         Player player = Bukkit.getPlayer(args[1]);
 
             ItemStack itemStack = MincraMagics.getItemManager().getItem(args[2]);
+
             if (args.length > 3) {
                 if (StringUtils.isNumeric(args[3])) {
                     itemStack.setAmount(Integer.parseInt(args[3]));
@@ -106,11 +107,11 @@ public class MincraCommands implements CommandExecutor {
                 }
             }
 
-            player.getInventory().addItem(itemStack);
 
             if (player != null) {
 
                 if (MincraMagics.getItemManager().getItem(args[2]) != null) {
+                    player.getInventory().addItem(itemStack);
                     ChatUtil.sendMessage(ChatUtil.debug(player.getName() + "に" + args[2] + "を付与しました。"),caster);
 
                 } else {
