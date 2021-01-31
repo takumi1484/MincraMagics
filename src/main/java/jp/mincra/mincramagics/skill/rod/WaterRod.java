@@ -2,6 +2,7 @@ package jp.mincra.mincramagics.skill.rod;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.skill.MincraParticle;
+import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -20,6 +21,8 @@ public class WaterRod {
             MincraMagics.getSkillManager().useSkill(player,id);
 
             //メイン
+            final int[] duration = {600};
+
             Timer timer = new Timer();
             TimerTask task = new TimerTask() {
                 @Override
@@ -27,8 +30,6 @@ public class WaterRod {
                     Player finalPlayer = Bukkit.getPlayer(player.getUniqueId());
 
                     Location location = finalPlayer.getLocation();
-
-                    int duration = 600;
 
                     if (location.add(0,1,0).getBlock().getType().equals(Material.WATER)) {
                         float yaw = location.getYaw();
@@ -48,9 +49,10 @@ public class WaterRod {
                         location.getWorld().spawnParticle(Particle.BUBBLE_POP,location,2,0.43,0.43,0.43,10);
 
                         //削除
-                        duration -= 1;
-                        if (duration < 0) {
+                        duration[0] = duration[0] - 1;
+                        if (duration[0] < 0) {
                             timer.cancel();
+                            ChatUtil.sendConsoleMessage("cancel");
                         }
                     }
                 }
