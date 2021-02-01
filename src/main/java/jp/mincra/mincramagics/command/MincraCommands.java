@@ -3,7 +3,7 @@ package jp.mincra.mincramagics.command;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
-import jp.mincra.mincramagics.skill.MincraParticle;
+import jp.mincra.mincramagics.util.MincraParticle;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Particle;

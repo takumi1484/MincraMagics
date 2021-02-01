@@ -3,7 +3,7 @@ package jp.mincra.mincramagics.skill.rod;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodToEntityEvent;
-import jp.mincra.mincramagics.skill.MincraParticle;
+import jp.mincra.mincramagics.util.MincraParticle;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;

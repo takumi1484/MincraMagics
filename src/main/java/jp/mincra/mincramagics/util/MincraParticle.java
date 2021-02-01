@@ -1,4 +1,4 @@
-package jp.mincra.mincramagics.skill;
+package jp.mincra.mincramagics.util;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
