@@ -21,7 +21,7 @@ public class onPlayerJoin implements Listener {
             //1度ログイン済み
 
             //SQLから情報を取得
-            MincraPlayer mincraPlayer = MincraMagics.getSQLManager().getMincraPlayer(player.getUniqueId());
+            MincraPlayer mincraPlayer = MincraMagics.getSQLManager().getMincraPlayerSQL().getMincraPlayer(player.getUniqueId());
             mincraPlayer.setPlayerName(player.getName());
             //プレイヤーをHashMapに追加
             MincraMagics.getPlayerManager().putMincraPlayer(mincraPlayer);
@@ -39,7 +39,7 @@ public class onPlayerJoin implements Listener {
             mincraPlayer.setPlayerUUID(player.getUniqueId());
             mincraPlayer.setPlayerName(player.getName());
             //SQLに追加
-            MincraMagics.getSQLManager().insertMincraPlayer(player.getUniqueId(),mincraPlayer);
+            MincraMagics.getSQLManager().getMincraPlayerSQL().insertMincraPlayer(player.getUniqueId(),mincraPlayer);
             //プレイヤーをHashMapに追加
             MincraMagics.getPlayerManager().putMincraPlayer(mincraPlayer);
 

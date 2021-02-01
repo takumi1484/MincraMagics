@@ -18,10 +18,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MincraMagics extends JavaPlugin {
 
-    protected static MincraMagics instance;
-    public static MincraMagics getInstance(){
-        return instance;
-    }
+    private static MincraMagics instance;
+
+    private static EventNotifier eventNotifier;
+
+    private static PlayerManager playerManager;
+    private static MobManager mobManager;
+    private static PropertyManager propertyManager;
+    private static SQLManager sqlManager;
+    private static UIManager uiManager;
+    private static JSONManager jsonManager;
+    private static ItemManager itemManager;
+    private static SkillManager skillManager;
 
     @Override
     public void onEnable() {
@@ -77,7 +85,7 @@ public final class MincraMagics extends JavaPlugin {
     @Override
     public void onDisable() {
         //SQL全て保存
-        sqlManager.saveMincraPlayer();
+        sqlManager.getMincraPlayerSQL().saveMincraPlayer();
 
         instance = null;
         ChatUtil.sendConsoleMessage("プラグインが正常に終了しました。");
@@ -91,7 +99,11 @@ public final class MincraMagics extends JavaPlugin {
         skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
     }
 
-    private static EventNotifier eventNotifier;
+
+    public static MincraMagics getInstance(){
+        return instance;
+    }
+
     public static EventNotifier getEventNotifier() {
         if (eventNotifier == null) {
             eventNotifier = new EventNotifier();
@@ -99,57 +111,48 @@ public final class MincraMagics extends JavaPlugin {
         return eventNotifier;
     }
 
-
-    private static PlayerManager playerManager;
     public static PlayerManager getPlayerManager() {
         if (playerManager == null)
             playerManager = new PlayerManager();
         return playerManager;
     }
 
-    private static MobManager mobManager;
     public static MobManager getMobManager() {
         if (mobManager == null)
             mobManager = new MobManager();
         return mobManager;
     }
 
-    private static PropertyManager propertyManager;
     public static PropertyManager getPropertyManager() {
         if (propertyManager == null)
             propertyManager = new PropertyManager();
         return propertyManager;
     }
 
-    private static SQLManager sqlManager;
     public static SQLManager getSQLManager() {
         if (sqlManager == null)
             sqlManager = new SQLManager();
         return sqlManager;
     }
 
-    private static UIManager uiManager;
     public static UIManager getUIManager(){
         if (uiManager == null)
             uiManager = new UIManager();
         return uiManager;
     }
 
-    private static JSONManager jsonManager;
     public static JSONManager getJSONManager() {
         if (jsonManager == null)
             jsonManager = new JSONManager();
         return jsonManager;
     }
 
-    private static ItemManager itemManager;
     public static ItemManager getItemManager() {
         if (itemManager == null)
             itemManager = new ItemManager();
         return itemManager;
     }
 
-    private static SkillManager skillManager;
     public static SkillManager getSkillManager() {
         if (skillManager == null)
             skillManager = new SkillManager();

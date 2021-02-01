@@ -1,4 +1,4 @@
-/*package jp.mincra.mincramagics.sql;
+package jp.mincra.mincramagics.sql;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraPlayer;
@@ -77,4 +77,4 @@ public class MincraPlayerSQL extends SQLManager {
         }
     }
 }
-*/
+

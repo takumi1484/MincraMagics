@@ -21,7 +21,7 @@ public class onPlayerQuit implements Listener {
         //Mapから取得
         MincraPlayer mincraPlayer = MincraMagics.getPlayerManager().getMincraPlayerMap().get(uuid);
         //SQLに保存
-        MincraMagics.getSQLManager().updateMincraPlayer(mincraPlayer);
+        MincraMagics.getSQLManager().getMincraPlayerSQL().updateMincraPlayer(mincraPlayer);
 
         //オンラインプレイヤーリストを正しく設定するために遅延する
         Timer timer = new Timer(false);
