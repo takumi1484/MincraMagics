@@ -36,6 +36,10 @@ public class ItemManager {
             registerItem(v,k);
             registerRecipe(v,k);
         });
+
+        ChatUtil.sendConsoleMessage(itemStackMap.size() + "個のアイテムを登録しました。");
+        ChatUtil.sendConsoleMessage(shapedRecipeMap.size() + "個のレシピを登録しました。");
+        ChatUtil.sendConsoleMessage(customShapedRecipeMap.size() + "個のカスタムレシピを登録しました。");
     }
 
     public void registerItem(JSONArray itemArray, String path) {
@@ -136,7 +140,6 @@ public class ItemManager {
 
             itemStackMap.put(mcr_id, item);
         }
-        ChatUtil.sendConsoleMessage(itemStackMap.size() + "個のアイテムを登録しました。");
     }
 
     public void registerRecipe(JSONArray itemArray, String path) {
@@ -244,9 +247,6 @@ public class ItemManager {
                 }
             }
         }
-
-        ChatUtil.sendConsoleMessage(shapedRecipeMap.size() + "個のレシピを登録しました。");
-        ChatUtil.sendConsoleMessage(customShapedRecipeMap.size() + "個のカスタムレシピを登録しました。");
     }
 
     public void discoverShowRecipes(Player player){
