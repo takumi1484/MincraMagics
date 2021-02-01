@@ -1,9 +1,12 @@
 package jp.mincra.mincramagics.event;
 
+import jp.mincra.mincramagics.event.entity.CustomEntitySpawnEvent;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodToEntityEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.entity.EntitySpawnEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +15,7 @@ public class EventNotifier {
 
     private List<PlayerUseMagicRodEvent> playerUseMagicRod = new ArrayList<>();
     private List<PlayerUseMagicRodToEntityEvent> playerUseMagicRodToEntity = new ArrayList<>();
+    private List<CustomEntitySpawnEvent> customEntitySpawn = new ArrayList<>();
 
     /**
      * プレイヤーが魔法杖を使ったときのイベント
@@ -41,6 +45,19 @@ public class EventNotifier {
     }
 
     /**
+     * カスタムエンティティがスポーンしたときに実行
+     * @param event イベント
+     * @param mcr_id スポーンさせるエンティティ名
+     */
+    public void runCustomEntitySpawn(EntitySpawnEvent event, String mcr_id) {
+        if (this.customEntitySpawn != null) {
+            for (CustomEntitySpawnEvent customEntitySpawnEvent : customEntitySpawn) {
+                customEntitySpawnEvent.onCustomEntitySpawn(event, mcr_id);
+            }
+        }
+    }
+
+    /**
      * リスナーを追加する。
      * @param listener リスナーを実装したクラス
      */
@@ -50,6 +67,9 @@ public class EventNotifier {
         }
         if (listener instanceof PlayerUseMagicRodToEntityEvent) {
             playerUseMagicRodToEntity.add((PlayerUseMagicRodToEntityEvent) listener);
+        }
+        if (listener instanceof CustomEntitySpawnEvent) {
+            customEntitySpawn.add((CustomEntitySpawnEvent) listener);
         }
     }
 }
