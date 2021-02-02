@@ -38,7 +38,7 @@ public class MobManager {
         //読み込み
         jsonArrayMap.forEach(this::registerMob);
 
-
+        ChatUtil.sendConsoleMessage(entityJsonMap.size() + "個のモブを登録しました。");
     }
 
     public void registerMob(String path, JSONArray jsonArray) {
