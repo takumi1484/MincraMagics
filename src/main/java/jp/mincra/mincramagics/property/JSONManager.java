@@ -38,11 +38,6 @@ public class JSONManager {
 
             JSONArray tempJSONArray;
 
-            StringBuffer messageBuffer =new StringBuffer(path);
-            String message = messageBuffer.toString();
-
-            ChatUtil.sendConsoleMessage(message);
-
             for (File file : directory.listFiles()) {
                 if (isJSONFile(file)) {
 
