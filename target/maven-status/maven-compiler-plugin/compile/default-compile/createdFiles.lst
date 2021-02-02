@@ -1,6 +1,7 @@
 jp\mincra\mincramagics\command\MincraCommands.class
 jp\mincra\mincramagics\listener\onPlayerInteract.class
 jp\mincra\mincramagics\entity\player\PlayerManager.class
+jp\mincra\mincramagics\entity\mob\hostile\ExampleZombieMob$1.class
 jp\mincra\mincramagics\property\PropertyManager.class
 jp\mincra\mincramagics\skill\rod\CureRod$1.class
 jp\mincra\mincramagics\skill\rod\WaterRod.class

@@ -104,6 +104,7 @@ public final class MincraMagics extends JavaPlugin {
         propertyManager.loadProperty();
         itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
         skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
+        mobManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/mobs"));
     }
 
 

@@ -5,7 +5,6 @@ import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodToEntityEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntitySpawnEvent;
 
 import java.util.ArrayList;

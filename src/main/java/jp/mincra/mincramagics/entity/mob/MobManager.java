@@ -12,7 +12,7 @@ public class MobManager {
     final private List<String> FRIENDLYMOBS = new ArrayList<>(Arrays.asList("PLAYER","HORSE","OCELOT","WOLF","SHEEP","CHICKEN","COW","ITEMFRAME","VILLAGER"));
 
     private Map<String, JSONObject> entityJsonMap;
-    private Map<EntityType, TreeMap<Integer, String>> typeChanceMap;
+    private Map<EntityType, List<String>> typeMCRIDMap;
     private Map<EntityType, Integer> typeSumMap;
 
     public List<String> getFriendlyMobs() {
@@ -22,8 +22,8 @@ public class MobManager {
         return entityJsonMap;
     }
 
-    public TreeMap<Integer, String> getTypeChanceMap(EntityType entityType) {
-        return typeChanceMap.get(entityType);
+    public List<String> getTypeMCRIDList(EntityType entityType) {
+        return typeMCRIDMap.get(entityType);
     }
 
     public Integer getTypeSum(EntityType entityType) {
@@ -32,7 +32,7 @@ public class MobManager {
 
     public void register(Map<String, JSONArray> jsonArrayMap) {
         entityJsonMap = new HashMap<>();
-        typeChanceMap = new HashMap<>();
+        typeMCRIDMap = new HashMap<>();
         typeSumMap = new HashMap<>();
 
         //読み込み
@@ -60,10 +60,13 @@ public class MobManager {
                     //エンティティタイプごとにchanceの合計を加算
                     typeSumMap.merge(entityType, chance, Integer::sum);
 
-                    //mapのentityTypeのValueがnullなら
-                    typeChanceMap.computeIfAbsent(entityType, k -> new TreeMap<>());
-                    //エンティティタイプごとにモブのスポーンチャンスを分ける
-                    typeChanceMap.get(entityType).put(chance, mcr_id);
+                    //mapのentityTypeのValueがnullならリスト追加
+                    if (typeMCRIDMap.get(entityType) == null) {
+                        List<String> list = new ArrayList<>();
+                        typeMCRIDMap.put(entityType, list);
+                    }
+                    //エンティティタイプごとにIDをput
+                    typeMCRIDMap.get(entityType).add(mcr_id);
                 }
 
             } else {
