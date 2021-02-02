@@ -3,6 +3,7 @@ package jp.mincra.mincramagics;
 import jp.mincra.mincramagics.command.MincraCommands;
 import jp.mincra.mincramagics.command.MincraTabCompleter;
 import jp.mincra.mincramagics.entity.mob.MobManager;
+import jp.mincra.mincramagics.entity.mob.hostile.ExampleZombieMob;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.event.EventNotifier;
 import jp.mincra.mincramagics.item.ItemManager;
@@ -58,6 +59,8 @@ public final class MincraMagics extends JavaPlugin {
         skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
         getItemManager();
         itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
+        getMobManager();
+        mobManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/mobs"));
 
         //listener
         getServer().getPluginManager().registerEvents(new onPlayerJoin(), this);
@@ -67,8 +70,10 @@ public final class MincraMagics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onPlayerToggleFlight(), this);
         getServer().getPluginManager().registerEvents(new onPlayerInteract(), this);
         getServer().getPluginManager().registerEvents(new onPlayerInteractEntity(), this);
+        getServer().getPluginManager().registerEvents(new onEntitySpawn(), this);
         //独自リスナー
         getEventNotifier();
+        //Skills
         eventNotifier.registerEvents(new MoveRod());
         eventNotifier.registerEvents(new CureRod());
         eventNotifier.registerEvents(new ExpRod());
@@ -76,6 +81,8 @@ public final class MincraMagics extends JavaPlugin {
         eventNotifier.registerEvents(new JumpRod());
         eventNotifier.registerEvents(new WaterRod());
         eventNotifier.registerEvents(new BarrierRod());
+        //Mobs
+        eventNotifier.registerEvents(new ExampleZombieMob());
 
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));
@@ -97,6 +104,7 @@ public final class MincraMagics extends JavaPlugin {
         propertyManager.loadProperty();
         itemManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/items"));
         skillManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/skills"));
+        mobManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/mobs"));
     }
 
 

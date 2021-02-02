@@ -1,0 +1,13 @@
+[
+  {
+    "id": "zombie",
+    "mcr_id": "example_zombie",
+    "nbt": {
+      "CustomName": "{\"text\":\"Example Zombie\",\"color\":\"dark_green\",\"bold\":true,\"italic\":false}",
+      "HandItems": [
+        {"id": "minecraft:stone_sword", "Count": 1},{}
+      ]
+    },
+    "chance": 10
+  }
+]

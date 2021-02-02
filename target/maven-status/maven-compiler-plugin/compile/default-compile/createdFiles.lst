@@ -1,6 +1,7 @@
 jp\mincra\mincramagics\command\MincraCommands.class
 jp\mincra\mincramagics\listener\onPlayerInteract.class
 jp\mincra\mincramagics\entity\player\PlayerManager.class
+jp\mincra\mincramagics\entity\mob\hostile\ExampleZombieMob$1.class
 jp\mincra\mincramagics\property\PropertyManager.class
 jp\mincra\mincramagics\skill\rod\CureRod$1.class
 jp\mincra\mincramagics\skill\rod\WaterRod.class
@@ -8,6 +9,7 @@ jp\mincra\mincramagics\event\EventNotifier.class
 jp\mincra\mincramagics\util\Matrix2D.class
 jp\mincra\mincramagics\util\BossBarUtil$1.class
 jp\mincra\mincramagics\sql\SQLManager.class
+jp\mincra\mincramagics\event\entity\CustomEntitySpawnEvent.class
 jp\mincra\mincramagics\skill\rod\CureRod.class
 jp\mincra\mincramagics\sql\MincraPlayerSQL.class
 jp\mincra\mincramagics\util\BossBarUtil.class
@@ -15,6 +17,7 @@ jp\mincra\mincramagics\listener\onPlayerQuit$1.class
 jp\mincra\mincramagics\skill\rod\InfernoRod$spawnFireball.class
 jp\mincra\mincramagics\container\MincraSkill.class
 jp\mincra\mincramagics\skill\SkillManager.class
+jp\mincra\mincramagics\listener\onEntitySpawn.class
 jp\mincra\mincramagics\listener\onPlayerToggleFlight.class
 jp\mincra\mincramagics\listener\onPlayerInteractEntity.class
 jp\mincra\mincramagics\skill\rod\MoveRod.class
@@ -28,6 +31,7 @@ jp\mincra\mincramagics\command\MincraTabCompleter.class
 jp\mincra\mincramagics\skill\rod\BarrierRod.class
 jp\mincra\mincramagics\MincraMagics.class
 jp\mincra\mincramagics\util\ChatUtil.class
+jp\mincra\mincramagics\entity\mob\hostile\ExampleZombieMob.class
 jp\mincra\mincramagics\event\MincraListener.class
 jp\mincra\mincramagics\skill\rod\ExpRod$2.class
 jp\mincra\mincramagics\skill\rod\WaterRod$1.class
