@@ -1,5 +1,7 @@
 # MincraMagics
 
+###forked at 2021/02/05
+
 Minecraftに魔法を追加するSpigotプラグインです。  
 [MincraMagicRod](https://github.com/celtas/MincraMagicRod)の後継になります。
 
