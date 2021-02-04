@@ -81,6 +81,8 @@ public final class MincraMagics extends JavaPlugin {
         eventNotifier.registerEvents(new JumpRod());
         eventNotifier.registerEvents(new WaterRod());
         eventNotifier.registerEvents(new BarrierRod());
+        eventNotifier.registerEvents(new BeastRod());
+        eventNotifier.registerEvents(new DestroyRod());
         //Mobs
         eventNotifier.registerEvents(new ExampleZombieMob());
 
